@@ -1,7 +1,11 @@
+/*
+    For Index.html 
+*/
 html body {
     min-height: 420px;
     height: 100vh;
     width: 100vw;
+    background-image: url('images/dogBackgroundDesktop.png');
 }
 
 #mainScreen {
@@ -10,7 +14,7 @@ html body {
     min-width:500px;
     height: 100%;
     min-height:650px;
-    background-image: url('images/dogBackgroundDesktop.png');
+    
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;
@@ -72,4 +76,100 @@ html body {
     }
 
 
+}
+/*
+    For list.html 
+*/
+label {
+    display: block;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+    margin: .4rem 0;
+}
+
+.note {
+    font-size: .8em;
+}
+
+#name {
+   
+    width:100%;
+
+}
+#gender {
+    min-height: 100px;
+    min-width: 200px;
+    background-image: linear-gradient(white, rgb(192, 248, 248)
+    , white );
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin:auto;
+    border-radius: 15px;
+    font-size:30px;
+    font-weight:bold;
+    border:1.5px;
+    border-style:solid;
+    border-color:rgb(151, 195, 231);
+}
+#breed {
+    width:100%;
+}
+#energylvl {
+    width:100%;
+}
+#housetrained {
+    min-height: 100px;
+    min-width: 200px;
+    background-image: linear-gradient(white, rgb(192, 248, 248)
+    , white );
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin:auto;
+    border-radius: 15px;
+    font-size:30px;
+    font-weight:bold;
+    border:1.5px;
+    border-style:solid;
+    border-color:rgb(151, 195, 231);
+}
+#Size {
+    width:100%;
+}
+#avatar {
+    min-height: 100px;
+    min-width: 200px;
+    background-image: linear-gradient(white, rgb(192, 248, 248)
+    , white );
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin:auto;
+    border-radius: 15px;
+    font-size:30px;
+    font-weight:bold;
+    border:1.5px;
+    border-style:solid;
+    border-color:rgb(151, 195, 231);
+}
+
+#sbmtPet {
+    min-height: 100px;
+    min-width: 200px;
+    background-image: linear-gradient(white, rgb(192, 248, 248)
+    , white );
+    background-size:contain;
+    background-repeat: no-repeat;
+    margin:auto;
+    border-radius: 15px;
+    font-size:30px;
+    font-weight:bold;
+    border:1.5px;
+    border-style:solid;
+    border-color:rgb(151, 195, 231);
+}
+/* Matches.html */
+#password {
+    width:100%;
 }

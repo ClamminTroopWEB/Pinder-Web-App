@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+        <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <form id="mainScreen">
+        <img id="pinderLogoMain" src="images/mainLogoBlue.png"/>
+        <div id="bttnContainer">
+           
+        <span> <font size="20"> <strong> Name:  </strong> </font>
+             <input type="text" name="Name" value="" id="name">
+        </span>
+          
+          <span> <font size="20"> <strong> Gender:  </strong> </font>  
+            <input onclick="genderChange()" type="button" value="Male" id="gender"/>
+          </span>
+          
+           <span> <font size="20"> <strong> Breed:  </strong> </font>  
+            <select id="breed">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>  
+           </span>
+          
+        <span> <font size="20"> <strong> Energy Level:  </strong> </font>
+               <input type="text" name="Energylvl" id="energylvl" value="">
+        </span>
+          
+        <span> <font size="20"> <strong> House Trained:  </strong> </font>
+            <input onclick="houseTrained()" type="button" value="Yes" id="housetrained"/>
+          </span>
+
+           
+           <span> <font size="20"> <strong> Size:  </strong> </font>
+            <select id="Size">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>  
+           </span>
+
+           <span> <font size="20"> <strong> Image:  </strong> </font> 
+            <input type="file" id="file" name="avatar" />
+           </span>
+        </div>
+
+        <input id="sbmtPet" text="List the Pet" type="submit" value="Submit">
+
+  </form>
+
+</body>
+  </form>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function genderChange() 
+    {
+    if (document.getElementById("gender").value=="Male") 
+        document.getElementById("gender").value= "Female";
+    else if (document.getElementById("gender").value=="Female")
+        document.getElementById("gender").value= "Male";
+    }
+
+    function houseTrained() 
+    {
+    if (document.getElementById("housetrained").value=="Yes") 
+        document.getElementById("housetrained").value= "No";
+    else if (document.getElementById("housetrained").value=="No")
+        document.getElementById("housetrained").value= "Yes";
+    }
+</script>
+
+
+</html>
