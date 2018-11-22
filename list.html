@@ -2,80 +2,86 @@
 <html>
 
 <head>
-        <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="styles/sharedStyling.css">
+    <link rel="stylesheet" href="styles/listAPetStyling.css">
 </head>
+
 <body>
 
-    <form id="mainScreen">
-        <img id="pinderLogoMain" src="images/mainLogoBlue.png"/>
-        <div id="bttnContainer">
-           
-        <span> <font size="20"> <strong> Name:  </strong> </font>
-             <input type="text" name="Name" value="" id="name">
-        </span>
-          
-          <span> <font size="20"> <strong> Gender:  </strong> </font>  
-            <input onclick="genderChange()" type="button" value="Male" id="gender"/>
-          </span>
-          
-           <span> <font size="20"> <strong> Breed:  </strong> </font>  
-            <select id="breed">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-            </select>  
-           </span>
-          
-        <span> <font size="20"> <strong> Energy Level:  </strong> </font>
-               <input type="text" name="Energylvl" id="energylvl" value="">
-        </span>
-          
-        <span> <font size="20"> <strong> House Trained:  </strong> </font>
-            <input onclick="houseTrained()" type="button" value="Yes" id="housetrained"/>
-          </span>
+    <nav id='listAPetScreen'>
+        <img id="pinderLogoMain" src="images/mainLogoBlue.png" />
 
-           
-           <span> <font size="20"> <strong> Size:  </strong> </font>
-            <select id="Size">
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-            </select>  
-           </span>
+        <form id="listAPetForm">
 
-           <span> <font size="20"> <strong> Image:  </strong> </font> 
-            <input type="file" id="file" name="avatar" />
-           </span>
-        </div>
 
-        <input id="sbmtPet" text="List the Pet" type="submit" value="Submit">
+            <div id="listAPetInputs" class="blueRoundSquare">
 
-  </form>
+                <span class="formSpan center">
+                    <label class="formLabel">Name: </label>
+                    <input class="formInput" type="text" name="Name" placeholder="enter name here" id="listAPetName">
+                </span>
+
+                <span class="formSpan center">
+                    <label class="formLabel">Gender: </label>
+                    <select class="formInput" id="listAPetGender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other ;)</option>
+                    </select>
+                </span>
+
+                <span class="formSpan center">
+                    <label class="formLabel">Breed: </label>
+                    <select class="formInput" id="listAPetBreed">
+                        <option value="volvo">Labrador</option>
+                        <option value="Great_Dane">Great Dane</option>
+                        <option value="Poodle">Poodle</option>
+                        <option value="Demon">Demon</option>
+                    </select>
+                </span>
+
+                <span class="formSpan center ">
+                    <label class="formLabel">Energy Level: </label>
+                    <select class="formInput" id="listAPetEnergy">
+                        <option value="calm">Calm</option>
+                        <option value="somewhat_energetic">Somewhat Energetic</option>
+                        <option value="really_energetic">Really Energetic</option>
+                    </select>
+                </span>
+
+                <span class="formSpan center">
+                    <label class="formLabel">House Trained: </label>
+                    <select class="formInput" id="listAPetHouseTrained">
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                    </select> </span>
+
+
+                <span class="formSpan center">
+                    <label class="formLabel">Size: </label>
+                    <select class="formInput" id="listAPetSize">
+                        <option value="small">Small</option>
+                        <option value="mid-sized">Mid-Sized</option>
+                        <option value="large">Large</option>
+                    </select>
+                </span>
+
+                <span class="formSpan center">
+                    <label class="formLabel">Image: </label>
+                    <input class="formInput" type="file" id="file" name="avatar" />
+                </span>
+            </div>
+
+            <input id="submitPet" text="List the Pet" type="submit" value="Submit">
+        </form>
+    </nav>
 
 </body>
-  </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-    function genderChange() 
-    {
-    if (document.getElementById("gender").value=="Male") 
-        document.getElementById("gender").value= "Female";
-    else if (document.getElementById("gender").value=="Female")
-        document.getElementById("gender").value= "Male";
-    }
+<script src="scripts/script.js"></script>
 
-    function houseTrained() 
-    {
-    if (document.getElementById("housetrained").value=="Yes") 
-        document.getElementById("housetrained").value= "No";
-    else if (document.getElementById("housetrained").value=="No")
-        document.getElementById("housetrained").value= "Yes";
-    }
-</script>
 
 
 </html>
