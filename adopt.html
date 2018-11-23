@@ -2,35 +2,32 @@
 <html>
 
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="styles/sharedStyling.css">
+  <link rel="stylesheet" href="styles/adoptStyling.css">
+
 </head>
+
 <body>
-    
-<div class="w3-content w3-section" style="max-width:100%">
-  <img class="mySlides" src="./images/img1.jpg" style="width:100%">
-  <img class="mySlides" src="./images/img2.jpg" style="width:100%">
-  <img class="mySlides" src="./images/img3.jpeg" style="width:100%">
-</div>
+  <nav id="adoptScreen">
+    <div class="menuBar">
+      <button id="backBttnMenu" class="smallBlueBttn" onclick="window.location.href='./index.html'"> Back</button>
+      <img id="pinderLogoMain" src="images/mainLogoBlue.png" />
+      <button id="myProfileBttnMenu" class="smallBlueBttn" onclick="window.location.href='./profile.html'"> My
+        Profile</button>
+    </div>
 
-<script>
-var slideIndex = 0;
-carousel();
+    <div id='adopContainer'>
+      <div id="adoptImageHolder">
+        <img class="adoptImage" src="images/img1.jpg">
+      </div>
+      <div id="adoptInfoContainer">
+      </div>
 
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > x.length) {slideIndex = 1}
-    x[slideIndex-1].style.display = "block";
-    setTimeout(carousel, 500); // Change image every 2 seconds
-}
-</script>
-    
+    </div>
 
+
+  </nav>
 </body>
 
 
