@@ -8,23 +8,39 @@
 
 </head>
 
-<body>
+<body id="profileBody">
     <!--h1 id="heading">Hey I am testing this</h1 -->
 
     <nav id="profileScreen">
         <div class="menuBar">
             <button id="backBttnMenu" class="smallBlueBttn" onclick="window.location.href='./index.html'"> Back</button>
-            <img id="pinderLogoMain" src="images/mainLogoBlue.png" />
-            <button id="myProfileBttnMenu" class="smallBlueBttn" onclick="window.location.href='./login.html'"> Change Account</button>
+            <label id="titleLabel">My Profile</label>
+            <button id="myProfileBttnMenu" class="smallBlueBttn" onclick="window.location.href='./login.html'"> Change
+                Account</button>
         </div>
-
-
-
+        <div id="profileImageHolder">
+            <img class="profileImage" src="images/vanderSquare.png" />
+        </div>
+        <div id="profileInputsContainer">
+            <div class="profileInputRow">
+                <label  for="profileName">Name: </label>
+                <input class="profileInput" type="text" placeholder="enter your name" name="profileName"  value="Keith Vander-Linden"/>
+            </div>
+            <div class="profileInputRow">
+                <label for="profileContactEmail">Contact Email:</label>
+                <input class="profileInput" type="text" placeholder="enter your email" name="profileContactEmail" value="LindenLovesDogs@calvin.edu" />
+            </div>
+            <div class="profileInputRow">
+                <label for="profileLocation">Location:</label>
+                <input class="profileInput" type="text" placeholder="enter your city" name="profileLocation" value="Grand Rapids"/>
+            </div>
+        </div>
+        <div id="profileButtons">
+            <button id="myMatchesProfileBttn" class="profileBttn smallBlueBttn" onclick="window.location.href='./matches.html'"> My Matches</button>
+            <button id="saveChangesProfileBttn" class="profileBttn smallGreenBttn" onclick="window.location.href='./index.html'"> Save Changes</button>
+        </div>
     </nav>
-
 </body>
-
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="scripts/shared_jQuery.js"></script>
 <script src="scripts/shared_script.js"></script>

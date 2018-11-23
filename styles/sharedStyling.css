@@ -26,8 +26,8 @@ html body {
 
 
 #pinderLogoMain {
-    width: 375px;
-    height: 150px;
+    width: 250px;
+    height: 100px;
     position: relative;
     margin-right: auto;
     margin-left: auto;
@@ -66,10 +66,10 @@ html body {
     border-color: rgb(151, 195, 231);
 }
 
-.smallBlueBttn {
+.smallGreenBttn {
     min-height: 50px;
     min-width: 100px;
-    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-image: linear-gradient(white, rgb(169, 252, 210), white);
     background-size: contain;
     background-repeat: no-repeat;
     margin: auto;
@@ -78,8 +78,40 @@ html body {
     font-weight: bold;
     border: 1.5px;
     border-style: solid;
-    border-color: rgb(151, 195, 231);
+    border-color: rgb(122, 187, 154);
 }
+
+.smallBlueBttn {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(169, 226, 252), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(129, 182, 224);
+}
+
+.smallOrangeBttn {
+    min-height: 50px;
+    min-width: 150px;
+    margin-left:auto;
+    margin-right:auto;
+    background-image: linear-gradient(white, rgb(255, 208, 122), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(209, 131, 42);
+}
+
 
 .smallGreyBttn {
     min-height: 50px;

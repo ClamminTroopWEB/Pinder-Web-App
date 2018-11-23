@@ -1,4 +1,4 @@
-#profileBody {
+#matchProfileBody {
     background-image: linear-gradient(white, rgb(155, 195, 255), rgb(155, 195, 255), white);
     background-size: cover;
     background-repeat: repeat;
@@ -21,6 +21,7 @@
 #profileImageHolder {
     height: 175px;
     width: 175px;
+    margin-top:6%;
     margin-right: auto;
     margin-left: auto;
     border: 3px;
@@ -69,7 +70,7 @@
 
 .profileInputRow {
     font-size: 25px;
-    margin-bottom:10%;
+    margin-bottom:2%;
 }
 
 .profileInputRow>input {
