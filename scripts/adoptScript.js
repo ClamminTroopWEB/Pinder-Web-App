@@ -1,14 +1,20 @@
-var slideIndex = 0;
-carousel();
+$(document).ready(function () {
 
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-      x[i].style.display = "none";
-    }
-    slideIndex++;
-    if (slideIndex > x.length) {slideIndex = 1}
-    x[slideIndex-1].style.display = "block";
-    setTimeout(carousel, 500); // Change image every 2 seconds
-}
+    $("#heartButton").click(function () {
+        alert('You have liked a dog');
+    });
+
+    $("#xoutButton").click(function () {
+        alert('You have disliked this dog. Whats wrong with you?');
+    });
+
+    $("#rightBttn").click(function () {
+        alert('Right Button: Add code to move between dogs within the database');
+    });
+
+    $("#leftBttn").click(function () {
+        alert('Left Button: Add code to move between dogs within the database');
+    });
+
+
+});
