@@ -1,0 +1,107 @@
+#matchProfileBody {
+    background-image: linear-gradient(white, rgb(155, 195, 255), rgb(155, 195, 255), white);
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+
+#titleLabel {
+    font-size: 50px;
+    width: 55%;
+    margin-left: 8%;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.menuBar {
+    margin-top: 2%;
+}
+
+#profileImageHolder {
+    height: 175px;
+    width: 175px;
+    margin-top:6%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.profileImage {
+    height: 100%;
+    width: 100%;
+
+}
+
+#profileScreen {
+    display: flex;
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    min-height: 650px;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#profileInputsContainer {
+    background-color: rgb(233, 232, 253);
+    width: 60%;
+    min-width:300px;
+    max-width:600px;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    border: 1.5px;
+    border-style: solid;
+    border-color: black;
+    padding:2%;
+}
+
+.profileInput {
+    background-color: white;
+    width:45%;
+}
+
+.profileInputRow {
+    font-size: 25px;
+    margin-bottom:2%;
+}
+
+.profileInputRow>input {
+    font-size:20px;
+    float:right;
+    border:.25px;
+    border-color:black;
+    border-style:solid;
+}
+
+.profileInputRow>label {
+    word-break: break-all;
+    width:40%;
+}
+
+.profileBttn {
+    display: inline-block;
+    width: 48%;
+}
+
+#myMatchesProfileBttn {
+    float: left;
+}
+
+#saveChangesProfileBttn {
+    float: right;
+}
+
+#profileButtons {
+    width: 40%;
+    min-width:250px;
+    margin-right: auto;
+    margin-left: auto;
+}
