@@ -1,4 +1,4 @@
-Gavin Martin and Justin Baskaran November 25, 2018 CS336 Prof. Vander-Linden
+Gavin Martin, Justin Baskaran, and Ian Christenson November 25, 2018 CS336 Prof. Vander-Linden
 
 DESIGN: Pinder for the Web
 
