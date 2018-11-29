@@ -1,29 +1,36 @@
+/* profile.js
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+"use_strict";
+
 $(document).ready(function () {
-$.ajax({
-  url: "/profile",
-  type: "POST",
-  data: {
-  	"ownerID":getCookie("PinderloginID")
-  }
+  $.ajax({
+    url: "/profile",
+    type: "POST",
+    data: {
+      "ownerID":getCookie("PinderloginID")
+    }
   })
   .done(function( result ) {
-  	$("#profileNameText").val("Professor Prium");
-  	$("#profileEmailText").val(result[0].email);
-  	$("#profileLocationText").val(result[0].Address);
-  	console.log("result: "+result);
+    $("#profileNameText").val("Professor Prium");
+    $("#profileEmailText").val(result[0].email);
+    $("#profileLocationText").val(result[0].Address);
 
-  	var image = new Image();
+    console.log("result: " + result);
+    var image = new Image();
     image.src = result[0].ProfilePicture;
     $(".profileImage").attr("src", image.src);
-
-
   })
   .fail(function(xhr, status, errorThrown) {
-       console.log('AJAX POST failed...');
-   })
-
-
+     console.log('AJAX POST failed...');
+  });
 });
+
 function getCookie(name) {
   var nameEQ = name + "=";
   var ca = document.cookie.split(';');

@@ -1,45 +1,45 @@
+/* login.js
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+"use_strict";
+
 var Email;
-$(document).ready(function () {
+$(document).ready(function() {
+  $('form').submit(function(event) {
+    $("p").remove();
+    event.preventDefault();
 
-  $( 'form' ).submit(function( event ) {
-
-  $( "p" ).remove();
-  event.preventDefault();
-
-   $.ajax({
-  url: "/login",
-  type: "post",
-  data: 
-  { 
-    Username: $('#loginEmail').val(),
-    Password: $('#loginPassword').val()
-  }
-  })
-  .done(function( result ) {
-  	console.log("JSON: " + result[0].loginID);
-      if (result[0].loginID != "Failure")
-      {
+    $.ajax({
+      url: "/login",
+      type: "post",
+      data: {
+        Username: $('#loginEmail').val(),
+        Password: $('#loginPassword').val()
+      }
+    })
+    .done(function( result ) {
+    	console.log("JSON: " + result[0].loginID);
+      if (result[0].loginID != "Failure") {
         setCookie('PinderloginID',result[0].loginID, 3);
       	setCookie('PinderloginEmail',$('#loginEmail').val(), 3);
         setCookie('PinderloginPassword',$('#loginPassword').val(), 3);
         console.log("Cookies: " + getCookie('PinderloginID'));
-
         window.location.href = "../selection.html";
-      } 
-        else if (result[0].ownerID === "Failure") 
-      {
+      } else if (result[0].ownerID === "Failure") {
         console.log("Failure");
       	alert("Incorrect Password or Username");
       }
-
     })
-	.fail(function(xhr, status, errorThrown) {
-	console.log('AJAX POST failed...');
-	 })
-	});
+  	.fail(function(xhr, status, errorThrown) {
+  	console.log('AJAX POST failed...');
+  	})
+  });
 });
-
-
 
 function setCookie(name, value, days) {
   var expires = "";

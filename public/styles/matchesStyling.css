@@ -1,3 +1,11 @@
+/* matchesStyling.css stylizes matches.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
 #matchesScreen {
     display: flex;
     width: 100%;
@@ -30,7 +38,6 @@
     border: 2px;
     border-style: solid;
     border-color: rgb(138, 138, 138);
-
 }
 
 #matchesTableBackground {
@@ -45,12 +52,10 @@
     margin-right: auto;
     margin-left: auto;
     overflow: scroll;
-
 }
 
 #matchesTable {
     width: 100%;
-
     table-layout: fixed;
     word-break: break-all;
     border-collapse: collapse;
@@ -104,14 +109,12 @@ tr {
 }
 
 @media screen and (max-width: 800px) {
-
     td {
         font-size: 20px;
     }
 }
 
 @media screen and (max-width: 700px) {
-
     #matchesTableBackground {
         width: 75%;
     }
@@ -135,13 +138,10 @@ tr {
     td {
         font-size: 17.5px;
     }
-
 }
 
 @media screen and (max-width: 600px) {
-
     td {
         font-size: 15px;
     }
-
 }

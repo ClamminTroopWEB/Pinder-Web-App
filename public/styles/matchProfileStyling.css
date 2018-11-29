@@ -1,9 +1,16 @@
+/* matchProfileStyling.css stylizes matchProfile.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
 #matchProfileBody {
     background-image: linear-gradient(white, rgb(155, 195, 255), rgb(155, 195, 255), white);
     background-size: cover;
     background-repeat: repeat;
 }
-
 
 #titleLabel {
     font-size: 50px;

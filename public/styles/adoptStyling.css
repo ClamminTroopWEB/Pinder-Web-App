@@ -1,3 +1,11 @@
+/* adoptStyling.css stylizes adopt.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
 #adoptScreen {
     display: flex;
     width: 100%;
@@ -74,7 +82,6 @@
 .adoptInfoDesc {
     float: right;
     font-size: 22px;
-
 }
 
 #adoptButtonContainer {
@@ -84,19 +91,15 @@
 }
 
 #heartButton {
-
     float: left;
-
     width: 80px;
     height: 80px;
 }
 
 #xoutButton {
-
     float: right;
     width: 80px;
     height: 80px;
-
 }
 
 #swipeButtons {
@@ -115,9 +118,6 @@
     width: 50px;
     height: 50px;
 }
-
-
-
 
 @media screen and (max-height: 660px) {
     #heartButton {
@@ -139,8 +139,6 @@
 }
 
 @media screen and (max-width: 900px) {
-
-
     #leftBttn {
         float: left;
         width: 40px;
@@ -152,7 +150,6 @@
         width: 40px;
         height: 40px;
     }
-
 }
 
 @media screen and (max-width: 700px) {
@@ -167,6 +164,4 @@
         width: 35px;
         height: 35px;
     }
-
-
 }

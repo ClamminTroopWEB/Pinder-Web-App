@@ -1,6 +1,11 @@
-/*
-    For Index.html 
-*/
+/* style.css stylizes index.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
 html body {
     min-height: 420px;
     height: 100vh;
@@ -26,7 +31,6 @@ html body {
     right: 10px;
     bottom: 10px;
 }
-
 
 #pinderLogoMain {
     width: 250px;
@@ -91,7 +95,6 @@ html body {
 }
 
 @media screen and (max-width: 550px) {
-
     #mainScreen {
         display: flex;
         width: 100%;
@@ -99,7 +102,4 @@ html body {
         background-image: url('../images/dogBackgroundMobile.png');
         justify-content: center;
     }
-
-
 }
-

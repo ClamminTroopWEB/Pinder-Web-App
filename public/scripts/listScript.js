@@ -1,56 +1,60 @@
+/* list.js
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+"use_strict";
+
 var pictureImage;
 
 function readFile() {
-  
   if (this.files && this.files[0]) {
-    
-    var FR= new FileReader();
+    var FR = new FileReader();
     
     FR.addEventListener("load", function(e) {
-      document.getElementById("img").src       = e.target.result;
+      document.getElementById("img").src = e.target.result;
       pictureImage = e.target.result;
       console.log(e.target.result);
       document.getElementById("b64").innerHTML = e.target.result;
     }); 
-    
     FR.readAsDataURL( this.files[0] );
   }
-  
 }
 
 document.getElementById("file").addEventListener("change", readFile);
 
 $(document).ready(function () {
-  $( 'form' ).submit(function( event ) {
-   $( "p" ).remove();
-   event.preventDefault();
-  //  console.log(getCookie(PinderloginID));
+  $('form').submit(function(event) {
+    $("p").remove();
+    event.preventDefault();
+    //  console.log(getCookie(PinderloginID));
 
-
-   $.ajax({
-  url: "/newPet",
-  type: "POST",
-  data: 
-  {
-    loginID: getCookie("PinderloginID"),
-    Name: $('#listAPetName').val(),
-    Gender:$('#listAPetGender').find(":selected").text(),
-    Breed: $('#listAPetBreed').find(":selected").text(),
-    EnergyLevel: $('#listAPetEnergy').find(":selected").text(),
-    HouseTrained:$('#listAPetHouseTrained').find(":selected").text(),
-    Size:$('#listAPetSize').find(":selected").text(),
-    Image:pictureImage
-  }
-  })
-  .done(function( result ) {
+    $.ajax({
+      url: "/newPet",
+      type: "POST",
+      data: {
+        loginID: getCookie("PinderloginID"),
+        Name: $('#listAPetName').val(),
+        Gender:$('#listAPetGender').find(":selected").text(),
+        Breed: $('#listAPetBreed').find(":selected").text(),
+        EnergyLevel: $('#listAPetEnergy').find(":selected").text(),
+        HouseTrained:$('#listAPetHouseTrained').find(":selected").text(),
+        Size:$('#listAPetSize').find(":selected").text(),
+        Image:pictureImage
+      }
+    })
+    .done(function( result ) {
       $("body").append("<p>Dog has been published to our database!</p>");
     })
     .fail(function(xhr, status, errorThrown) {
-       console.log('AJAX POST failed...');
-            $("body").append("<p>Dog was NOT published into the database!</p>");
-         })
-      });
-    }); 
+      console.log('AJAX POST failed...');
+      $("body").append("<p>Dog was NOT published into the database!</p>");
+    })
+  });
+}); 
 
 function getCookie(name) {
   var nameEQ = name + "=";
