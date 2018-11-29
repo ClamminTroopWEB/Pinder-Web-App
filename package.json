@@ -2,7 +2,7 @@
   "name": "pinder",
   "version": "1.0.0",
   "description": "Pinder Web App",
-  "author": "Justin Baskaran and Gavin Martin",
+  "author": "Justin Baskaran, Gavin Martin, and Ian Christensen",
   "license": "ISC",
   "scripts": {
     "start": "kill $(pgrep node) ; node server.js &",

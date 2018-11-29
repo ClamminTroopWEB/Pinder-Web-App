@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="./styles/shared.css">
+    <link rel="stylesheet" href="./styles/login.css">
+</head>
+
+<body>
+    <nav id="loginScreen">
+        <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+        <form id="loginForm" action="/create" method="post">
+            <div id="loginInputs" class="blueRoundSquare">
+                <label id="loginFormTitle">Log In</label>
+                <br/>
+
+                <span class="formSpan">
+                    <label class="loginFormLabel">Email: </label>
+                    <input class="loginFormInput" type="email" placeholder="please enter email" name="email" value="" id="loginEmail">
+                </span>
+
+                <span class=formSpan>
+                    <label class="loginFormLabel">Password: </label>
+                    <input class="loginFormInput"  type="password" placeholder="please enter password" name="password" value="" id="loginPassword">
+                </span>
+
+                <span id="loginBttns" class="formSpan">
+                    <input class="smallGreyBttn" id="loginToAccountBttn" text="Create" type="submit" value="Create">
+                </span>
+            </div>
+        </form>
+    </nav>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./scripts/JQuery.js"></script>
+<script src="./scripts/Shared.js"></script>
+<script src="./scripts/Login.js"></script>
+</html>

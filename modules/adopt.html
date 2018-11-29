@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <link rel="stylesheet" href="./styles/shared.css">
+  <link rel="stylesheet" href="./styles/adopt.css">
+</head>
+
+<body>
+  <nav id="adoptScreen">
+    <div class="menuBar">
+      <button id="backBttnMenu" class="smallBlueBttn" onclick="window.location.href='./index.html'"> Back</button>
+      <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+      <button id="myProfileBttnMenu" class="smallBlueBttn" onclick="window.location.href='./profile.html'"> My
+        Profile</button>
+    </div>
+
+    <div id='adopContainer'>
+      <div id="adoptImageHolder">
+        <img class="adoptImage">
+      </div>
+      <div id="swipeButtons">
+          <img id="rightBttn" src="./images/moveRight.png"/>
+          <img id="leftBttn" src="./images/moveLeft.png"/>
+        </div>
+      <div id="adoptInfoContainer">
+        <div class='adoptInfoLine'>
+          <span class="adopInfoName">Name: </span>
+          <span class="adopInfoNameDesc"></span>
+        </div>
+        <br />
+        <div class='adoptInfoLine'>
+          <span class="adopInfoBreed">Breed:</span>
+          <span class="adopInfoBreedDesc"></span>
+        </div>
+        <br />
+        <div class='adoptInfoLineLast'>
+          <span class="adopInfoGender">Gender:</span>
+          <span class="adopInfoGenderDesc"></span>
+        </div>
+      </div>
+      <div id="adoptButtonContainer">
+        <image src="./images/xout.png" id="xoutButton"></button>
+        <image src="./images/greenHeart.png" id="heartButton"></button>
+      </div>
+    </div>
+  </nav>
+</body>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="./scripts/JQuery.js"></script>
+<script src="./scripts/Shared.js"></script>
+<script src="./scripts/Adopt.js"></script>
+</html>

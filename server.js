@@ -33,11 +33,11 @@ MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds0
 
 app.set('port', (process.env.PORT || 3000));
 app.set('host', (process.env.HOST || "localhost"));
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'modules')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/newPet', function (req, res) {
+app.post('/newPet', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err
       peopleList = result;
@@ -68,7 +68,7 @@ app.post('/newPet', function (req, res) {
   });
 });
 
-app.get('/adoptaPet', function (req, res) {
+app.get('/adopt', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err
       peopleList = result;
@@ -76,7 +76,7 @@ app.get('/adoptaPet', function (req, res) {
   });
 });
 
-app.post('/login', function (req, res) {
+app.post('/login', function(req, res) {
   var username = req.body.Username;
   var password = req.body.Password;
   dbo.collection('users').find({"email":username,"password":password}).toArray(function (err, result) {
@@ -88,7 +88,7 @@ app.post('/login', function (req, res) {
   });
 });
 
-app.post('/itsamatch', function (req, res) {
+app.post('/itsamatch', function(req, res) {
   var ownerID = req.body.ownerID;
   var dogID = req.body.dogID;
 
@@ -98,7 +98,7 @@ app.post('/itsamatch', function (req, res) {
   });
 });
 
-app.post('/profile', function (req, res) {
+app.post('/profile', function(req, res) {
   var ownerID = req.body.ownerID;
   console.log("Profile: " + ownerID);
 
@@ -112,55 +112,61 @@ app.post('/profile', function (req, res) {
   });
 });
 
-// app.post('/getOwnerID', function (req, res) {
+app.post('/create', function(req, res) {
+  dbo.collection('users').insertOne({
+    loginID: Date.now(), 
+    password: req.body.password, 
+    email: req.body.email,
+  }, function(err, data) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        res.sendStatus(200);
+    });
+});
+
+// app.post('/getOwnerID', function(req, res) {
 //   var username = req.body.Email;
 //   dbo.collection('users').find({"email":username}).toArray(function (err, result) {
-//     console.log("HIPPOS: "+result.length);
-//     if (result.length > 1) 
-//     {
+//     console.log("HIPPOS: " + result.length);
+//     if (result.length > 1) {
 //       res.json({"ownerID":result.loginID});
-//     } else 
-//     {
+//     } else {
 //       res.json({"ownerID":"Failure"});
 //     }    
-//   })
+//   });
 // });
 
-// app.post('/adoptaPet', function (req, res) {
+// app.post('/adoptaPet', function(req, res) {
 //   dbo.collection('homework3').find().toArray(function (err, result) {
 //     if (err) throw err
-//       peopleList = result;
-//   })
+//     peopleList = result;
+//   });
 
 //   var id = peopleList.length + 1;
 //   var firstname = req.body.firstname;
 //   var lastname = req.body.lastname;
 //   var start = req.body.start;
-//   var collection = dbo.collection('homework3');
 
-//     collection.insertOne
-//     ({id: id, firstname: firstname, lastname: lastname, start: start});
+//   dbo.collection('homework3').insertOne({id: id, firstname: firstname, lastname: lastname, start: start});
 
-//     dbo.collection('homework3').find().toArray(function (err, result) {
+//   dbo.collection('homework3').find().toArray(function (err, result) {
 //     if (err) throw err
-//       peopleList = result;
-//       //console.log(result);
-//       res.json(peopleList);
+//     peopleList = result;
+//     res.json(peopleList);
 //   })
 // });
 
-// app.get('/person/:id', function (req, res) {
+// app.get('/person/:id', function(req, res) {
 //   dbo.collection('homework3').find().toArray(function (err, result) {
 //     if (err) throw err
-//       peopleList = result;
-//   })
+//     peopleList = result;
+//   });
 //   var pindex = Person(req.params.id);
-//   if (pindex != "404 Not found")
-//   {
+//   if (pindex != "404 Not found") {
 //     res.json(pindex);
-//   }
-//   else 
-//   {
+//   } else {
 //     res.send("404 Not found");
 //   }
 // });
