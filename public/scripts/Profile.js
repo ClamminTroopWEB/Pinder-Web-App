@@ -1,4 +1,4 @@
-/* profile.js
+/* Profile.js implements the AJAX requests necessary for profile.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

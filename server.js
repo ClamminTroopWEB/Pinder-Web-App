@@ -76,10 +76,8 @@ app.get('/adopt', function(req, res) {
   });
 });
 
-app.post('/login', function(req, res) {
-  var username = req.body.Username;
-  var password = req.body.Password;
-  dbo.collection('users').find({"email":username,"password":password}).toArray(function (err, result) {
+app.post('/', function(req, res) {
+  dbo.collection('users').find({"email":req.body.email,"password":req.body.password}).toArray(function (err, result) {
     if (result.length > 0) { 
       res.send(result);
     } else {
@@ -102,7 +100,7 @@ app.post('/profile', function(req, res) {
   var ownerID = req.body.ownerID;
   console.log("Profile: " + ownerID);
 
-  dbo.collection('users').find({"loginID":ownerID}).toArray(function (err, result) {
+  dbo.collection('users').find({"loginID": ownerID}).toArray(function (err, result) {
     console.log(result);
     if (result.length > 0) { 
       res.send(result);
@@ -114,7 +112,7 @@ app.post('/profile', function(req, res) {
 
 app.post('/create', function(req, res) {
   dbo.collection('users').insertOne({
-    loginID: Date.now(), 
+    loginID: req.body.loginID, 
     password: req.body.password, 
     email: req.body.email,
   }, function(err, data) {

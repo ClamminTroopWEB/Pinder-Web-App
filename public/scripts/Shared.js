@@ -1,4 +1,4 @@
-/* shared.js
+/* Shared.js implements the AJAX requests necessary for shared.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

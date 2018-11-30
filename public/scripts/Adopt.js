@@ -1,4 +1,4 @@
-/* adopt.js
+/* Adopt.js implements the AJAX requests necessary for adopt.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

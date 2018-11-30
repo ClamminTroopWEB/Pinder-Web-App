@@ -1,4 +1,4 @@
-/* login.js
+/* Login.js implements the AJAX requests necessary for index.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -10,15 +10,14 @@
 
 $(document).ready(function() {
   $('form').submit(function(event) {
-    $("p").remove();
     event.preventDefault();
 
     $.ajax({
-      url: "/login",
+      url: "/",
       type: "post",
       data: {
-        Username: $('#loginEmail').val(),
-        Password: $('#loginPassword').val()
+        email: $('#loginEmail').val(),
+        password: $('#loginPassword').val()
       }
     })
     .done(function(result) {

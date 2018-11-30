@@ -1,4 +1,4 @@
-/* matchesProfile.js
+/* MatchesProfile.js implements the AJAX requests necessary for matchesProfile.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

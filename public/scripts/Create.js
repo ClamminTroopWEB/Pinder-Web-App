@@ -1,4 +1,4 @@
-/* login.js
+/* Create.js implements the AJAX requests necessary for create.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -9,15 +9,16 @@
 "use_strict";
 
 $(document).ready(function() {
-  let form = $("form");
-  form.submit(function(event) {
-    $("p").remove();
+  $("form").submit(function(event) {
     event.preventDefault();
-
     $.ajax({
-        type: form.attr('method'),
-        url: form.attr('action'),
-        data: form.serialize(),
+      url: '/create',
+      type: 'post',
+      data: {
+        loginID: Date.now(),
+        email: $('#loginEmail').val(),
+        password: $('#loginPassword').val(),
+      },
     })
     .done(function(result) {
       window.location.href = "../selection.html";

@@ -1,4 +1,4 @@
-/* matches.js
+/* Matches.js implements the AJAX requests necessary for matches.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

@@ -1,4 +1,4 @@
-/* list.js
+/* List.js implements the AJAX requests necessary for list.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

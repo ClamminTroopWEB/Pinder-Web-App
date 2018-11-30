@@ -1,4 +1,4 @@
-/* shared.js
+/* JQuery.js implements the AJAX requests necessary for jquery.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
