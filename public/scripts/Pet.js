@@ -1,4 +1,4 @@
-/* MatchesProfile.js implements the AJAX requests necessary for matchesProfile.html
+/* Pet.js implements the AJAX requests necessary for pet.html
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -7,3 +7,5 @@
  */
 
 "use_strict";
+
+// TODO: retrieve the pets information and display it on the pet's profile page

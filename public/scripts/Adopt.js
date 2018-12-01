@@ -15,7 +15,7 @@ $(document).ready(function () {
     var index = 0;
 
     $.ajax({
-      url: "/adoptaPet",
+      url: "/adopt",
       type: "GET"
     })
     .done(function(result) {
