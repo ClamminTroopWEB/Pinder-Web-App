@@ -37,53 +37,32 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.post('/newPet', function(req, res) {
-  dbo.collection('dogs').find().toArray(function (err, result) {
-    if (err) throw err
-      peopleList = result;
-  });
-
-  var id = peopleList.length + 1;
-  var loginID = req.body.loginID;
-  var Name = req.body.Name;
-  var Gender = req.body.Gender;
-  var Breed = req.body.Breed;
-  var EnergyLevel = req.body.EnergyLevel;
-  var HouseTrained = req.body.HouseTrained;
-  var Size = req.body.Size;
-  var Image = req.body.Image;
-  var collection = dbo.collection('dogs');
-  console.log(loginID);
-
-  collection.insertOne({
-      id: id,
-      ownerID: loginID, 
-      Name: Name, 
-      Gender: Gender, 
-      Breed: Breed,
-      EnergyLevel: EnergyLevel, 
-      HouseTrained: HouseTrained, 
-      Size: Size,
-      Image: Image
-  });
-});
-
-app.get('/adopt', function(req, res) {
-  dbo.collection('dogs').find().toArray(function (err, result) {
-    if (err) throw err
-      peopleList = result;
-    res.json(result);
-  });
-});
-
 app.post('/', function(req, res) {
-  dbo.collection('users').find({"email":req.body.email,"password":req.body.password}).toArray(function (err, result) {
+  dbo.collection('users').find({"email": req.body.email,"password": req.body.password}).toArray(function (err, result) {
     if (result.length > 0) { 
       res.send(result);
     } else {
-      res.send({"Result":"Failure"});
+      res.send({"Result": "Failure"});
     }    
   });
+});
+
+app.post('/create', function(req, res) {
+  dbo.collection('users').find().toArray(function (err, result) {
+  if (err) throw err
+      peopleList = result;
+  });
+  dbo.collection('users').insertOne({
+    loginID: peopleList.length + 1, 
+    password: req.body.password, 
+    email: req.body.email,
+  }, function(err, data) {
+        if (err) {
+            console.error(err);
+            process.exit(1);
+        }
+        res.sendStatus(200);
+    });
 });
 
 app.post('/itsamatch', function(req, res) {
@@ -93,6 +72,14 @@ app.post('/itsamatch', function(req, res) {
   dbo.collection('matches').insertOne({
     dogID: ownerID,
     ownerID: dogID
+  });
+});
+
+app.get('/adopt', function(req, res) {
+  dbo.collection('dogs').find().toArray(function (err, result) {
+    if (err) throw err
+      peopleList = result;
+    res.json(result);
   });
 });
 
@@ -110,18 +97,22 @@ app.post('/profile', function(req, res) {
   });
 });
 
-app.post('/create', function(req, res) {
-  dbo.collection('users').insertOne({
-    loginID: req.body.loginID, 
-    password: req.body.password, 
-    email: req.body.email,
-  }, function(err, data) {
-        if (err) {
-            console.error(err);
-            process.exit(1);
-        }
-        res.sendStatus(200);
-    });
+app.post('/newPet', function(req, res) {
+  dbo.collection('dogs').find().toArray(function (err, result) {
+    if (err) throw err
+      dogList = result;
+  });
+  dbo.collection('dogs').insertOne({
+      id: dogList.length + 1,
+      ownerID: req.body.loginID, 
+      Name: req.body.Name, 
+      Gender: req.body.Gender, 
+      Breed: req.body.Breed,
+      EnergyLevel: req.body.EnergyLevel, 
+      HouseTrained: req.body.HouseTrained, 
+      Size: req.body.Size,
+      Image: req.body.Image
+  });
 });
 
 // app.post('/getOwnerID', function(req, res) {
