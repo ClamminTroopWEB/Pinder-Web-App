@@ -99,8 +99,8 @@ app.post('/profile', function(req, res) {
 
 app.post('/newPet', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
-    if (err) throw err
-      dogList = result;
+    if (err) throw err;
+    dogList = result;
   });
   dbo.collection('dogs').insertOne({
       id: dogList.length + 1,
@@ -113,6 +113,14 @@ app.post('/newPet', function(req, res) {
       Size: req.body.Size,
       Image: req.body.Image
   });
+});
+
+app.get('/matches', function(req, res) {
+  dbo.collection('dogs').find().toArray(function(err, result) {
+    if (err) throw err;
+    dogList = result;
+  });
+  res.json(dogList);
 });
 
 // app.post('/getOwnerID', function(req, res) {
