@@ -49,40 +49,27 @@ app.post('/', function(req, res) {
 
 app.post('/create', function(req, res) {
   dbo.collection('users').find({ "email":req.body.email } ).toArray(function (err, result) {
-  if (err) throw err
-      peopleList = result;
-  if (result.length == 0)
-  {
+    if (err) throw err
+        peopleList = result;
+    if (result.length == 0) {
 
-    dbo.collection('users').count({}, function(error, numOfDocs) {
-   
-    // ..
-    dbo.collection('users').insertOne({
-    name: req.body.name,
-    loginID: numOfDocs + 1, 
-    password: req.body.password, 
-    email: req.body.email,
-    Address: req.body.location,
-    ProfilePicture: req.body.Image
-  }, function(err, data) {
-        if (err) {
-            res.sendStatus(400);
-        }
-        res.sendStatus(200);
-    });
-  });
-  }
-  });
-
-});
-
-app.post('/itsamatch', function(req, res) {
-  var ownerID = req.body.ownerID;
-  var dogID = req.body.dogID;
-
-  dbo.collection('matches').insertOne({
-    dogID: ownerID,
-    ownerID: dogID
+      dbo.collection('users').countDocuments({}, function(error, numOfDocs) {
+      dbo.collection('users').insertOne({
+        name: req.body.name,
+        loginID: numOfDocs + 1, 
+        password: req.body.password, 
+        email: req.body.email,
+        Address: req.body.location,
+        ProfilePicture: req.body.Image,
+        matches: [],
+      }, function(err, data) {
+          if (err) {
+              res.sendStatus(400);
+          }
+          res.sendStatus(200);
+        });
+      });
+    }
   });
 });
 
@@ -116,10 +103,7 @@ app.post('/saveProfile', function(req, res) {
   var Location= req.body.Location;
 
   dbo.collection('users').updateOne({"loginID": parseInt(ownerID)},{$set: {"name":Name,"email":Email,"Address":Location}});
-
-
 });
-
 
 app.post('/newPet', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
@@ -139,10 +123,23 @@ app.post('/newPet', function(req, res) {
   });
 });
 
+app.put('/itsamatch', function(req, res) {
+  dbo.collection('users').updateOne(
+    {"loginID": req.body.loginID },
+    {$addToSet: {"matches": req.body.dogID}}
+  );
+});
+
 app.get('/matches', function(req, res) {
-  dbo.collection('dogs').find().toArray(function(err, result) {
+  dbo.collection('users').find({"loginID": parseInt(ownerID)}, {matches: {$gt: -1}}).toArray(function (err, result) {
     if (err) throw err;
-    dogList = result;
+    idList = result;
+  });
+  idList.foreach(function(id) {
+    dbo.collection('dogs').find({"id": id}).toArray(function(err, result) {
+      if (err) throw err;
+      dogList = result;
+    });
   });
   res.json(dogList);
 });
