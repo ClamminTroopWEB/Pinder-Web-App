@@ -48,21 +48,32 @@ app.post('/', function(req, res) {
 });
 
 app.post('/create', function(req, res) {
-  dbo.collection('users').find().toArray(function (err, result) {
+  dbo.collection('users').find({ "email":req.body.email } ).toArray(function (err, result) {
   if (err) throw err
       peopleList = result;
-  });
-  dbo.collection('users').insertOne({
-    loginID: peopleList.length + 1, 
+  if (result.length == 0)
+  {
+
+    dbo.collection('users').count({}, function(error, numOfDocs) {
+   
+    // ..
+    dbo.collection('users').insertOne({
+    name: req.body.name,
+    loginID: numOfDocs + 1, 
     password: req.body.password, 
     email: req.body.email,
+    Address: req.body.location,
+    ProfilePicture: req.body.Image
   }, function(err, data) {
         if (err) {
-            console.error(err);
-            process.exit(1);
+            res.sendStatus(400);
         }
         res.sendStatus(200);
     });
+  });
+  }
+  });
+
 });
 
 app.post('/itsamatch', function(req, res) {
@@ -87,7 +98,7 @@ app.post('/profile', function(req, res) {
   var ownerID = req.body.ownerID;
   console.log("Profile: " + ownerID);
 
-  dbo.collection('users').find({"loginID": ownerID}).toArray(function (err, result) {
+  dbo.collection('users').find({"loginID": parseInt(ownerID)}).toArray(function (err, result) {
     console.log(result);
     if (result.length > 0) { 
       res.send(result);
@@ -96,6 +107,19 @@ app.post('/profile', function(req, res) {
     }    
   });
 });
+
+app.post('/saveProfile', function(req, res) {
+  var ownerID = req.body.loginID;
+  console.log("Profile Saveprofile: " + ownerID);
+  var Name= req.body.Name;
+  var Email = req.body.Email;
+  var Location= req.body.Location;
+
+  dbo.collection('users').updateOne({"loginID": parseInt(ownerID)},{$set: {"name":Name,"email":Email,"Address":Location}});
+
+
+});
+
 
 app.post('/newPet', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {

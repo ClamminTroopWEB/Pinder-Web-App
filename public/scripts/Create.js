@@ -7,16 +7,36 @@
  */
 
 "use_strict";
+var image;
+
+function readFile() {
+  if (this.files && this.files[0]) {
+    var FR = new FileReader();
+    
+    FR.addEventListener("load", function(e) {
+      document.getElementById("img").src = e.target.result;
+      image = e.target.result;
+    }); 
+    FR.readAsDataURL(this.files[0]);
+  }
+}
+
+document.getElementById("file").addEventListener("change", readFile);
 
 $(document).ready(function() {
+
+
   $("form").submit(function(event) {
     event.preventDefault();
     $.ajax({
       url: '/create',
       type: 'post',
       data: {
+        name: $('#loginName').val(),
         email: $('#loginEmail').val(),
         password: $('#loginPassword').val(),
+        location: $('#loginLocation').val(),
+        Image: image
       }
     })
     .done(function(result) {

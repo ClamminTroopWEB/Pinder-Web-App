@@ -17,11 +17,11 @@ $(document).ready(function () {
     }
   })
   .done(function( result ) {
-    $("#profileNameText").val("Professor Prium");
+    $("#profileNameText").val(result[0].name);
     $("#profileEmailText").val(result[0].email);
     $("#profileLocationText").val(result[0].Address);
 
-    console.log("result: " + result);
+    //console.log("result: " + result);
     var image = new Image();
     image.src = result[0].ProfilePicture;
     $(".profileImage").attr("src", image.src);
@@ -29,6 +29,34 @@ $(document).ready(function () {
   .fail(function(xhr, status, errorThrown) {
      console.log('AJAX POST failed...');
   });
+
+  $( "#saveChangesProfileBttn" ).click(function()  {
+    $("p").remove();
+
+    console.log("You got here!");
+    $.ajax({
+      url: "/saveProfile",
+      type: "POST",
+      data: {
+        loginID: getCookie("PinderloginID"),
+        Name: $('#profileNameText').val(),
+        Email: $('#profileEmailText').val(),
+        Location: $('#profileLocationText').val()
+      }
+    })
+    .done(function( result ) {
+       console.log('AJAX POST succeded...');
+      $("body").append("<p>Your information has been saved!</p>");
+    })
+    .fail(function(xhr, status, errorThrown) {
+      console.log('AJAX POST failed...');
+      $("body").append("<p>Your information has not been saved!</p>");
+    })
+  });
+
+
+
+
 });
 
 function getCookie(name) {
