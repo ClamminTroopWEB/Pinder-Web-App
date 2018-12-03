@@ -125,7 +125,7 @@ app.post('/newPet', function(req, res) {
 
 app.put('/itsamatch', function(req, res) {
   dbo.collection('users').updateOne(
-    {"loginID": req.body.loginID },
+    {"loginID": parseInt(req.body.loginID)},
     {$addToSet: {"matches": req.body.dogID}}
   );
 });
@@ -135,11 +135,10 @@ app.get('/matches', function(req, res) {
     if (err) throw err;
     idList = result;
   });
+  
+  dogList = [];
   idList.foreach(function(id) {
-    dbo.collection('dogs').find({"id": id}).toArray(function(err, result) {
-      if (err) throw err;
-      dogList = result;
-    });
+    dogList.push(dbo.collection('dogs').find({"id": id}));
   });
   res.json(dogList);
 });
@@ -154,39 +153,6 @@ app.get('/matches', function(req, res) {
 //       res.json({"ownerID":"Failure"});
 //     }    
 //   });
-// });
-
-// app.post('/adoptaPet', function(req, res) {
-//   dbo.collection('homework3').find().toArray(function (err, result) {
-//     if (err) throw err
-//     peopleList = result;
-//   });
-
-//   var id = peopleList.length + 1;
-//   var firstname = req.body.firstname;
-//   var lastname = req.body.lastname;
-//   var start = req.body.start;
-
-//   dbo.collection('homework3').insertOne({id: id, firstname: firstname, lastname: lastname, start: start});
-
-//   dbo.collection('homework3').find().toArray(function (err, result) {
-//     if (err) throw err
-//     peopleList = result;
-//     res.json(peopleList);
-//   })
-// });
-
-// app.get('/person/:id', function(req, res) {
-//   dbo.collection('homework3').find().toArray(function (err, result) {
-//     if (err) throw err
-//     peopleList = result;
-//   });
-//   var pindex = Person(req.params.id);
-//   if (pindex != "404 Not found") {
-//     res.json(pindex);
-//   } else {
-//     res.send("404 Not found");
-//   }
 // });
 
 app.all("*", (req, res) => {
