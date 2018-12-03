@@ -16,6 +16,38 @@
 //     });
 // });
 
+const DogBox = React.createClass({
+  loadDogsFromServer: function() {
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({data: data});
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+  getInitialState: function() {
+    return {data: []};
+  },
+  componentDidMount: function() {
+    this.loadDogsFromServer();
+    setInterval(this.loadDogsFromServer, this.props.pollInterval);
+  },
+  render: function() {
+    return (
+      <div className="dogBox">
+        <h1>Dogs</h1>
+        <DogTable data={this.state.data} />
+        <DogForm onDogSubmit={this.handleDogSubmit} />
+      </div>
+    );
+  }
+});
+
 //
 const DogTable = React.createClass({
   render: function() {
@@ -46,39 +78,6 @@ const Dog = React.createClass({
           {this.props.name}
         </h2>
         {this.props.children}
-      </div>
-    );
-  }
-});
-
-//
-const DogBox = React.createClass({
-  loadDogsFromServer: function() {
-    $.ajax({
-      url: this.props.url,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-    });
-  }
-  getInitialState: function() {
-    return {data: []};
-  },
-  componentDidMount: function() {
-    this.loadDogsFromServer();
-    setInterval(this.loadDogsFromServer, this.props.pollInterval);
-  },
-  render: function() {
-    return (
-      <div className="dogBox">
-        <h1>Dogs</h1>
-        <DogTable data={this.state.data} />
-        <DogForm onDogSubmit={this.handleDogSubmit} />
       </div>
     );
   }
