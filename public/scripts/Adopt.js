@@ -50,9 +50,9 @@ $(document).ready(function () {
         console.log("SUP: "+ Dog_Array[index].DogID);
         $.ajax({
             url: "/itsamatch",
-            type: "POST",
+            type: "PUT",
             data: {
-                "ownerID":getCookie("PinderloginID"),
+                "loginID":getCookie("PinderloginID"),
                 "dogID": Dog_Array[index].DogID
             }
         })
@@ -60,7 +60,7 @@ $(document).ready(function () {
             console.log("Added to your matches!");
         })
         .fail(function(xhr, status, errorThrown) {
-            console.log('AJAX POST failed...');
+            console.log('AJAX PUT failed...');
         });
 
         if (Dog_Array[index-1] != null) {   
