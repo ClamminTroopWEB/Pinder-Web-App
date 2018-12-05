@@ -11,6 +11,8 @@ html body {
     height: 100vh;
     width: 100vw;
     background-image: url('../images/dogBackgroundDesktop.png');
+    background-repeat:no-repeat;
+    background-size: cover;
 }
 
 #mainScreen {

@@ -46,7 +46,8 @@ $(document).ready(function () {
     })
     .done(function( result ) {
        console.log('AJAX POST succeded...');
-      $("body").append("<p>Your information has been saved!</p>");
+      alert('Your changes have been saved');
+      window.location.href = "../selection.html";
     })
     .fail(function(xhr, status, errorThrown) {
       console.log('AJAX POST failed...');

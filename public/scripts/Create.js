@@ -12,49 +12,51 @@ var image;
 function readFile() {
   if (this.files && this.files[0]) {
     var FR = new FileReader();
-    
-    FR.addEventListener("load", function(e) {
+
+    FR.addEventListener("load", function (e) {
       document.getElementById("img").src = e.target.result;
       image = e.target.result;
-    }); 
+    });
     FR.readAsDataURL(this.files[0]);
   }
 }
 
 document.getElementById("file").addEventListener("change", readFile);
 
-$(document).ready(function() {
+$(document).ready(function () {
 
 
-  $("form").submit(function(event) {
+  $("form").submit(function (event) {
     event.preventDefault();
     $.ajax({
-      url: '/create',
-      type: 'post',
-      data: {
-        name: $('#loginName').val(),
-        email: $('#loginEmail').val(),
-        password: $('#loginPassword').val(),
-        location: $('#loginLocation').val(),
-        Image: image
-      }
-    })
-    .done(function(result) {
-      console.log("JSON: " + result[0].loginID);
-      if (result[0].loginID != "Failure") {
-        setCookie('PinderloginID',result[0].loginID, 3);
-        setCookie('PinderloginEmail',$('#loginEmail').val(), 3);
-        setCookie('PinderloginPassword',$('#loginPassword').val(), 3);
-        console.log("Cookies: " + getCookie('PinderloginID'));
-        window.location.href = "../selection.html";
-      } else if (result[0].ownerID === "Failure") {
-        console.log("Failure");
-        alert("Incorrect Password or Username");
-      }
-    })
-  	.fail(function(xhr, status, errorThrown) {
-  	 console.log('AJAX POST failed...');
-  	});
+        url: '/create',
+        type: 'post',
+        data: {
+          name: $('#createAccountName').val(),
+          email: $('#createAccountEmail').val(),
+          password: $('#createAccountPassword').val(),
+          location: $('#createAccountLocation').val(),
+          Image: image
+        }
+      })
+      .done(function (result) {
+        // console.log("JSON: " + result[0].loginID);
+        if (result.Result == 'Failure') {
+          console.log(result);
+          alert("That Email has been taken, please choose another");
+        } else {
+          console.log("JSON: " + result);
+          setCookie('PinderloginID', result.loginID, 3);
+          setCookie('PinderloginEmail', $('#createAccountEmail').val(), 3);
+          setCookie('PinderloginPassword', $('#createAccountPassword').val(), 3);
+          console.log("Cookies: " + getCookie('PinderloginID'));
+          window.location.href = "../selection.html";
+        }
+      })
+      .fail(function (xhr, status, errorThrown) {
+        console.log('AJAX POST failed...');
+        alert(xhr + " " +  status);
+      });
   });
 });
 
