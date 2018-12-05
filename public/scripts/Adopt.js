@@ -112,7 +112,12 @@ $(document).ready(function () {
 
     $("#rightBttn").click(function () {
         //  alert('Right Button: Add code to move between dogs within the database');
-        index++;
+        if((index + 1) > Dog_Array.length - 1) {
+            index = 0;
+        }
+        else {
+            index++;
+        }
 
         $(".adopInfoNameDesc").text(Dog_Array[index].Name);
         $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
@@ -126,6 +131,14 @@ $(document).ready(function () {
     $("#leftBttn").click(function () {
         //  alert('Left Button: Add code to move between dogs within the database');
         index --;
+
+        if ((index - 1) < 0 ) {
+            index = Dog_Array.length - 1;
+        }
+        else {
+            index--;
+        }
+
         $(".adopInfoNameDesc").text(Dog_Array[index].Name);
         $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
         $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);

@@ -55,7 +55,7 @@ $(document).ready(function () {
       })
       .fail(function (xhr, status, errorThrown) {
         console.log('AJAX POST failed...');
-        alert(xhr + " " +  status);
+        //alert(xhr + " " +  status);
       });
   });
 });
