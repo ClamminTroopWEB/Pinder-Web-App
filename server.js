@@ -19,7 +19,7 @@ const multer = require('multer');
 var dbo;
 var peopleList;
 
-MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, function (err, client) {
+MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, { useNewUrlParser: true }, function(err, client) {
   if (err) throw err
   
   dbo = client.db('pinder-web-app')
@@ -108,7 +108,7 @@ app.post('/saveProfile', function(req, res) {
 app.post('/newPet', function(req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err;
-    dogList = result;
+      dogList = result;
   });
   dbo.collection('dogs').insertOne({
       id: dogList.length + 1,
@@ -130,17 +130,19 @@ app.put('/itsamatch', function(req, res) {
   );
 });
 
-app.get('/matches', function(req, res) {
-  dbo.collection('users').find({"loginID": parseInt(ownerID)}, {matches: {$gt: -1}}).toArray(function (err, result) {
+app.get('/matches.html', function(req, res) {
+  console.log(req.body.loginID);
+  dbo.collection('users').find({"loginID": parseInt(req.body.loginID)}, {matches: {$gt: -1}}).toArray(function (err, result) {
     if (err) throw err;
-    idList = result;
+      idList = result;
   });
-  
-  dogList = [];
+
+  matchList = [];
   idList.foreach(function(id) {
-    dogList.push(dbo.collection('dogs').find({"id": id}));
+    console.log(id);
+    matchList.push(dbo.collection('dogs').find({"id": id}));
   });
-  res.json(dogList);
+  res.json(matchList);
 });
 
 // app.post('/getOwnerID', function(req, res) {
@@ -155,6 +157,4 @@ app.get('/matches', function(req, res) {
 //   });
 // });
 
-app.all("*", (req, res) => {
-  res.sendStatus( 404 );
-});
+app.all("*", (req, res) => { res.sendStatus(404); });

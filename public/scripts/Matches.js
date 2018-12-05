@@ -6,8 +6,9 @@
  * Semester: Fall, 2018
  */
 
-"use_strict";
+// "use_strict";
 
+// var loginID = getCookie("PinderloginID");
 // $(document).ready(function() {
 //     $(".matchRow").click(function () {
 //         var clickedBttnElement = $(this); // or var clickedBtnID = this.id
@@ -15,6 +16,17 @@
 //         window.location.href = './pet.html'
 //     });
 // });
+$(document).ready(function () {
+  $.ajax({
+    url: "/profile",
+    type: "get",
+    data: {
+      "loginID": getCookie("PinderloginID")
+    }
+  })
+  .fail(function(xhr, status, errorThrown) {
+     console.log('AJAX POST failed...');
+  });
 
 const DogBox = React.createClass({
   loadDogsFromServer: function() {
@@ -40,9 +52,7 @@ const DogBox = React.createClass({
   render: function() {
     return (
       <div className="dogBox">
-        <h1>Dogs</h1>
         <DogTable data={this.state.data} />
-        <DogForm onDogSubmit={this.handleDogSubmit} />
       </div>
     );
   }
@@ -74,9 +84,9 @@ const Dog = React.createClass({
   render: function() {
     return (
       <div className="dog">
-        <h2 className="dogName">
+        <h1 className="dogName">
           {this.props.name}
-        </h2>
+        </h1>
         {this.props.children}
       </div>
     );
@@ -88,3 +98,14 @@ ReactDOM.render(
   <DogBox url="/matches.html" pollInterval={2000} />,
   document.getElementById('matchesTable')
 );
+
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
