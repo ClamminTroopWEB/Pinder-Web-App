@@ -47,7 +47,7 @@ $(document).ready(function () {
         });
 
     $("#heartButton").click(function () {
-        console.log("SUP: " + Dog_Array[index].DogID);
+        //console.log("SUP: " + Dog_Array[index].DogID);
         $.ajax({
                 url: "/itsamatch",
                 type: "PUT",
@@ -63,26 +63,22 @@ $(document).ready(function () {
                 console.log('AJAX PUT failed...');
             });
 
-        if (Dog_Array[index - 1] != null) {
-            $(".adopInfoNameDesc").text(Dog_Array[index - 1].Name);
-            $(".adopInfoBreedDesc").text(Dog_Array[index - 1].Breed);
-            $(".adopInfoGenderDesc").text(Dog_Array[index - 1].Gender);
+        if (Dog_Array.length > 1) {
+            var indexToSplice = index;
+            Dog_Array.splice(indexToSplice, 1);
+            if (Dog_Array[index] == null) {
+                index = 0;
+            }
+
+            $(".adopInfoNameDesc").text(Dog_Array[index].Name);
+            $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
+            $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
             var image = new Image();
-            image.src = Dog_Array[index - 1].Image;
+            image.src = Dog_Array[index].Image;
             $(".adoptImage").attr("src", image.src);
-
-            Dog_Array.splice(index);
         } else {
-            $(".adopInfoNameDesc").text(Dog_Array[index + 1].Name);
-            $(".adopInfoBreedDesc").text(Dog_Array[index + 1].Breed);
-            $(".adopInfoGenderDesc").text(Dog_Array[index + 1].Gender);
-
-            var image = new Image();
-            image.src = Dog_Array[index + 1].Image;
-            $(".adoptImage").attr("src", image.src);
-
-            Dog_Array.splice(index);
+            alert('You have matched with them all');
         }
     });
 
