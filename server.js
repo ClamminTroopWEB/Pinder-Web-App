@@ -12,7 +12,7 @@ const express = require('express');
 const app = express();
 const fs = require('fs');
 const path = require('path');
-const bodyParser = require('body-parser');
+var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const multer = require('multer');
 
@@ -40,7 +40,7 @@ app.set('host', (process.env.HOST || "localhost"));
 app.use('/', express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
 
 app.post('/', function (req, res) {
@@ -166,19 +166,46 @@ app.put('/itsamatch', function (req, res) {
 });
 
 app.post('/matches', function (req, res) {
+  var matches_list=[];
+
   dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
-      user = result[0].matches;
-      res.send(user);
+      matches = result[0].matches;
+    // console.log(matches);
+      for (var i=0; i< matches.length; i++)
+      {
+        dbo.collection('dogs').find({
+           "id": parseInt(matches[i])
+        }).toArray(function (err, results) {
+        if (err) throw err;
+//          user = result[0].matches;
+     // console.log("+++ " + results[0].Name);
+    //  console.log(results[0].id);
+      var match = {
+        "id": results[0].id
+        , "Name": results[0].Name
+         , "Breed": results[0].Breed
+         , "EnergyLevel": results[0].EnergyLevel
+         , "HouseTrained": results[0].HouseTrained
+          , "Size": results[0].Size
+        , "Image":results[0].Image
 
-      
-      dbo.collection('dogs').find({
-        "id": parseInt()
-      })
-  });
+      };
+
+
+      console.log(match);
+      matches_list.push(match);
+
+      });
+  };
+console.log(matches_list.length);
+res.json(matches_list);
+
+
 }); 
+});
 
 // app.post('/getOwnerID', function(req, res) {
 //   var username = req.body.Email;

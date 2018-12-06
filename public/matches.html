@@ -5,7 +5,16 @@
     <meta name="viewport" content="width=device-width" />
     <link rel="stylesheet" href="./styles/shared.css">
     <link rel="stylesheet" href="./styles/matches.css">
+    <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+    <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/jquery@3.1.0/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/remarkable@1.7.1/dist/remarkable.min.js"></script>
+
+        
 </head>
+
+
 
 <body>
     <nav id="matchesScreen">
@@ -18,6 +27,9 @@
         <div id="tableHeading">
             <label> Your Matches </label>
         </div>
+        <div id="content"/>
+     
+
         <div id="matchesTableBackground">
             <div id="matchesTable">
                 <!--tr class="matchRow">
@@ -34,5 +46,6 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="./scripts/Matches.js"></script>
+        <script type = "text/babel" src="./scripts/Matches.js"></script>
+
 </html>
