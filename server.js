@@ -16,6 +16,8 @@ var bodyParser = require('body-parser');
 const MongoClient = require('mongodb').MongoClient;
 const multer = require('multer');
 
+ var matches_list=[];
+
 var dbo;
 var peopleList;
 
@@ -166,12 +168,13 @@ app.put('/itsamatch', function (req, res) {
 });
 
 app.post('/matches', function (req, res) {
-  var matches_list=[];
+ 
 
   dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
+      console.log(result[0].matches);
       matches = result[0].matches;
     // console.log(matches);
       for (var i=0; i< matches.length; i++)
@@ -195,16 +198,18 @@ app.post('/matches', function (req, res) {
       };
 
 
-      console.log(match);
+    //  console.log(match);
       matches_list.push(match);
 
       });
   };
-console.log(matches_list.length);
+//console.log(matches_list);
+
+console.log(matches_list);
 res.json(matches_list);
-
-
-}); 
+ matches_list=[];
+});
+//matches_list=[]; 
 });
 
 // app.post('/getOwnerID', function(req, res) {
