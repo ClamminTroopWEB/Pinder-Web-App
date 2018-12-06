@@ -21,9 +21,7 @@ const multer = require('multer');
 var dbo;
 var peopleList;
 
-MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, {
-  useNewUrlParser: true
-}, function (err, client) {
+MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, function (err, client) {
   if (err) throw err
 
   dbo = client.db('pinder-web-app')
@@ -168,48 +166,34 @@ app.put('/itsamatch', function (req, res) {
 });
 
 app.post('/matches', function (req, res) {
- 
-
   dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
-      console.log(result[0].matches);
       matches = result[0].matches;
-    // console.log(matches);
-      for (var i=0; i< matches.length; i++)
+      for (var i = 0; i < matches.length; i++)
       {
         dbo.collection('dogs').find({
            "id": parseInt(matches[i])
         }).toArray(function (err, results) {
         if (err) throw err;
-//          user = result[0].matches;
-     // console.log("+++ " + results[0].Name);
-    //  console.log(results[0].id);
+        var dog = results[0];
+
       var match = {
-        "id": results[0].id
-        , "Name": results[0].Name
-         , "Breed": results[0].Breed
-         , "EnergyLevel": results[0].EnergyLevel
-         , "HouseTrained": results[0].HouseTrained
-          , "Size": results[0].Size
-        , "Image":results[0].Image
-
+        "id": dog.id
+        , "Name": dog.Name
+        , "Breed": dog.Breed
+        , "EnergyLevel": dog.EnergyLevel
+        , "HouseTrained": dog.HouseTrained
+        , "Size": dog.Size
+        , "Image":dog.Image
       };
-
-
-    //  console.log(match);
       matches_list.push(match);
-
       });
   };
-//console.log(matches_list);
-
-console.log(matches_list);
 res.json(matches_list);
- matches_list=[];
+// matches_list = [];
 });
-//matches_list=[]; 
 });
 
 // app.post('/getOwnerID', function(req, res) {
