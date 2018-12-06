@@ -19,5 +19,14 @@
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
-  }
+  },
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClamminTroopWEB/Pinder-Web-App.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ClamminTroopWEB/Pinder-Web-App/issues"
+  },
+  "homepage": "https://github.com/ClamminTroopWEB/Pinder-Web-App#readme"
 }

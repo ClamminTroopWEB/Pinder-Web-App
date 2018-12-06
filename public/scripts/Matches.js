@@ -16,18 +16,38 @@
 //         window.location.href = './pet.html'
 //     });
 // });
-$(document).ready(function () {
+//alert(getCookie('PinderloginID'));
+
+$(document).ready(function() {
   $.ajax({
-    url: "/profile",
-    type: "get",
+    url: "/matches",
+    type: "POST",
     data: {
-      "loginID": getCookie("PinderloginID")
+      loginID: getCookie("PinderloginID")
     }
   })
+  .done(function(result) {
+        console.log(result);
+        alert(result);
+  })
   .fail(function(xhr, status, errorThrown) {
-     console.log('AJAX POST failed...');
+     console.log('AJAX POST failed:' + errorThrown + " " + status);
+      alert('got a failure');
   });
+});
 
+function getCookie(name) {
+  var nameEQ = name + "=";
+  var ca = document.cookie.split(';');
+  for (var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+  }
+  return null;
+}
+
+/*
 const DogBox = React.createClass({
   loadDogsFromServer: function() {
     $.ajax({
@@ -98,14 +118,4 @@ ReactDOM.render(
   <DogBox url="/matches.html" pollInterval={2000} />,
   document.getElementById('matchesTable')
 );
-
-function getCookie(name) {
-  var nameEQ = name + "=";
-  var ca = document.cookie.split(';');
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-  }
-  return null;
-}
+*/

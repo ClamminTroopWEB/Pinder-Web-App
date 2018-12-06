@@ -165,28 +165,20 @@ app.put('/itsamatch', function (req, res) {
   });
 });
 
-app.get('/matches.html', function (req, res) {
-  console.log(req.body.loginID);
+app.post('/matches', function (req, res) {
   dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
-  }, {
-    matches: {
-      $gt: -1
-    }
   }).toArray(function (err, result) {
     if (err) throw err;
-    idList = result;
-  });
+      user = result[0].matches;
+      res.send(user);
 
-  matchList = [];
-  idList.foreach(function (id) {
-    console.log(id);
-    matchList.push(dbo.collection('dogs').find({
-      "id": id
-    }));
+      
+      dbo.collection('dogs').find({
+        "id": parseInt()
+      })
   });
-  res.json(matchList);
-});
+}); 
 
 // app.post('/getOwnerID', function(req, res) {
 //   var username = req.body.Email;
