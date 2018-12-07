@@ -12,7 +12,7 @@ DESIGN: Pinder for the Web
 Stakeholders, 
 we are pleased to announce the design of Pinder has been completed. Here's how it will work:
 
-The application will have 3 main features: listing a pet for adoption, the abillity to find and match with pets that taylor to your needs, and the ability to view the pets you've matched with. 
+The application will have 3 main features: listing a pet for adoption, the abillity to find and match with pets that tailor to your needs, and the ability to view the pets you've matched with. 
 
 The Database will have 2 collections: dogs and people. 
 Each person object will have an id, usernames password, address, and a profile picture. Dogs will have an ownerID to connect them to their owner's profile. They will also have an id, breed, and a name.
