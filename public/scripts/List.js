@@ -45,11 +45,14 @@ $(document).ready(function () {
       }
     })
     .done(function( result ) {
-      $("body").append("<p>Dog has been published to our database!</p>");
+      console.log(result);
+      alert('A dog has been added');
+      window.location.href = "../selection.html";
     })
     .fail(function(xhr, status, errorThrown) {
       console.log('AJAX POST failed...');
-      $("body").append("<p>Dog was NOT published into the database!</p>");
+      alert('A dog has been added');
+      window.location.href = "../selection.html";
     })
   });
 }); 

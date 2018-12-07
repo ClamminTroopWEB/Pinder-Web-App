@@ -141,6 +141,7 @@ app.post('/newPet', function (req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err;
     dogList = result;
+    console.log(result);
   });
   dbo.collection('dogs').insertOne({
     id: dogList.length + 1,
@@ -153,6 +154,7 @@ app.post('/newPet', function (req, res) {
     Size: req.body.Size,
     Image: req.body.Image
   });
+  res.sendStatus(200);
 });
 
 app.put('/itsamatch', function (req, res) {
