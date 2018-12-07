@@ -32,6 +32,7 @@ var DogBox = React.createClass({
     this.loadDogsFromServer();
     setInterval(this.loadDogsFromServer, this.props.pollInterval);
   },
+ 
   render: function() {
     return (
       <table>  
@@ -42,16 +43,29 @@ var DogBox = React.createClass({
 });
 
 var DogTable = React.createClass({
+ nameSomething123Dogs: function() {
+    
+
+    window.location.href = '../selection.html'
+
+
+
+
+  }.bind(this),
+  
+
   render: function() {
     const dogNodes = this.props.data.map(function(dog) {
       return (
         <tr key={dog.id}>
           <td className="matchBreed">{dog.Breed}</td>
     			<td className="matchName">{dog.Name}</td>
-          <td className="matchImage"><img src={dog.Image}/></td>
+          <td className="matchImage"> <img src={dog.Image}/> </td>
+          <td className="matchImage"> <button onClick={this.nameSomething123Dogs}>his</button> </td>
+
         </tr>
       );
-    });
+    }.bind(this));
     return (
       <tbody className="dogTable">
         {dogNodes}
@@ -60,15 +74,6 @@ var DogTable = React.createClass({
   }
 });
 
-var Dog = React.createClass({
-  render: function() {
-    return (
-      <tr className="dog">
-        {this.props.children}
-      </tr>
-    );
-  }
-});
 
 ReactDOM.render(
   <DogBox url="/matches" pollInterval={2000}/>,
