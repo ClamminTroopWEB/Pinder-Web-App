@@ -192,7 +192,7 @@ app.post('/matches', function (req, res) {
       });
   };
 res.json(matches_list);
-// matches_list = [];
+matches_list = [];
 });
 });
 
