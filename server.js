@@ -198,17 +198,46 @@ matches_list = [];
 });
 });
 
-// app.post('/getOwnerID', function(req, res) {
-//   var username = req.body.Email;
-//   dbo.collection('users').find({"email":username}).toArray(function (err, result) {
-//     console.log("HIPPOS: " + result.length);
-//     if (result.length > 1) {
-//       res.json({"ownerID":result.loginID});
-//     } else {
-//       res.json({"ownerID":"Failure"});
-//     }    
-//   });
-// });
+app.put('/deleteMatch', function (req, res) {
+  
+    console.log("Server DogID: "+ req.body.dogID);
+    console.log("Server loginID: "+ req.body.loginID);
+   dbo.collection('users').find({
+    "loginID": parseInt(req.body.loginID)
+  }).toArray(function (err, result) {
+    if (err) throw err;
+    var newmatches=[];
+    var matches = result[0].matches;
+    console.log("Matches for User: " + matches);
+
+
+    for (i=0; i<matches.length;i++)
+    {
+      if (req.body.dogID != matches[i])
+      {
+        newmatches.push(matches[i]);
+      }
+    }
+
+
+  console.log("New Matches for User" +newmatches);
+
+ dbo.collection('users').updateOne({
+    "loginID": parseInt(req.body.loginID)
+  }, {
+    $set: {
+      "matches": newmatches
+    }
+  });
+
+
+
+});
+  
+
+});
+
+
 
 app.all("*", (req, res) => {
   res.sendStatus(404);
