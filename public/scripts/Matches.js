@@ -95,6 +95,6 @@ var DogTable = React.createClass({
 
 
 ReactDOM.render(
-  <DogBox url="/matches" pollInterval={2000}/>,
+  <DogBox url="/matches" pollInterval={15000}/>,
    document.getElementById('matchesTableBackground')
 );
