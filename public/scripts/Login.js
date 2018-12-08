@@ -5,25 +5,29 @@
  * Class: CS-336-A, for Calvin College
  * Semester: Fall, 2018
  */
+import React from 'react';
+import ReactDOM from 'react-dom';
+import '../styles/login.css';
+import '../styles/login.css';
+import '../styles/shared.css';
+import $ from 'jquery';
 
-"use_strict";
 
-$(document).ready(function () {
-  $('form').submit(function (event) {
-    event.preventDefault();
-
-    $.ajax({
-        url: "/",
-        type: "post",
-        data: {
-          email: $('#loginEmail').val(),
-          password: $('#loginPassword').val()
-        }
-      })
-      .done(function (result) {
-        console.log(result.Result);
-        //console.log("JSON: " + result[0].loginID);
-        if (result.Result == "Failure") {
+module.exports = React.createClass({
+    getInitialState: function() {
+        return {data: []};
+    },
+    loadCommentsFromServer: function() {
+        $.ajax({
+            url: "/",
+            type: "post",
+            data: {
+              email: $('#loginEmail').val(),
+              password: $('#loginPassword').val()
+            }
+        })
+         .done(function(result){
+          if (result.Result == "Failure") {
           console.log("Failure");
           alert("Incorrect Password or Username");
         } else if (result[0].loginID != "Failure") {
@@ -33,15 +37,53 @@ $(document).ready(function () {
           console.log("Cookies: " + getCookie('PinderloginID'));
           window.location.href = "../selection.html";
         }
-      })
-      .fail(function (xhr, status, errorThrown) {
-        console.log('AJAX POST failed...');
-        alert('some went wrong with the login');
-      });
-  });
+         }.bind(this))
+         .fail(function(xhr, status, errorThrown) {
+            console.log('AJAX POST failed...');
+            alert('some went wrong with the login');
+         }.bind(this));
+    },
+    componentDidMount: function() {
+        this.loadCommentsFromServer();
+        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+    },
+    render: function() {
+        return (
+            <nav id="loginScreen">
+            <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+            <form id="loginForm" action="/login" method="POST">
+              <div id="loginInputs" class="blueRoundSquare">
+                <label id="loginFormTitle">Log In</label>
+                <br/>
+
+                <span class="formSpan">
+                    <label class="loginFormLabel">Email: </label>
+                    <input class="loginFormInput" type="email" placeholder="please enter an email" name="Name" value="" id="loginEmail">
+                </span>
+
+                <span class=formSpan>
+                    <label class="loginFormLabel">Password: </label>
+                    <input class="loginFormInput"  type="password" placeholder="please enter a password" name="Password" value="" id="loginPassword">
+                </span>
+
+                <span id="loginBttns" class="formSpan">
+                    <input class="smallGreyBttn" id="loginToAccountBttn" text="Log In" type="submit" value="Log In">
+                    <input class="smallGreyBttn" id="" text="Create Account" type="button" value="Create Account" onclick="window.location.href='./create.html'">
+                </span>
+                </div>
+            </form>
+           </nav>
+        );
+    }
 });
 
-function setCookie(name, value, days) {
+
+
+
+
+
+
+{/*function setCookie(name, value, days) {
   var expires = "";
   if (days) {
     var date = new Date();
@@ -60,4 +102,4 @@ function getCookie(name) {
     if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
   }
   return null;
-}
+} */}

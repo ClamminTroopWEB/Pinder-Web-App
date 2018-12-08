@@ -8,13 +8,13 @@
 
 "use_strict";
 
-const express = require('express');
-const app = express();
-const fs = require('fs');
-const path = require('path');
+var express = require('express');
+var app = express();
+var fs = require('fs');
+var path = require('path');
 var bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
-const multer = require('multer');
+var MongoClient = require('mongodb').MongoClient;
+var multer = require('multer');
 
  var matches_list=[];
 
@@ -43,18 +43,21 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
-app.post('/', function (req, res) {
+app.post('/login', function (req, res) {
+  console.log(req.body);
+ // console.log("Email: " + req.body.Name);
+ // console.log("Password: " + req.body.Password);
   dbo.collection('users').find({
-    "email": req.body.email,
-    "password": req.body.password
+    "email": req.body.Name,
+    "password": req.body.Password
   }).toArray(function (err, result) {
+   // console.log("Result: " + JSON.stringify(result));
     if (result.length > 0) {
-      res.send(result);
+      res.send(result[0]);
     } else {
-      res.send({
-        "Result": "Failure"
-      });
+      res.send({"Result": "Failure"});
     }
+
   });
 });
 
