@@ -1,4 +1,3 @@
-
 /* server.js implements the server for Pinder
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
@@ -17,7 +16,7 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
 
- var matches_list=[];
+var matches_list = [];
 
 var dbo;
 var peopleList;
@@ -47,19 +46,28 @@ app.use(bodyParser.urlencoded({
 app.post('/login', function (req, res) {
   console.log('post request recieved on server');
   //console.log(req.body);
- // console.log("Email: " + req.body.Name);
- // console.log("Password: " + req.body.Password);
+   console.log("Email: " + req.body.email);
+   console.log("Password: " + req.body.password);
   dbo.collection('users').find({
-    "email": req.body.Name,
-    "password": req.body.Password
+    "email": req.body.email,
+    "password": req.body.password
   }).toArray(function (err, result) {
     if (result.length > 0) {
+      var response = {
+        loginID: result[0].loginID,
+        email: result[0].email,
+        password: result[0].password
+      };
+
       //console.log("Result to send: " + JSON.stringify(result[0]));
       console.log('sent result for match found');
-      res.send(JSON.stringify(result[0]));
+      console.log(JSON.stringify(response));
+      res.send(JSON.stringify(response));
     } else {
       console.log('sent failure for match found');
-      res.send({"Result": "Failure"});
+      res.send({
+        loginID: "Failure"
+      });
     }
 
   });
@@ -179,68 +187,65 @@ app.post('/matches', function (req, res) {
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
-      matches = result[0].matches;
-      for (var i = 0; i < matches.length; i++)
-      {
-        dbo.collection('dogs').find({
-           "id": parseInt(matches[i])
-        }).toArray(function (err, results) {
+    matches = result[0].matches;
+    for (var i = 0; i < matches.length; i++) {
+      dbo.collection('dogs').find({
+        "id": parseInt(matches[i])
+      }).toArray(function (err, results) {
         if (err) throw err;
         var dog = results[0];
 
-      var match = {
-        "id": dog.id
-        , "Name": dog.Name
-        , "Breed": dog.Breed
-        , "EnergyLevel": dog.EnergyLevel
-        , "HouseTrained": dog.HouseTrained
-        , "Size": dog.Size
-        , "Image":dog.Image
-      };
-      matches_list.push(match);
+        var match = {
+          "id": dog.id,
+          "Name": dog.Name,
+          "Breed": dog.Breed,
+          "EnergyLevel": dog.EnergyLevel,
+          "HouseTrained": dog.HouseTrained,
+          "Size": dog.Size,
+          "Image": dog.Image
+        };
+        matches_list.push(match);
       });
-  };
-res.json(matches_list);
-matches_list = [];
-});
+    };
+    res.json(matches_list);
+    matches_list = [];
+  });
 });
 
 app.put('/deleteMatch', function (req, res) {
-  
-    console.log("Server DogID: "+ req.body.dogID);
-    console.log("Server loginID: "+ req.body.loginID);
-   dbo.collection('users').find({
+
+  console.log("Server DogID: " + req.body.dogID);
+  console.log("Server loginID: " + req.body.loginID);
+  dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
-    var newmatches=[];
+    var newmatches = [];
     var matches = result[0].matches;
     console.log("Matches for User: " + matches);
 
 
-    for (i=0; i<matches.length;i++)
-    {
-      if (req.body.dogID != matches[i])
-      {
+    for (i = 0; i < matches.length; i++) {
+      if (req.body.dogID != matches[i]) {
         newmatches.push(matches[i]);
       }
     }
 
 
-  console.log("New Matches for User" +newmatches);
+    console.log("New Matches for User" + newmatches);
 
- dbo.collection('users').updateOne({
-    "loginID": parseInt(req.body.loginID)
-  }, {
-    $set: {
-      "matches": newmatches
-    }
+    dbo.collection('users').updateOne({
+      "loginID": parseInt(req.body.loginID)
+    }, {
+      $set: {
+        "matches": newmatches
+      }
+    });
+
+
+
   });
 
-
-
-});
-  
 
 });
 

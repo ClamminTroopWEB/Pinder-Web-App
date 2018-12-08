@@ -14,6 +14,7 @@ var Login = React.createClass({
     },
     handleLoginClick: function(loginID,Password) {
 
+
     	var response;
     	  console.log("Email: " + loginID);
     	  console.log("Password: " + Password);
@@ -26,16 +27,15 @@ var Login = React.createClass({
               password: Password
             },
  			success: function(data) {
-       		//console.log("Result: " + data.Result);
-       		//console.log("ID: " + data.loginID);
-       			if (data.Result == "Failure") {
-         			 alert("Incorrect Password or Username");
+                console.log("Result: " + data.loginID);
+       			if (data.loginID == "Failure") {
+                      alert("Incorrect Password or Username");
         		} else  {
-			      setCookie('PinderloginID', data.loginID, 3);
-			      setCookie('PinderloginEmail', loginID, 3);
-			      setCookie('PinderloginPassword', Password, 3);
-                  console.log("Cookies: " + getCookie('PinderloginID'))
-                  alert('got the right data');
+                    alert('got the right data');
+                    this.setCookie('PinderloginID', data.loginID, 3);
+                    this.setCookie('PinderloginEmail', loginID, 3);
+                    this.setCookie('PinderloginPassword', Password, 3);
+                    console.log("Cookies: " + this.getCookie('PinderloginID'))
 			    }
 	     	}.bind(this),
 	        error: function(xhr, status, err) {
@@ -53,7 +53,26 @@ var Login = React.createClass({
     },
     handleTextChange: function(e) {
         this.setState({text: e.target.value});
-	},
+    },
+    setCookie: function(name, value, days) {
+        var expires = "";
+        if (days) {
+          var date = new Date();
+          date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+          expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    }, 
+    getCookie: function(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    },
 
 
     render: function() {
@@ -85,8 +104,8 @@ var Login = React.createClass({
                     <input className="smallGreyBttn" id="loginToAccountBttn"
 
 
-                    type="submit" value="Log In"
-                    onClick = {this.handleLoginClick.bind(this,this.state.author,this.state.text)}
+                    type="button" value="Log In"
+                    onClick = {this.handleLoginClick.bind(this, this.state.author,this.state.text)}
                     />
                     <input className="smallGreyBttn" id=""  type="button" value="Create Account" />
                 </span>
