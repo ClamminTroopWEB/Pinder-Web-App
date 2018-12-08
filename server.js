@@ -1,3 +1,4 @@
+
 /* server.js implements the server for Pinder
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
@@ -44,17 +45,20 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/login', function (req, res) {
-  console.log(req.body);
+  console.log('post request recieved on server');
+  //console.log(req.body);
  // console.log("Email: " + req.body.Name);
  // console.log("Password: " + req.body.Password);
   dbo.collection('users').find({
     "email": req.body.Name,
     "password": req.body.Password
   }).toArray(function (err, result) {
-   // console.log("Result: " + JSON.stringify(result));
     if (result.length > 0) {
-      res.send(result[0]);
+      //console.log("Result to send: " + JSON.stringify(result[0]));
+      console.log('sent result for match found');
+      res.send(JSON.stringify(result[0]));
     } else {
+      console.log('sent failure for match found');
       res.send({"Result": "Failure"});
     }
 

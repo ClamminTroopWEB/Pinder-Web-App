@@ -12,33 +12,34 @@ var Login = React.createClass({
     	console.log("getInitialState");
          return {data: []};
     },
-    loadCommentsFromServer: function(loginID,Password) {
+    handleLoginClick: function(loginID,Password) {
 
     	var response;
     	  console.log("Email: " + loginID);
     	  console.log("Password: " + Password);
 		$.ajax({
             url: "/login",
-            type: "post",
+            type: "POST",
             dataType: 'json',
             data: {
               email: loginID,
               password: Password
             },
  			success: function(data) {
-       		console.log("Result: " + data.Result);
-       		console.log("ID: " + data.loginID);
+       		//console.log("Result: " + data.Result);
+       		//console.log("ID: " + data.loginID);
        			if (data.Result == "Failure") {
          			 alert("Incorrect Password or Username");
         		} else  {
 			      setCookie('PinderloginID', data.loginID, 3);
 			      setCookie('PinderloginEmail', loginID, 3);
 			      setCookie('PinderloginPassword', Password, 3);
-			      console.log("Cookies: " + getCookie('PinderloginID'))
+                  console.log("Cookies: " + getCookie('PinderloginID'))
+                  alert('got the right data');
 			    }
 	     	}.bind(this),
 	        error: function(xhr, status, err) {
-	        	console.log("Error Produced!");
+	        	console.log("Error Produced!: " + err);
 			}.bind(this)
 			});
      },
@@ -85,7 +86,7 @@ var Login = React.createClass({
 
 
                     type="submit" value="Log In"
-                    onClick = {this.loadCommentsFromServer.bind(this,this.state.author,this.state.text)}
+                    onClick = {this.handleLoginClick.bind(this,this.state.author,this.state.text)}
                     />
                     <input className="smallGreyBttn" id=""  type="button" value="Create Account" />
                 </span>

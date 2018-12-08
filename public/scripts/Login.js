@@ -13,11 +13,12 @@ import '../styles/shared.css';
 import $ from 'jquery';
 
 
+
 module.exports = React.createClass({
     getInitialState: function() {
         return {data: []};
     },
-    loadCommentsFromServer: function() {
+    handleLoginClick: function() {
         $.ajax({
             url: "/",
             type: "post",
@@ -27,15 +28,15 @@ module.exports = React.createClass({
             }
         })
          .done(function(result){
-          if (result.Result == "Failure") {
-          console.log("Failure");
-          alert("Incorrect Password or Username");
+            if (result.Result == "Failure") {
+            console.log("Failure");
+            alert("Incorrect Password or Username");
         } else if (result[0].loginID != "Failure") {
-          setCookie('PinderloginID', result[0].loginID, 3);
-          setCookie('PinderloginEmail', $('#loginEmail').val(), 3);
-          setCookie('PinderloginPassword', $('#loginPassword').val(), 3);
-          console.log("Cookies: " + getCookie('PinderloginID'));
-          window.location.href = "../selection.html";
+            setCookie('PinderloginID', result[0].loginID, 3);
+            setCookie('PinderloginEmail', $('#loginEmail').val(), 3);
+            setCookie('PinderloginPassword', $('#loginPassword').val(), 3);
+            console.log("Cookies: " + getCookie('PinderloginID'));
+            window.location.href = "../selection.html";
         }
          }.bind(this))
          .fail(function(xhr, status, errorThrown) {
@@ -44,34 +45,34 @@ module.exports = React.createClass({
          }.bind(this));
     },
     componentDidMount: function() {
-        this.loadCommentsFromServer();
-        setInterval(this.loadCommentsFromServer, this.props.pollInterval);
+        //this.handleLoginClick();
+        //setInterval(this.loadCommentsFromServer, this.props.pollInterval);
     },
     render: function() {
         return (
             <nav id="loginScreen">
-            <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
-            <form id="loginForm" action="/login" method="POST">
-              <div id="loginInputs" class="blueRoundSquare">
-                <label id="loginFormTitle">Log In</label>
-                <br/>
+                <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+                <form id="loginForm" action="/login" method="POST">
+                    <div id="loginInputs" class="blueRoundSquare">
+                        <label id="loginFormTitle">Log In</label>
+                        <br/>
 
-                <span class="formSpan">
-                    <label class="loginFormLabel">Email: </label>
-                    <input class="loginFormInput" type="email" placeholder="please enter an email" name="Name" value="" id="loginEmail">
-                </span>
+                        <span class="formSpan">
+                            <label class="loginFormLabel">Email: </label>
+                            <input class="loginFormInput" type="email" placeholder="please enter an email" name="Name" value="" id="loginEmail"/>
+                        </span>
 
-                <span class=formSpan>
-                    <label class="loginFormLabel">Password: </label>
-                    <input class="loginFormInput"  type="password" placeholder="please enter a password" name="Password" value="" id="loginPassword">
-                </span>
+                        <span class="formSpan">
+                            <label class="loginFormLabel">Password: </label>
+                            <input class="loginFormInput"  type="password" placeholder="please enter a password" name="Password" value="" id="loginPassword"/>
+                        </span>
 
-                <span id="loginBttns" class="formSpan">
-                    <input class="smallGreyBttn" id="loginToAccountBttn" text="Log In" type="submit" value="Log In">
-                    <input class="smallGreyBttn" id="" text="Create Account" type="button" value="Create Account" onclick="window.location.href='./create.html'">
-                </span>
-                </div>
-            </form>
+                        <span id="loginBttns" class="formSpan">
+                            <input class="smallGreyBttn" id="loginToAccountBttn" text="Log In" onClick={this.handleLoginClick} type="button" value="Log In"/>
+                            <input class="smallGreyBttn" id="" text="Create Account" type="button" value="Create Account" onClick={this.handleLoginClick}/>
+                        </span>
+                    </div>
+                </form>
            </nav>
         );
     }
