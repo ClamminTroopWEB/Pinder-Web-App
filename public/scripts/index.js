@@ -4,7 +4,19 @@ var Dog_Array = [];
 var Dogs_Liked = [];
 var index = 0;
 
+import React from 'react';
+import ReactDOM from 'react-dom';
+import $ from 'jquery';
+import Remarkable from 'remarkable';
 
+import "../styles/adopt.css";
+import "../styles/list.css";
+import "../styles/matches.css";
+import "../styles/matchProfile.css";
+import "../styles/profile.css";
+//import "../styles/shared.css";
+import "../styles/style.css";
+import "../styles/login.css";
 
 var Login = React.createClass({
     getInitialState: function() {
@@ -89,7 +101,7 @@ var Login = React.createClass({
       console.log("render");
         return (
            <nav id="loginScreen">
-        <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+        <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
         <form id="loginForm" action="/login" method="POST" >
             <div id="loginInputs" className="blueRoundSquare">
                 <label id="loginFormTitle">Log In</label>
@@ -148,7 +160,7 @@ var Selection = React.createClass({
   render: function() {
     return (
       <nav id="mainScreen">
-        <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+        <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
         <div id="bttnContainer">
             <button id="listPetBttn" className="blueBttn" 
             onClick={this.listaPet}> List Pet </button>
@@ -399,7 +411,7 @@ var Create = React.createClass ({
     render: function() {
         return(
             <nav id="loginScreen">
-                    <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+                    <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
                     <form id="loginForm" action="/create" method="post">
                         <div id="loginInputs" className="blueRoundSquare">
                             <label id="loginFormTitle">Create Account</label>
@@ -919,8 +931,8 @@ var Adopt = React.createClass({
                 <img className="adoptImage"/>
             </div>
             <div id="swipeButtons">
-                <img id="rightBttn" src="./images/moveRight.png" onClick={this.handleRightClick.bind(this)}/>
-                <img id="leftBttn" src="./images/moveLeft.png" onClick={this.handleLeftClick.bind(this)}/>
+                <img id="rightBttn" src="../images/moveRight.png" onClick={this.handleRightClick.bind(this)}/>
+                <img id="leftBttn" src="../images/moveLeft.png" onClick={this.handleLeftClick.bind(this)}/>
             </div>
             <div id="adoptInfoContainer">
             <div className='adoptInfoLine'>
@@ -939,8 +951,8 @@ var Adopt = React.createClass({
             </div>
             </div>
             <div id="adoptButtonContainer">
-                <img src="./images/xout.png" id="xoutButton" onClick={this.handleRejectClick.bind(this)}/>
-                <img src="./images/greenHeart.png" id="heartButton" onClick={this.handleAdoptClick.bind(this)}/>
+                <img src="../images/xout.png" id="xoutButton" onClick={this.handleRejectClick.bind(this)}/>
+                <img src="../images/greenHeart.png" id="heartButton" onClick={this.handleAdoptClick.bind(this)}/>
             </div>
             </div>
             </nav>
