@@ -73,6 +73,13 @@ app.post('/login', function (req, res) {
 });
 
 app.post('/create', function (req, res) {
+  var total;
+  dbo.collection('users').find().toArray(function (err, result) {
+    if (err) throw err
+    total = result.length
+  console.log("Size of Users: ", total);
+  });
+
   dbo.collection('users').find({
     "email": req.body.email
   }).toArray(function (err, result) {
@@ -84,10 +91,9 @@ app.post('/create', function (req, res) {
         "Result": req.body.email
       });
     } else if (result.length == 0) {
-      dbo.collection('users').countDocuments({}, function (error, numOfDocs) {
         dbo.collection('users').insertOne({
           name: req.body.name,
-          loginID: numOfDocs + 1,
+          loginID: total + 1,
           password: req.body.password,
           email: req.body.email,
           Address: req.body.location,
@@ -98,9 +104,9 @@ app.post('/create', function (req, res) {
             res.sendStatus(400);
           }
           res.send({
-            "loginID": numOfDocs + 1
+            "loginID": total + 1
           });
-        });
+  
       });
     }
   });
