@@ -80,6 +80,9 @@ var Login = React.createClass({
         return <MyImage>Please sign up.</MyImage>;
     },
 
+    loadCreate: function() {
+        ReactDOM.render(React.createElement(Create), document.getElementById('login'))
+    },
     render: function() {
       console.log(this.state);
       console.log("render");
@@ -112,7 +115,7 @@ var Login = React.createClass({
                     type="button" value="Log In"
                     onClick = {this.handleLoginClick.bind(this, this.state.author,this.state.text)}
                     />
-                    <input className="smallGreyBttn" id=""  type="button" value="Create Account" />
+                    <input className="smallGreyBttn" id=""  type="button" value="Create Account" onClick={this.loadCreate}/>
                 </span>
                  </div>
              </form>
@@ -122,6 +125,147 @@ var Login = React.createClass({
         )
     }
 });
+
+
+var Create = React.createClass ({
+    getInitialState: function() {
+        console.log("getInitialState");
+        return {data: []};
+    },
+    componentDidMount: function() {
+        console.log("componentDidMount");
+    },
+    readFile: function() {
+
+        var file = $('#petPicture').prop('src');
+         var reader  = new FileReader();
+         // it's onload event and you forgot (parameters)
+         reader.onload = function(e)  {
+             // var image = document.createElement("img");
+             // the result image data
+             $('#petPicture').attr("src",e.target.result ) ;
+             console.log("Source Data: " + e.target.result);
+             console.log("Img Data: " + $('#petPicture').prop('src'));
+            // document.body.appendChild(image);
+             
+          }
+          // you have to declare the file loading
+          reader.readAsDataURL(file);
+     
+    },
+    loadLoginPage: function() {
+        ReactDOM.render(React.createElement(Login), document.getElementById('login'));
+    },
+    handleNameChange: function(e) {
+        this.setState({name: e.target.value});
+    },
+    handleEmailChange: function(e) {
+        this.setState({email: e.target.value});
+    },
+    handlePasswordChange: function(e) {
+        this.setState({password: e.target.value});
+    },
+    handleLocationChange: function(e) {
+        this.setState({location: e.target.value});
+    },
+    handleSubmitButton: function(email, password, location, name) {
+        console.log(email, password, location, name)
+        function setCookie(name, value, days) {
+            var expires = "";
+            if (days) {
+              var date = new Date();
+              date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+              expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "") + expires + "; path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for (var i = 0; i < ca.length; i++) {
+              var c = ca[i];
+              while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+              if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+        $.ajax({
+            url: '/create',
+            type: 'post',
+            data: {
+              name: name,
+              email: email,
+              password: password,
+              location: location,
+              Image: $('#petPicture').prop('src')
+            }
+          })
+          .done(function (result) {
+            // console.log("JSON: " + result[0].loginID);
+            console.log('got what we needed: ' + result);
+            if (result.Result == 'Failure') {
+              console.log(result);
+              alert("That Email has been taken, please choose another");
+            } else {
+              console.log("JSON: " + result);
+              setCookie('PinderloginID', result.loginID, 3);
+              setCookie('PinderloginEmail', $('#createAccountEmail').val(), 3);
+              setCookie('PinderloginPassword', $('#createAccountPassword').val(), 3);
+              console.log("Cookies: " + getCookie('PinderloginID'));
+              ReactDOM.render(React.createElement(Selection), document.getElementById('login'));
+            }
+          })
+          .fail(function (xhr, status, errorThrown) {
+            console.log('failed: ' + errorThrown);
+            console.log('AJAX POST failed...');
+            //alert(xhr + " " +  status);
+          });
+    }, 
+    render: function() {
+        return(
+            <nav id="loginScreen">
+                    <img id="pinderLogoMain" src="./images/mainLogoBlue.png" />
+                    <form id="loginForm" action="/create" method="post">
+                        <div id="loginInputs" className="blueRoundSquare">
+                            <label id="loginFormTitle">Create Account</label>
+                            <br />
+                            <span className="formSpan">
+                                <label className="loginFormLabel">Email: </label>
+                                <input className="loginFormInput" type="email" placeholder="please enter an email" name="email" value=""
+                                    id="createAccountEmail" value={this.state.email} onChange={this.handleEmailChange} />
+                            </span>
+                            <span className="formSpan">
+                                <label className="loginFormLabel">Password: </label>
+                                <input className="loginFormInput" type="password" placeholder="please enter a password" name="password"
+                                    value="" id="createAccountPassword" value={this.state.password} onChange={this.handlePasswordChange}/>
+                            </span>
+                            <span className="formSpan">
+                                <label className="loginFormLabel">Location: </label>
+                                <input className="loginFormInput" type="text" placeholder="please enter a location" name="location"
+                                    value="" id="createAccountLocation" value={this.state.location} onChange={this.handleLocationChange} />
+                            </span>
+                            <span className="formSpan">
+                                <label className="loginFormLabel">Name: </label>
+                                <input className="loginFormInput" type="text" placeholder="please enter your name" name="location"
+                                    value="" id="createAccountName" value={this.state.name} onChange={this.handleNameChange} />
+                            </span>
+                            <span className="formSpan">
+                                <label className="loginFormLabel"> Profile Picture: </label>
+                                <input className="loginFormInput" type="file" id="file" name="avatar" onChange={this.readFile}/>
+                            </span>
+                            <span>
+                                <img id="petPicture"/>
+                            </span>
+                            <span id="loginBttns" className="formSpan">
+                                <input className="smallGreyBttn" id="backBttn" value="Back" onClick={this.loadLoginPage}/>
+                                <input className="smallGreyBttn" id="loginToAccountBttn" type="button" value="Create Account" onClick={this.handleSubmitButton.bind(this, this.state.email,this.state.password, this.state.location, this.state.name)}/>
+                            </span>
+                        </div>
+                </form>
+            </nav>
+        )
+    } 
+})
 
 var Selection = React.createClass({
   listaPet: function() {
@@ -472,122 +616,122 @@ var List = React.createClass({
 });
 
 var DogBox = React.createClass({
-  loadDogsFromServer: function() {
-    var personID = this.getCookie("PinderloginID");
-   $.ajax({
-      url: "/matches",
-      dataType: 'json',
-      type: 'post',
-      data: { "loginID": personID },
-      success: function(data) {
-        this.setState({data: data});
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.error(this.props.url, status, err.toString());
-      }.bind(this)
-  });
-  },
-  getInitialState: function() {
-    return {data: []};
-  },
-  getCookie: function(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
+    loadDogsFromServer: function() {
+      var personID = this.getCookie("PinderloginID");
+     $.ajax({
+        url: "/matches",
+        dataType: 'json',
+        type: 'post',
+        data: { "loginID": personID },
+        success: function(data) {
+          this.setState({data: data});
+        }.bind(this),
+        error: function(xhr, status, err) {
+          console.error(this.props.url, status, err.toString());
+        }.bind(this)
+    });
     },
-  componentDidMount: function() {
-    this.loadDogsFromServer();
-  //  setInterval(this.loadDogsFromServer, this.props.pollInterval);
-  },
-  backBttn: function() {
-    ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
-  },
-  profileAcct: function() {
-    ReactDOM.render(React.createElement(ProfilePage), document.getElementById('login'))
-  },
-  render: function() {
-    return (
-       <nav id="matchesScreen">
-        <div className="menuBar">
-             <button id="backBttnMenu" className="smallBlueBttn" 
-            onClick={this.backBttn} > Back</button>
-            <button id="myProfileBttnMenu" className="smallBlueBttn"
-            onClick={this.profileAcct} > My Profile</button>
-        </div>
-        <div id="tableHeading">
-            <label> Your Matches </label>
-        </div>
-        <div id="matchesTableBackground">
-           <table>  
-              <DogTable data={this.state.data} />
-          </table>
-        </div>
-    </nav>
-
-     
-    );
-  }
-});
-
-var DogTable = React.createClass({
-  getCookie: function(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    }.bind(this),
-
- nameSomething123Dogs: function(e) {
-    var personID = getCookie("PinderloginID");
-    var dogID = e.id;
-    $.ajax({
-      url: "/deleteMatch",
-      dataType: 'json',
-      type: 'put',
-      data: { 
-        "loginID": personID, 
-        "dogID": dogID
+    getInitialState: function() {
+      return {data: []};
+    },
+    getCookie: function(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
       },
-    })
-    .done(function( result ) {
-      console.log(result);
-      alert('Removed Dog from your Matches!');
-      //window.location.href = "../selection.html";
-    })
-    .fail(function(xhr, status, errorThrown) {
-      console.log('AJAX POST failed...');
-     // window.location.href = "../selection.html";
-    })
-
-  }.bind(this),
-  // calvins internet sucks,   
-  render: function() {
-    const dogNodes = this.props.data.map(function(dog) {
+    componentDidMount: function() {
+      this.loadDogsFromServer();
+    //  setInterval(this.loadDogsFromServer, this.props.pollInterval);
+    },
+    backBttn: function() {
+      ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
+    },
+    profileAcct: function() {
+      ReactDOM.render(React.createElement(ProfilePage), document.getElementById('login'))
+    },
+    render: function() {
       return (
-        <tr key={dog.id}>
-          <td className="matchBreed">{dog.Breed}</td>
-          <td className="matchName">{dog.Name}</td>
-          <td className="matchImage"> <img src={dog.Image}/> </td>
-          <td className="matchImage"> <button onClick={this.nameSomething123Dogs.bind(this, dog)}>Unmatch</button> </td>
-        </tr>
+         <nav id="matchesScreen">
+          <div className="menuBar">
+               <button id="backBttnMenu" className="smallBlueBttn" 
+              onClick={this.backBttn} > Back</button>
+              <button id="myProfileBttnMenu" className="smallBlueBttn"
+              onClick={this.profileAcct} > My Profile</button>
+          </div>
+          <div id="tableHeading">
+              <label> Your Matches </label>
+          </div>
+          <div id="matchesTableBackground">
+             <table>  
+                <DogTable data={this.state.data} />
+            </table>
+          </div>
+      </nav>
+  
+       
       );
-    }.bind(this));
-    return (
-      <tbody className="dogTable">
-        {dogNodes}
-      </tbody>
-    );
-  }
-});
+    }
+  });
+  
+  var DogTable = React.createClass({
+    getCookie: function(name) {
+          var nameEQ = name + "=";
+          var ca = document.cookie.split(';');
+          for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+          }
+          return null;
+      }.bind(this),
+  
+   nameSomething123Dogs: function(e) {
+      var personID = getCookie("PinderloginID");
+      var dogID = e.id;
+      $.ajax({
+        url: "/deleteMatch",
+        dataType: 'json',
+        type: 'put',
+        data: { 
+          "loginID": personID, 
+          "dogID": dogID
+        },
+      })
+      .done(function( result ) {
+        console.log(result);
+        alert('Removed Dog from your Matches!');
+        //window.location.href = "../selection.html";
+      })
+      .fail(function(xhr, status, errorThrown) {
+        console.log('AJAX POST failed...');
+       // window.location.href = "../selection.html";
+      })
+  
+    }.bind(this),
+    // calvins internet sucks,   
+    render: function() {
+      const dogNodes = this.props.data.map(function(dog) {
+        return (
+          <tr key={dog.id}>
+            <td className="matchBreed">{dog.Breed}</td>
+            <td className="matchName">{dog.Name}</td>
+            <td className="matchImage"> <img src={dog.Image}/> </td>
+            <td className="matchImage"> <button onClick={this.nameSomething123Dogs.bind(this, dog)}>Unmatch</button> </td>
+          </tr>
+        );
+      }.bind(this));
+      return (
+        <tbody className="dogTable">
+          {dogNodes}
+        </tbody>
+      );
+    }
+  });
 
 var Adopt = React.createClass({
     getInitialState: function() {
@@ -796,6 +940,7 @@ var Adopt = React.createClass({
         )
     }
 });
+
 
 
 

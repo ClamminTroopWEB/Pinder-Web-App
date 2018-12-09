@@ -15,7 +15,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
-var APP_PATH = path.join(__dirname, 'public');
+var APP_PATH = path.join(__dirname, 'app');
 
 
 var matches_list = [];
@@ -84,10 +84,10 @@ app.post('/create', function (req, res) {
         "Result": req.body.email
       });
     } else if (result.length == 0) {
-      dbo.collection('users').countDocuments({}, function (error, numOfDocs) {
+      dbo.collection('users').find({}).toArray(function (error, numOfDocs) {
         dbo.collection('users').insertOne({
           name: req.body.name,
-          loginID: numOfDocs + 1,
+          loginID: numOfDocs.length + 1,
           password: req.body.password,
           email: req.body.email,
           Address: req.body.location,
@@ -97,8 +97,9 @@ app.post('/create', function (req, res) {
           if (err) {
             res.sendStatus(400);
           }
+          console.log('')
           res.send({
-            "loginID": numOfDocs + 1
+            "loginID": numOfDocs.length + 1
           });
         });
       });
