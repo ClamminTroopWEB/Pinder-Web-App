@@ -15,6 +15,8 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
+var APP_PATH = path.join(__dirname, 'public');
+
 
 var matches_list = [];
 
@@ -30,14 +32,11 @@ MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds0
     if (err) throw err
     peopleList = result;
   });
-  app.listen(app.get('port'), function () {
-    console.log('Server started: http://localhost:' + app.get('port') + '/');
-  });
-});
+
 
 app.set('port', (process.env.PORT || 3000));
 app.set('host', (process.env.HOST || "localhost"));
-app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(APP_PATH));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
@@ -250,7 +249,9 @@ app.put('/deleteMatch', function (req, res) {
 });
 
 
-
-app.all("*", (req, res) => {
-  res.sendStatus(404);
+  app.use('*', express.static(APP_PATH));
+  
+  app.listen(app.get('port'), function () {
+    console.log('Server started: http://localhost:' + app.get('port') + '/');
+  });
 });
