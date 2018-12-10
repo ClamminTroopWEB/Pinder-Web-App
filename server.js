@@ -29,8 +29,6 @@ MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds0
     peopleList = result;
   });
 
-  app.listen(app.get('port'), function() { console.log('Server started: http://' + app.get('host') + ':' + app.get('port') + '/'); });
-});
 
 app.set('port', (process.env.PORT || 3000));
 app.set('host', (process.env.HOST || "localhost"));
@@ -237,3 +235,7 @@ app.put('/deleteMatch', function (req, res) {
 });
 
 app.use('*', express.static(APP_PATH));
+
+
+app.listen(app.get('port'), function() { console.log('Server started: http://' + app.get('host') + ':' + app.get('port') + '/'); });
+});
