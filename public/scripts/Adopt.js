@@ -1,4 +1,4 @@
-/* Adopt.js implements the AJAX requests necessary for adopt.html
+/* Adopt.js
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -22,14 +22,14 @@ var Dogs_Liked = [];
 var index = 0;
 
 module.exports = React.createClass({
-    getInitialState: function() {
-        console.log("getInitialState");
-        return {data: []};
-    },
-    componentDidMount: function() {
-        console.log("componentDidMount");
-        this.getAdoptInformation();
-    },
+  getInitialState: function() {
+    console.log("getInitialState");
+    return {data: []};
+  },
+  componentDidMount: function() {
+    console.log("componentDidMount");
+    this.getAdoptInformation();
+  },
     getCookie: function(name) {
         var nameEQ = name + "=";
         var ca = document.cookie.split(';');
