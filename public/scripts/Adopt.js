@@ -8,51 +8,80 @@
 
 "use_strict";
 
-$(document).ready(function () {
-    console.log(document.cookie);
-    var Dog_Array = [];
-    var Dogs_Liked = [];
-    var index = 0;
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Remarkable from 'remarkable';
+import $ from 'jquery';
+// import {Dog_Array, Dogs_Liked, index} from './global';
+import '../styles/adopt.css';
 
-    $.ajax({
-            url: "/adopt",
-            type: "GET"
-        })
-        .done(function (result) {
-            for (i = 0; i < result.length; i++) {
-                var Dog = {
-                    Name: result[i].Name,
-                    Gender: result[i].Gender,
-                    DogID: result[i].id,
-                    Breed: result[i].Breed,
-                    Image: result[i].Image
-                }
-                // console.log(result)
-                // console.log(Dog);
-                Dog_Array.push(Dog);
-            }
+var Dog_Array = [];
+var Dogs_Liked = [];
+var index = 0;
 
-            $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-            $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-            $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
-
-            var image = new Image();
-            image.src = Dog_Array[index].Image;
-            $(".adoptImage").attr("src", image.src);
-            console.log("Dog_Array");
-
-        })
-        .fail(function (xhr, status, errorThrown) {
-            console.log('AJAX POST failed...');
-        });
-
-    $("#heartButton").click(function () {
-        //console.log("SUP: " + Dog_Array[index].DogID);
+module.exports = React.createClass({
+    getInitialState: function() {
+        console.log("getInitialState");
+        return {data: []};
+    },
+    componentDidMount: function() {
+        console.log("componentDidMount");
+        this.getAdoptInformation();
+    },
+    getCookie: function(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    },
+    getAdoptInformation: function() {
+        Dog_Array=[];
+        Dogs_Liked = [];
+        index = 0;
+        
+        console.log("getAdoptInformation");
         $.ajax({
+            url: "/adopt",
+            type: "get",
+            success: function(data) {
+                for (var i = 0; i < data.length; i++) {
+                    var Dog = {
+                        "Name": data[i].Name,
+                        "Gender": data[i].Gender,
+                        "DogID": data[i].id,
+                        "Breed": data[i].Breed,
+                        "Image": data[i].Image
+                    }
+                  Dog_Array.push(Dog);
+                }
+
+                console.log(Dog_Array);
+
+                $(".adopInfoNameDesc").text(Dog_Array[index].Name);
+                $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
+                $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+
+                var image = new Image();
+                image.src = Dog_Array[index].Image;
+                $(".adoptImage").attr("src", image.src);
+              
+                console.log("Dog_Array");
+            }.bind(this), error: function(xhr, status, err) {
+                console.log("Error: " + err);
+            }.bind(this)
+        });
+    },
+    handleAdoptClick: function() {
+        console.log("handleAdoptClick");
+            $.ajax({
                 url: "/itsamatch",
-                type: "PUT",
+                type: "put",
                 data: {
-                    "loginID": getCookie("PinderloginID"),
+                    "loginID": this.getCookie("PinderloginID"),
                     "dogID": Dog_Array[index].DogID
                 }
             })
@@ -80,9 +109,9 @@ $(document).ready(function () {
         } else {
             alert('You have matched with them all');
         }
-    });
-
-    $("#xoutButton").click(function () {
+    },
+    handleRejectClick: function() {
+        console.log("handleRejectClick");
         var indexToSplit = index;
         if (Dog_Array.length > 1) {
             indexToSplit = index;
@@ -90,7 +119,7 @@ $(document).ready(function () {
             if (Dog_Array[index] == null) {
                 index = 0;
             } else {
-                //index++;
+
             }
             $(".adopInfoNameDesc").text(Dog_Array[index].Name);
             $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
@@ -102,10 +131,9 @@ $(document).ready(function () {
         } else {
             alert("You have already disliked all the dogs");
         }
-    });
-
-    $("#rightBttn").click(function () {
-        //  alert('Right Button: Add code to move between dogs within the database');
+    },
+    handleRightClick: function() {
+        console.log("handleRightClick");
         if ((index + 1) > Dog_Array.length - 1) {
             index = 0;
         } else {
@@ -119,10 +147,9 @@ $(document).ready(function () {
         var image = new Image();
         image.src = Dog_Array[index].Image;
         $(".adoptImage").attr("src", image.src);
-    });
-
-    $("#leftBttn").click(function () {
-        //  alert('Left Button: Add code to move between dogs within the database');
+    },
+    handleLeftClick: function() {
+        console.log("handleLeftClick");
         if ((index - 1) < 0) {
             index = Dog_Array.length - 1;
         } else {
@@ -136,16 +163,66 @@ $(document).ready(function () {
         var image = new Image();
         image.src = Dog_Array[index].Image;
         $(".adoptImage").attr("src", image.src);
-    });
-});
+    },
+    handleBackClick: function() {
+        console.log("back button clicked");
+        alert("back button clicked");
+        // TODO: Redirect to the "Selection" page
+        // window.location.href = "../selection";
+    },
+    handleMyProfileClick: function() {
+        console.log("my profile button clicked");
+        alert("my profile button clicked");
+        // TODO: Redirect to the "My Profile" page
+        // window.location.href = "../profile";
+    },
+     backBttn: function() {
+        ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
+    },
+    profileAcct: function() {
+        ReactDOM.render(React.createElement(ProfilePage), document.getElementById('login'))
+    },
 
-function getCookie(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    render: function() {
+        console.log("Render: " + this.state);
+        return (
+            <nav id="adoptScreen">
+            <div className="menuBar">
+                 <button id="backBttnMenu" className="smallBlueBttn" 
+            onClick={this.backBttn} > Back</button>
+            <button id="myProfileBttnMenu" className="smallBlueBttn"
+            onClick={this.profileAcct} > My Profile</button>
+            </div>
+            <div id='adopContainer'>
+            <div id="adoptImageHolder">
+                <img className="adoptImage"/>
+            </div>
+            <div id="swipeButtons">
+                <img id="rightBttn" src="../images/moveRight.png" onClick={this.handleRightClick.bind(this)}/>
+                <img id="leftBttn" src="../images/moveLeft.png" onClick={this.handleLeftClick.bind(this)}/>
+            </div>
+            <div id="adoptInfoContainer">
+            <div className='adoptInfoLine'>
+                <span className="adopInfoName">Name: </span>
+                <span className="adopInfoNameDesc"></span>
+            </div>
+            <br/>
+                <div className='adoptInfoLine'>
+                <span className="adopInfoBreed">Breed:</span>
+                <span className="adopInfoBreedDesc"></span>
+            </div>
+            <br/>
+            <div className='adoptInfoLineLast'>
+                <span className="adopInfoGender">Gender:</span>
+                <span className="adopInfoGenderDesc"></span>
+            </div>
+            </div>
+            <div id="adoptButtonContainer">
+                <img src="../images/xout.png" id="xoutButton" onClick={this.handleRejectClick.bind(this)}/>
+                <img src="../images/greenHeart.png" id="heartButton" onClick={this.handleAdoptClick.bind(this)}/>
+            </div>
+            </div>
+            </nav>
+        )
     }
-    return null;
-}
+});

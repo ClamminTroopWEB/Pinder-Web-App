@@ -1,5 +1,36 @@
-//"use_strict";
-// GLOBALS NEEDED FOR ADOPT A PET/////////////
+// /* index.js
+//  *
+//  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+//  * Professor: Keith Vander Linden
+//  * Class: CS-336-A, for Calvin College
+//  * Semester: Fall, 2018
+//  */
+
+// "use_strict";
+
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// // import '../styles/shared.css';
+
+// import DogBox from './DogBox.js';
+// import Adopt from './Adopt.js';
+// import Create from './Create.js';
+// import List from './List.js';
+// import Login from './Login.js';
+// import Profile from './Profile.js';
+// import Selection from './Selection';
+
+// ReactDOM.render(
+//     <Adopt url="/adopt" pollInterval={2000}/>,
+//     <Create url="/create" pollInterval={2000}/>,
+//     <List url="/list" pollInterval={2000}/>,
+//     <Login url="/" pollInterval={2000}/>,
+//     <Profile url="/profile" pollInterval={2000}/>,
+//     <Selection url="/selection" pollInterval={2000}/>,
+//     <DogBox url="/matches" pollInterval={2000}/>,
+//     document.getElementById('login')
+// );
+
 var Dog_Array = [];
 var Dogs_Liked = [];
 var index = 0;
