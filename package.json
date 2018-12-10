@@ -5,7 +5,7 @@
   "author": "Justin Baskaran, Gavin Martin, and Ian Christensen",
   "license": "ISC",
   "scripts": {
-    "start": "kill $(pgrep node); node server.js",
+    "start": "kill $(pgrep node);node_modules/.bin/webpack;node server.js",
     "stop": "kill $(pgrep node)"
   },
   "dependencies": {
