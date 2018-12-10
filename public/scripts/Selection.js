@@ -12,6 +12,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import List from './List.js';
+import Adopt from './Adopt.js';
+import DogBox from './DogBox.js';
+import Profile from './Profile.js';
 // import '../styles/selection.css';
 
 module.exports = React.createClass({
@@ -27,7 +31,7 @@ module.exports = React.createClass({
     },
     yourProfile: function() {
         //alert('Your Profile!');
-        ReactDOM.render(React.createElement(ProfilePage), document.getElementById('login'))
+        ReactDOM.render(React.createElement(Profile), document.getElementById('login'))
 
     },
   render: function() {

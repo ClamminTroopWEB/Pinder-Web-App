@@ -12,6 +12,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import Selection from './Selection.js';
+import Profile from './Profile.js';
 import '../styles/list.css';
 
 module.exports = React.createClass({
@@ -103,7 +105,7 @@ module.exports = React.createClass({
     ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
   },
   profileAcct: function() {
-    ReactDOM.render(React.createElement(ProfilePage), document.getElementById('login'))
+    ReactDOM.render(React.createElement(Profile), document.getElementById('login'))
   },
 
   render: function() {

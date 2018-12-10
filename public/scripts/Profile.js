@@ -12,6 +12,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import Selection from './Selection.js';
+import Login from './Login.js';
+import DogBox from './DogBox';
 import '../styles/profile.css';
 
 module.exports = React.createClass({

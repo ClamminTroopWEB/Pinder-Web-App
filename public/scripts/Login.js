@@ -12,6 +12,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import Selection from './Selection.js';
+import Create from './Create.js';
 import '../styles/login.css';
 
 module.exports = React.createClass({
@@ -44,8 +46,6 @@ module.exports = React.createClass({
                     this.setCookie('PinderloginPassword', Password, 3);
                     console.log("Cookies: " + this.getCookie('PinderloginID'))
                     ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
-
-
           }
         }.bind(this),
           error: function(xhr, status, err) {
@@ -131,8 +131,6 @@ module.exports = React.createClass({
                  </div>
              </form>
       </nav>
- 
-
         )
     }
 });

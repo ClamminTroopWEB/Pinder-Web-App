@@ -6,13 +6,13 @@
  * Semester: Fall, 2018
  */
 
-
 "use_strict";
 
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import Login from './Login.js'
 import '../styles/login.css';
 
 module.exports = React.createClass ({

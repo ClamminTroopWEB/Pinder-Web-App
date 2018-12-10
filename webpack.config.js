@@ -10,6 +10,18 @@ module.exports = {
         filename: '/bundle.js'
     },
     module: {
+        rules: [
+          {
+            test: /\.(png|jpg|gif)$/,
+            use: [
+              {
+                loader: 'file-loader',
+                options: {}
+              }
+            ]
+          }
+        ],
+        
         loaders: [
             { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" },
             { test: /\.css$/,  loader: 'style!css?modules!postcss' }
