@@ -16,16 +16,12 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
 var APP_PATH = path.join(__dirname, 'dist');
-
-
 var matches_list = [];
-
 var dbo;
 var peopleList;
 
 MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, function (err, client) {
   if (err) throw err
-
   dbo = client.db('pinder-web-app')
 
   dbo.collection('dogs').find().toArray(function (err, result) {
@@ -33,20 +29,19 @@ MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds0
     peopleList = result;
   });
 
+  app.listen(app.get('port'), function() { console.log('Server started: http://' + app.get('host') + ':' + app.get('port') + '/'); });
+});
 
 app.set('port', (process.env.PORT || 3000));
 app.set('host', (process.env.HOST || "localhost"));
 app.use('/', express.static(APP_PATH));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/login', function (req, res) {
   console.log('post request recieved on server');
-  //console.log(req.body);
-   console.log("Email: " + req.body.email);
-   console.log("Password: " + req.body.password);
+  console.log("Email: " + req.body.email);
+  console.log("Password: " + req.body.password);
   dbo.collection('users').find({
     "email": req.body.email,
     "password": req.body.password
@@ -57,10 +52,7 @@ app.post('/login', function (req, res) {
         email: result[0].email,
         password: result[0].password
       };
-
-      //console.log("Result to send: " + JSON.stringify(result[0]));
-      console.log('sent result for match found');
-      console.log(JSON.stringify(response));
+      console.log('sent result for match found' + JSON.stringify(response));
       res.send(JSON.stringify(response));
     } else {
       console.log('sent failure for match found');
@@ -68,7 +60,6 @@ app.post('/login', function (req, res) {
         loginID: "Failure"
       });
     }
-
   });
 });
 
@@ -218,7 +209,6 @@ app.post('/matches', function (req, res) {
 });
 
 app.put('/deleteMatch', function (req, res) {
-
   console.log("Server DogID: " + req.body.dogID);
   console.log("Server loginID: " + req.body.loginID);
   dbo.collection('users').find({
@@ -229,14 +219,11 @@ app.put('/deleteMatch', function (req, res) {
     var matches = result[0].matches;
     console.log("Matches for User: " + matches);
 
-
     for (i = 0; i < matches.length; i++) {
       if (req.body.dogID != matches[i]) {
         newmatches.push(matches[i]);
       }
     }
-
-
     console.log("New Matches for User" + newmatches);
 
     dbo.collection('users').updateOne({
@@ -246,18 +233,7 @@ app.put('/deleteMatch', function (req, res) {
         "matches": newmatches
       }
     });
-
-
-
-  });
-
-
-});
-
-
-  app.use('*', express.static(APP_PATH));
-  
-  app.listen(app.get('port'), function () {
-    console.log('Server started: http://localhost:' + app.get('port') + '/');
   });
 });
+
+app.use('*', express.static(APP_PATH));
