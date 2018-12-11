@@ -730,7 +730,7 @@ tr {
     min-width: 450px;
     height: 100vh;
     width: 100vw;
-    /*background-image: url('../images/dogBackgroundDesktop.png');*/
+    background-image: url('../images/dogBackgroundDesktop.png');
     background-repeat:no-repeat;
     background-size: cover;
 }
@@ -760,6 +760,9 @@ tr {
     margin-left: auto;
     top: 0px;
     margin-top: 1%;
+    background-image: url('../images/mainLogoBlue.png');
+    background-size: cover;
+    background-repeat:no-repeat;
 }
 
 #bttnContainer {
@@ -910,7 +913,7 @@ tr {
         width: 100%;
         min-width: 450px;
         height: 100%;
-        /*background-image: url('../images/dogBackgroundMobile.png');*/
+        background-image: url('../images/dogBackgroundMobile.png');
         justify-content: center;
     }
 

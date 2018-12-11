@@ -7,15 +7,17 @@
  */
 
 "use_strict";
-
+/*
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';*/
+
 // import '../styles/shared.css';
-
+/*
 import Login from './Login.js';
-import Profile from './Profile.js';
+import Profile from './Profile.js'; */
 
+/*
 ReactDOM.render((
         <Router history={browserHistory}>
             <Route path="/" component={Login}/>
@@ -23,17 +25,18 @@ ReactDOM.render((
         </Router>
     ), document.getElementById('login')
 );
+*/
 
 
-/*
 var Dog_Array = [];
 var Dogs_Liked = [];
 var index = 0;
-
+/*
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import Remarkable from 'remarkable';
+
 
 import "../styles/adopt.css";
 import "../styles/list.css";
@@ -44,6 +47,7 @@ import "../styles/profile.css";
 import "../styles/style.css";
 import "../styles/login.css";
 
+*/
 var Login = React.createClass({
     getInitialState: function() {
       console.log("getInitialState");
@@ -127,7 +131,7 @@ var Login = React.createClass({
       console.log("render");
         return (
            <nav id="loginScreen">
-        <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
+        <div id="pinderLogoMain"></div>
         <form id="loginForm" action="/login" method="POST" >
             <div id="loginInputs" className="blueRoundSquare">
                 <label id="loginFormTitle">Log In</label>
@@ -186,7 +190,7 @@ var Selection = React.createClass({
   render: function() {
     return (
       <nav id="mainScreen">
-        <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
+        <div id="pinderLogoMain"  />
         <div id="bttnContainer">
             <button id="listPetBttn" className="blueBttn" 
             onClick={this.listaPet}> List Pet </button>
@@ -992,4 +996,3 @@ ReactDOM.render(
     <Login pollInterval={2000}/>,
     document.getElementById('login')
 );
-*/
