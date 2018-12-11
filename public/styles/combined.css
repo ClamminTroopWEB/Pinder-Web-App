@@ -1,0 +1,928 @@
+/* adoptStyling.css stylizes adopt.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ #adoptScreen {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#adopContainer {
+    margin-top: 8%;
+    min-width: 350px;
+    min-height: 400px;
+    width: 35%;
+    height: 65%;
+    padding: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 35px;
+    border: 3px;
+    border-style: solid;
+    border-color: rgb(45, 121, 184);
+}
+
+#adoptImageHolder {
+    width: 200px;
+    height: 200px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.adoptImage {
+    width: 100%;
+    height: 100%;
+}
+
+#adoptInfoContainer {
+    background-color: rgb(247, 247, 255);
+    width: 40%;
+    min-width: 250px;
+    max-width: 600px;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    border: .5px;
+    border-style: solid;
+    border-color: black;
+    padding: 3%;
+}
+
+.adoptInfoLine {
+    width: 100%;
+    margin-bottom: 7.5%;
+}
+
+.adoptInfoLineLast {
+    width: 100%;
+}
+
+.adopInfoTitle {
+    float: left;
+    font-size: 22px;
+}
+
+.adoptInfoDesc {
+    float: right;
+    font-size: 22px;
+}
+
+#adoptButtonContainer {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#heartButton {
+    float: left;
+    width: 80px;
+    height: 80px;
+}
+
+#xoutButton {
+    float: right;
+    width: 80px;
+    height: 80px;
+}
+
+#swipeButtons {
+    position: sticky;
+    width: 100%;
+}
+
+#leftBttn {
+    float: left;
+    width: 50px;
+    height: 50px;
+}
+
+#rightBttn {
+    float: right;
+    width: 50px;
+    height: 50px;
+}
+
+@media screen and (max-height: 660px) {
+    #heartButton {
+        width: 60px;
+        height: 60px;
+    }
+
+    #xoutButton {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-height: 600px) {
+    .menuBar>#pinderLogoMain {
+        width: 133px;
+        height: 60px
+    }
+}
+
+@media screen and (max-width: 900px) {
+    #leftBttn {
+        float: left;
+        width: 40px;
+        height: 40px;
+    }
+
+    #rightBttn {
+        float: right;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #leftBttn {
+        float: left;
+        width: 35px;
+        height: 35px;
+    }
+
+    #rightBttn {
+        float: right;
+        width: 35px;
+        height: 35px;
+    }
+}
+
+
+
+/* listAPetStyling.css stylizes listAPet.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ #img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+#listAPetScreen {
+    display: flex;
+    width: 100%;
+    min-width:450px;
+    height: 100%;
+    justify-content:center;
+    flex-flow: column;
+    overflow:scroll;
+    align-items:top;
+}
+
+#listAPetInputs {
+    padding: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 65%;
+    height: 60%;
+    display:flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+#listAPetForm {
+    margin-top:3%;
+    display: flex;
+    overflow:visible;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.center {
+    margin-right:auto;
+    margin-left:auto;
+}
+
+.formSpan {
+    display: block;
+}
+
+.formLabel {
+    display:inline-block;
+    font-size: 30px;
+}
+
+.formInput {
+    display: inline-block;
+    width: 25%;
+    margin-left:2%;
+    font-size:20px;
+}
+
+.fileInput {
+    display: inline-block;
+    width: 50%;
+    margin-left:2%;
+    font-size:20px;
+}
+
+#submitPet {
+    min-height: 80px;
+    min-width: 160px;
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-right: auto;
+    margin-left:auto;
+    margin-top:2%;
+    border-radius: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(151, 195, 231);
+}
+
+.formToggleBttn {
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(151, 195, 231);
+}
+
+#housetrained {
+    min-height: 100px;
+    min-width: 200px;
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(151, 195, 231);
+}
+
+
+
+#loginScreen {
+    display: flex;
+    width: 100%;
+    min-width: 440px;
+    height: 100%;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#loginInputs {
+    width:60%;
+    height: 45%;
+    display: flex;
+    overflow:visible;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#loginForm {
+margin-top:5%;
+margin-bottom: 2%;
+}
+
+.loginFormLabel {
+    font-size: 35px;
+}
+
+.loginFormInput {
+    font-size: 23px
+}
+
+#loginFormTitle {
+    font-size: 50px;
+    text-align: center
+}
+
+.formSpan {
+    display:inline-block;
+    margin-top:2%;
+    margin-right:auto;
+    margin-left:auto;
+}
+
+#backBttn {
+    width: 100px;
+}
+
+.marginRight {
+    margin-right: 5%;
+}
+
+
+/* matchesStyling.css stylizes matches.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ #matchesScreen {
+    display: flex;
+    width: 100%;
+    min-width: 500px;
+    height: 100%;
+    min-height: 650px;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.menuBar>#pinderLogoMain {
+    width: 250px;
+    height: 100px
+}
+
+#tableHeading {
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(216, 216, 216), rgb(255, 255, 255));
+    margin-top: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    width: 60%;
+    height: 10%;
+    color: red;
+    font-size: 35px;
+    font-family: fantasy;
+    text-align: center;
+    display: block;
+    font-weight: bold;
+    padding-top: 2%;
+    border: 2px;
+    border-style: solid;
+    border-color: rgb(138, 138, 138);
+}
+
+#matchesTableBackground {
+    width: 60%;
+    height: 50%;
+    background-color: rgb(192, 248, 248);
+    background-repeat: no-repeat;
+    background-size: contain;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    margin-right: auto;
+    margin-left: auto;
+    overflow: scroll;
+}
+
+#matchesTable {
+    width: 100%;
+    table-layout: fixed;
+    word-break: break-all;
+    border-collapse: collapse;
+}
+
+th {
+    font-size: 30px;
+    text-align: center;
+    border: 0px;
+    background-color: rgba(144, 173, 255, 0.575);
+}
+
+td {
+    font-size: 25px;
+    text-align: center;
+    border-bottom: .75px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    border-color: black;
+    border-style: solid;
+}
+
+td.matchType {
+    width: 15%;
+    font-family: fantasy;
+}
+
+td.matchImage {
+    width: 15%;
+}
+
+.matchImage>img {
+    height:80px;
+    width:80px;
+    border:1.5px;
+    border-color:darkblue;
+}
+
+td.matchBreed {
+    width: 30%;
+}
+
+td.matchName {
+    width: 30%;
+}
+
+tr {
+    background-image: linear-gradient(rgb(255, 255, 255), rgba(194, 246, 255, 0.808), rgb(255, 255, 255));
+    height: 85px;
+}
+
+@media screen and (max-width: 800px) {
+    td {
+        font-size: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    #matchesTableBackground {
+        width: 75%;
+    }
+
+    #tableHeading {
+        background-image: linear-gradient(rgb(180, 180, 180));
+        margin-top: 10%;
+        margin-right: auto;
+        margin-left: auto;
+        width: 75%;
+        height: 10%;
+        color: red;
+        font-size: 35px;
+        font-family: fantasy;
+        text-align: center;
+        background-image: linear-gradient(rgb(180, 180, 180));
+        background-size: contain;
+        display: block;
+    }
+
+    td {
+        font-size: 17.5px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    td {
+        font-size: 15px;
+    }
+}
+
+
+/* matchProfileStyling.css stylizes matchProfile.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ #matchProfileBody {
+    background-image: linear-gradient(white, rgb(155, 195, 255), rgb(155, 195, 255), white);
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+#titleLabel {
+    font-size: 50px;
+    width: 55%;
+    margin-left: 8%;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.menuBar {
+    margin-top: 2%;
+}
+
+#profileImageHolder {
+    height: 175px;
+    width: 175px;
+    margin-top:6%;
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.profileImage {
+    height: 100%;
+    width: 100%;
+
+}
+
+#profileScreen {
+    display: flex;
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    min-height: 650px;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#profileInputsContainer {
+    background-color: rgb(233, 232, 253);
+    width: 60%;
+    min-width:300px;
+    max-width:600px;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    border: 1.5px;
+    border-style: solid;
+    border-color: black;
+    padding:2%;
+}
+
+.profileInput {
+    background-color: white;
+    width:45%;
+}
+
+.profileInputRow {
+    font-size: 25px;
+    margin-bottom:2%;
+}
+
+.profileInputRow>input {
+    font-size:20px;
+    float:right;
+    border:.25px;
+    border-color:black;
+    border-style:solid;
+}
+
+.profileInputRow>label {
+    word-break: break-all;
+    width:40%;
+}
+
+.profileBttn {
+    display: inline-block;
+    width: 48%;
+}
+
+#myMatchesProfileBttn {
+    float: left;
+}
+
+#saveChangesProfileBttn {
+    float: right;
+}
+
+#profileButtons {
+    width: 40%;
+    min-width:250px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+
+/* profileStyling.css stylizes profile.html
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ #profileBody {
+    background-image: linear-gradient(white, rgb(155, 195, 255), rgb(155, 195, 255), white);
+    background-size: cover;
+    background-repeat: repeat;
+}
+
+#titleLabel {
+    font-size: 50px;
+    width: 55%;
+    margin-left: 8%;
+    text-align: center;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.menuBar {
+    margin-top: 2%;
+}
+
+#profileImageHolder {
+    height: 175px;
+    width: 175px;
+    margin-right: auto;
+    margin-left: auto;
+    border: 3px;
+    border-color: black;
+    border-style: solid;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.profileImage {
+    height: 100%;
+    width: 100%;
+
+}
+
+#profileScreen {
+    display: flex;
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    min-height: 650px;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#profileInputsContainer {
+    background-color: rgb(233, 232, 253);
+    width: 60%;
+    min-width:300px;
+    max-width:600px;
+    height: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+    margin-bottom: 1.5%;
+    border: 1.5px;
+    border-style: solid;
+    border-color: black;
+    padding:2%;
+}
+
+.profileInput {
+    background-color: white;
+    width:45%;
+}
+
+.profileInputRow {
+    font-size: 25px;
+    margin-bottom:10%;
+}
+
+.profileInputRow>input {
+    font-size:20px;
+    float:right;
+    border:.25px;
+    border-color:black;
+    border-style:solid;
+}
+
+.profileInputRow>label {
+    word-break: break-all;
+    width:40%;
+}
+
+.profileBttn {
+    display: inline-block;
+    width: 48%;
+}
+
+#myMatchesProfileBttn {
+    float: left;
+}
+
+#saveChangesProfileBttn {
+    float: right;
+}
+
+#profileButtons {
+    width: 40%;
+    min-width:250px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+/* sharedStyling.css stylizes ???
+ *
+ * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
+ * Professor: Keith Vander Linden
+ * Class: CS-336-A, for Calvin College
+ * Semester: Fall, 2018
+ */
+
+ html body {
+    min-width: 450px;
+    height: 100vh;
+    width: 100vw;
+    /*background-image: url('../images/dogBackgroundDesktop.png');*/
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+#mainScreen {
+    display: flex;
+    width: 100%;
+    min-width: 450px;
+    height: 100%;
+    min-height: 650px;
+    justify-content: center;
+    flex-flow: column;
+}
+
+#myProfileBttn {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+}
+
+
+#pinderLogoMain {
+    width: 250px;
+    height: 100px;
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    top: 0px;
+    margin-top: 1%;
+}
+
+#bttnContainer {
+    display: flex;
+    height: 75%;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 5%;
+    justify-content: center;
+    flex-flow: column;
+}
+
+.entireScreen {
+    width: 100%;
+    display: block;
+}
+
+.blueBttn {
+    min-height: 100px;
+    min-width: 250px;
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(151, 195, 231);
+}
+
+.smallGreenBttn {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(169, 252, 210), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(122, 187, 154);
+}
+
+.smallBlueBttn {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(169, 226, 252), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(129, 182, 224);
+}
+
+.smallOrangeBttn {
+    min-height: 50px;
+    min-width: 150px;
+    margin-left:auto;
+    margin-right:auto;
+    background-image: linear-gradient(white, rgb(255, 208, 122), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(209, 131, 42);
+}
+
+.smallGreyBttn {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(216, 216, 216), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(133, 133, 133);
+}
+
+.smallGreyBttnLink {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(216, 216, 216), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(133, 133, 133);
+    color: black;
+    font-style: normal;
+}
+
+.blueRoundSquare {
+    padding: 3%;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: linear-gradient(white, rgb(192, 248, 248), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 35px;
+    border: 3px;
+    border-style: solid;
+    border-color: rgb(45, 121, 184);
+}
+
+.menuBar {
+    display: flex;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+    flex-flow: row;
+    position: absolute;
+    top: 0px;
+}
+
+.menuBar>#backBttnMenu {
+    float: left;
+    display: block;
+}
+
+.menuBar>#myProfileBttnMenu {
+    display: block;
+}
+
+@media screen and (max-width: 550px) {
+    #mainScreen {
+        display: flex;
+        width: 100%;
+        min-width: 450px;
+        height: 100%;
+        /*background-image: url('../images/dogBackgroundMobile.png');*/
+        justify-content: center;
+    }
+
+    .menuBar>#pinderLogoMain {
+        width: 250px;
+        height: 100px
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .menuBar>#pinderLogoMain {
+        width: 250px;
+        height: 100px
+    }
+}
