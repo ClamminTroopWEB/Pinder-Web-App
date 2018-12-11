@@ -519,9 +519,10 @@ var List = React.createClass({
   },
   submitPet: function() {
    // alert(image);
-   // console.log(this.getCookie("PinderloginID") + Name + Gender + Breed + EnergyLevel + HouseTrained + Size);
+    console.log("Cookie Value: " + this.getCookie("PinderloginID"));
     $.ajax({
       url: "/newPet",
+      dataType: 'application/json',
       type: "POST",
       data: {
         loginID: this.getCookie("PinderloginID"),
@@ -540,9 +541,10 @@ var List = React.createClass({
       //window.location.href = "../selection.html";
     })
     .fail(function(xhr, status, errorThrown) {
-      console.log(xhr.status);
+      console.log("Status Code: " + status);
+      console.log(errorThrown.toString());
       console.log('AJAX POST failed...');
-      alert('A dog has been added');
+      //alert('A dog has been added');
       //window.location.href = "../selection.html";
     })
   },
@@ -665,13 +667,17 @@ var List = React.createClass({
 
 var DogBox = React.createClass({
   loadDogsFromServer: function() {
+    
+    $('#Loading').text('Loading....').show();
     var personID = this.getCookie("PinderloginID");
    $.ajax({
       url: "/matches",
       dataType: 'json',
+      async: false,
       type: 'post',
       data: { "loginID": personID },
       success: function(data) {
+        $('#Loading').hide();
         this.setState({data: data});
       }.bind(this),
       error: function(xhr, status, err) {
@@ -711,9 +717,12 @@ var DogBox = React.createClass({
             onClick={this.backBttn} > Back</button>
             <button id="myProfileBttnMenu" className="smallBlueBttn"
             onClick={this.profileAcct} > My Profile</button>
+            
         </div>
+              
         <div id="tableHeading">
-            <label> Your Matches </label>
+            <h1 id="Loading"></h1>
+            <label > Your Matches </label>
         </div>
         <div id="matchesTableBackground">
            <table>  

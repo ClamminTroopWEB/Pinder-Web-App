@@ -16,9 +16,11 @@ var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
 var APP_PATH = path.join(__dirname, 'public');
-var matches_list = [];
 var dbo;
 var peopleList;
+var matches=[];
+var matches_list = [];
+
 
 MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, function (err, client) {
   if (err) throw err
@@ -147,13 +149,15 @@ app.post('/saveProfile', function (req, res) {
 });
 
 app.post('/newPet', function (req, res) {
+  var dogList;
+
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err;
-    dogList = result;
+    dogList = result.length;
     console.log(result);
   });
   dbo.collection('dogs').insertOne({
-    id: dogList.length + 1,
+    id: dogList + 1,
     ownerID: req.body.loginID,
     Name: req.body.Name,
     Gender: req.body.Gender,
@@ -163,7 +167,8 @@ app.post('/newPet', function (req, res) {
     Size: req.body.Size,
     Image: req.body.Image
   });
-  res.sendStatus(200);
+  console.log("List a Pet Response" + res);
+  //res.sendStatus(200);
 });
 
 app.put('/itsamatch', function (req, res) {
@@ -182,9 +187,10 @@ app.post('/matches', function (req, res) {
   }).toArray(function (err, result) {
     if (err) throw err;
     matches = result[0].matches;
-    for (var i = 0; i < matches.length; i++) {
+    console.log("Matches Array: " +matches);
+    matches.forEach(function(element) {
       dbo.collection('dogs').find({
-        "id": parseInt(matches[i])
+        "id": parseInt(element)
       }).toArray(function (err, results) {
         if (err) throw err;
         var dog = results[0];
@@ -198,11 +204,20 @@ app.post('/matches', function (req, res) {
           "Size": dog.Size,
           "Image": dog.Image
         };
-        matches_list.push(match);
+        //console.log(match.Name);
+       // console.log("I value: " + i);
+        matches_list.unshift(match);
+        console.log("Array Length INSIDE: " + matches_list.length);
       });
-    };
+    });
+
+    setTimeout(function(){
+    console.log("Array Length OUTSIDE: " + matches_list.length);
     res.json(matches_list);
     matches_list = [];
+    }, 500);
+
+    
   });
 });
 
