@@ -8,8 +8,10 @@
 
 "use_strict";
 
+const API_URL = '/';
+const POLL_INTERVAL = 2000;
 var Dog_Array = [];
 var Dogs_Liked = [];
 var index = 0;
 
-module.exports = {Dog_Array, Dogs_Liked, index};
+module.exports = {Dog_Array, Dogs_Liked, index, API_URL, POLL_INTERVAL };

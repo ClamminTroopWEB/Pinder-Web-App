@@ -10,14 +10,20 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Router, Route, browserHistory } from 'react-router';
 // import '../styles/shared.css';
 
 import Login from './Login.js';
+import Profile from './Profile.js';
 
-ReactDOM.render(
-    <Login url="/" pollInterval={2000}/>,
-    document.getElementById('login')
+ReactDOM.render((
+        <Router history={browserHistory}>
+            <Route path="/" component={Login}/>
+            <Route path="/Profile" component={Profile}/>
+        </Router>
+    ), document.getElementById('login')
 );
+
 
 /*
 var Dog_Array = [];
