@@ -14,8 +14,9 @@ import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
 import Profile from './Profile.js';
+import c from '../styles/combined.css';
+
 // import {Dog_Array, Dogs_Liked, index} from './global';
-import '../styles/adopt.css';
 
 var Dog_Array = [];
 var Dogs_Liked = [];
@@ -63,13 +64,13 @@ module.exports = React.createClass({
 
       console.log(Dog_Array);
 
-      $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-      $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-      $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+      $("#adopInfoNameDesc").text(Dog_Array[index].Name);
+      $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
+      $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
       var image = new Image();
       image.src = Dog_Array[index].Image;
-      $(".adoptImage").attr("src", image.src);
+      $("#adoptImage").attr("src", image.src);
 
       console.log("Dog_Array");
       }.bind(this), error: function(xhr, status, err) {
@@ -101,13 +102,13 @@ module.exports = React.createClass({
         index = 0;
       }
 
-      $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-      $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-      $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+      $("#adopInfoNameDesc").text(Dog_Array[index].Name);
+      $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
+      $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
       var image = new Image();
       image.src = Dog_Array[index].Image;
-      $(".adoptImage").attr("src", image.src);
+      $("#adoptImage").attr("src", image.src);
     } else {
       alert('You have matched with them all');
     }
@@ -124,13 +125,13 @@ module.exports = React.createClass({
 
     }
 
-    $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-    $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-    $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+    $("#adopInfoNameDesc").text(Dog_Array[index].Name);
+    $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
+    $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
     var image = new Image();
     image.src = Dog_Array[index].Image;
-    $(".adoptImage").attr("src", image.src);
+    $("#adoptImage").attr("src", image.src);
 
     } else {
       alert("You have already disliked all the dogs");
@@ -144,13 +145,13 @@ module.exports = React.createClass({
       index++;
     }
 
-    $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-    $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-    $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+    $("#adopInfoNameDesc").text(Dog_Array[index].Name);
+    $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
+    $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
     var image = new Image();
     image.src = Dog_Array[index].Image;
-    $(".adoptImage").attr("src", image.src);
+    $("#adoptImage").attr("src", image.src);
   },
   handleLeftClick: function() {
     console.log("handleLeftClick");
@@ -160,13 +161,13 @@ module.exports = React.createClass({
       index--;
     }
 
-    $(".adopInfoNameDesc").text(Dog_Array[index].Name);
-    $(".adopInfoBreedDesc").text(Dog_Array[index].Breed);
-    $(".adopInfoGenderDesc").text(Dog_Array[index].Gender);
+    $("#adopInfoNameDesc").text(Dog_Array[index].Name);
+    $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
+    $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
 
     var image = new Image();
     image.src = Dog_Array[index].Image;
-    $(".adoptImage").attr("src", image.src);
+    $("#adoptImage").attr("src", image.src);
   },
   handleBackClick: function() {
     console.log("back button clicked");
@@ -189,38 +190,38 @@ module.exports = React.createClass({
   render: function() {
     console.log("Render: " + this.state);
     return (
-      <nav id="adoptScreen">
-        <div className="menuBar">
-          <button id="backBttnMenu" className="smallBlueBttn" onClick={this.backBttn} >Back</button>
-          <button id="myProfileBttnMenu" className="smallBlueBttn" onClick={this.profileAcct}>My Profile</button>
+      <nav id={c.adoptScreen}>
+        <div className={c.menuBar}>
+          <button id={c.backBttnMenu} className={c.smallBlueBttn} onClick={this.backBttn}>Back</button>
+          <button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.profileAcct}>My Profile</button>
         </div>
-        <div id="adopContainer">
-          <div id="adoptImageHolder">
-            <img className="adoptImage"/>
+        <div id={c.adopContainer}>
+          <div id={c.adoptImageHolder}>
+            <img id="adoptImage" className={c.adoptImage}/>
           </div>
-          <div id="swipeButtons">
-            <img id="rightBttn" src="../images/moveRight.png" onClick={this.handleRightClick.bind(this)}/>
-            <img id="leftBttn" src="../images/moveLeft.png" onClick={this.handleLeftClick.bind(this)}/>
+          <div id={c.swipeButtons}>
+            <img id={c.rightBttn} src="https://i.imgur.com/fv9H3GL.png" onClick={this.handleRightClick.bind(this)}/>
+            <img id={c.leftBttn} src="https://i.imgur.com/vbjQyQd.png" onClick={this.handleLeftClick.bind(this)}/>
           </div>
-          <div id="adoptInfoContainer">
-            <div className='adoptInfoLine'>
-              <span className="adopInfoName">Name: </span>
-              <span className="adopInfoNameDesc"></span>
+          <div id={c.adoptInfoContainer}>
+            <div className={c.adoptInfoLine}>
+              <span className={c.adopInfoName}>Name: </span>
+              <span id="adopInfoNameDesc" className={c.adopInfoNameDesc}></span>
             </div>
             <br/>
-            <div className='adoptInfoLine'>
-              <span className="adopInfoBreed">Breed:</span>
-              <span className="adopInfoBreedDesc"></span>
+            <div className={c.adoptInfoLine}>
+              <span className={c.adopInfoBreed}>Breed: </span>
+              <span id="adopInfoBreedDesc" className={c.adopInfoBreedDesc}></span>
             </div>
             <br/>
-            <div className='adoptInfoLineLast'>
-              <span className="adopInfoGender">Gender:</span>
-              <span className="adopInfoGenderDesc"></span>
+            <div className={c.adoptInfoLineLast}>
+              <span className={c.adopInfoGender}>Gender: </span>
+              <span id="adopInfoGenderDesc" className={c.adopInfoGenderDesc}></span>
             </div>
           </div>
-          <div id="adoptButtonContainer">
-            <img src="../images/xout.png" id="xoutButton" onClick={this.handleRejectClick.bind(this)}/>
-            <img src="../images/greenHeart.png" id="heartButton" onClick={this.handleAdoptClick.bind(this)}/>
+          <div id={c.adoptButtonContainer}>
+            <img src="https://i.imgur.com/fwQiRUQ.png" id={c.xoutButton} onClick={this.handleRejectClick.bind(this)}/>
+            <img src="https://i.imgur.com/pPMPxhf.png" id={c.heartButton} onClick={this.handleAdoptClick.bind(this)}/>
           </div>
         </div>
       </nav>

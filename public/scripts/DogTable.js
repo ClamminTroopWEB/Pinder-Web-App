@@ -12,7 +12,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
-import '../styles/matches.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   getCookie: function(name) {
@@ -51,15 +51,15 @@ module.exports = React.createClass({
     const dogNodes = this.props.data.map(function(dog) {
     return (
         <tr key={dog.id}>
-          <td className="matchBreed">{dog.Breed}</td>
-          <td className="matchName">{dog.Name}</td>
-          <td className="matchImage"> <img src={dog.Image}/> </td>
-          <td className="matchImage"><button onClick={this.getDogProfile.bind(this, dog)}>Unmatch</button></td>
+          <td className={c.matchBreed}>{dog.Breed}</td>
+          <td className={c.matchName}>{dog.Name}</td>
+          <td className={c.matchImage}> <img src={dog.Image}/> </td>
+          <td className={c.matchImage}><button onClick={this.getDogProfile.bind(this, dog)}>Unmatch</button></td>
         </tr>
       );
       }.bind(this));
       return (
-        <tbody className="dogTable">
+        <tbody className={c.dogTable}>
           {dogNodes}
         </tbody>
     );

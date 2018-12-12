@@ -14,7 +14,7 @@ import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
 import Profile from './Profile.js';
-import '../styles/list.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -56,12 +56,12 @@ module.exports = React.createClass({
       type: "POST",
       data: {
         loginID: this.getCookie("PinderloginID"),
-        Name: $('#listAPetName').val(),
-        Gender: $('#listAPetGender').val(),
-        Breed: $('#listAPetBreed').val(),
-        EnergyLevel: $('#listAPetEnergy').val(),
-        HouseTrained: $('#listAPetHouseTrained').val(),
-        Size: $('#listAPetSize').val(),
+        Name: $('.listAPetName').val(),
+        Gender: $('.listAPetGender').val(),
+        Breed: $('.listAPetBreed').val(),
+        EnergyLevel: $('.listAPetEnergy').val(),
+        HouseTrained: $('.listAPetHouseTrained').val(),
+        Size: $('.listAPetSize').val(),
         Image: $('#PetPicture').prop('src')
       }
     })
@@ -110,31 +110,30 @@ module.exports = React.createClass({
 
   render: function() {
     console.log("render");
-
-
       return (
-        <nav id='listAPetScreen'>
-        <div className="menuBar">
-           <button id="backBttnMenu" className="smallBlueBttn" 
+        <nav id={c.listAPetScreen}>
+        <div className={c.menuBar}>
+           <button id={c.backBttnMenu} className={c.smallBlueBttn} 
             onClick={this.backBttn} > Back</button>
-            <button id="myProfileBttnMenu" className="smallBlueBttn"
+            <button id={c.myProfileBttnMenu} className={c.smallBlueBttn}
             onClick={this.profileAcct} > My Profile</button>
         </div>
-        <form id="listAPetForm" action="/newPet" method="POST">
-            <div id="listAPetInputs" className="blueRoundSquare">
+        <form id={c.listAPetForm} action="/newPet" method="POST">
+            <div id={c.listAPetInputs} className={c.blueRoundSquare}>
 
                 <span>
-                    <label className="formLabel">Name: </label>
-                    <input className="formInput" 
+                    <label className={c.formLabel}>Name: </label>
+                    <input className={c.formInput} 
                     type="text" name="Name" 
                     placeholder="enter a pet name" 
-                    id="listAPetName" value={this.state.name} 
+                    className="listAPetName" id={c.listAPetName} value={this.state.name} 
                     onChange={this.handleNameChange}/>
                 </span>
 
                 <span>
-                    <label className="formLabel">Gender: </label>
-                    <select className="formInput" id="listAPetGender" defaultValue={this.state.gender} onChange={this.handleGenderChange}>
+                    <label className={c.formLabel}>Gender: </label>
+                    <select className={c.formInput} id={c.listAPetGender} className="listAPetGender"
+                    defaultValue={this.state.gender} onChange={this.handleGenderChange}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                         <option value="other">Other ;)</option>
@@ -142,8 +141,9 @@ module.exports = React.createClass({
                 </span>
 
                 <span>
-                    <label className="formLabel">Breed: </label>
-                    <select className="formInput" id="listAPetBreed" value={this.state.breed} onChange={this.handleBreedChange}>
+                    <label className={c.formLabel}>Breed: </label>
+                    <select className={c.formInput} id={c.listAPetBreed} className="listAPetBreed"
+                    value={this.state.breed} onChange={this.handleBreedChange}>
                         <option value="Labrador">Labrador</option>
                         <option value="Great_Dane">Great Dane</option>
                         <option value="Poodle">Poodle</option>
@@ -152,8 +152,9 @@ module.exports = React.createClass({
                 </span>
 
                 <span>
-                    <label className="formLabel">Energy Level: </label>
-                    <select className="formInput" id="listAPetEnergy" value={this.state.energyLevel} onChange={this.handleEnergyLevelChange}>
+                    <label className={c.formLabel}>Energy Level: </label>
+                    <select className={c.formInput} id={c.listAPetEnergy} className="listAPetBreed"
+                    value={this.state.energyLevel} onChange={this.handleEnergyLevelChange}>
                         <option value="calm">Calm</option>
                         <option value="somewhat_energetic">Somewhat Energetic</option>
                         <option value="really_energetic">Really Energetic</option>
@@ -161,15 +162,15 @@ module.exports = React.createClass({
                 </span>
 
                 <span>
-                    <label className="formLabel">House Trained: </label>
-                    <select className="formInput" id="listAPetHouseTrained" value={this.state.houseTrained} onChange={this.houseTrained}>
+                    <label className={c.formLabel}>House Trained: </label>
+                    <select className={c.formInput} id={c.listAPetHouseTrained} className="listAPetHouseTrained" value={this.state.houseTrained} onChange={this.houseTrained}>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                     </select> </span>
 
                 <span>
-                    <label className="formLabel">Size: </label>
-                    <select className="formInput" id="listAPetSize" value={this.state.size} onChange={this.handleSizeChange}>
+                    <label className={c.formLabel}>Size: </label>
+                    <select className={c.formInput} id={c.listAPetSize} className="listAPetSize" value={this.state.size} onChange={this.handleSizeChange}>
                         <option value="small">Small</option>
                         <option value="mid-sized">Mid-Sized</option>
                         <option value="large">Large</option>
@@ -177,19 +178,17 @@ module.exports = React.createClass({
                 </span>
 
                 <span>
-                    <label className="formLabel">Image: </label>
-                    <input id="inp" type='file'
+                    <label className={c.formLabel}>Image: </label>
+                    <input id={c.inp} type='file'
                     onChange= {this.readFile}/>
                     <img id="PetPicture" height="150"/> 
                 </span>
-
                
             </div>
-            <input id="submitPet" type="button" 
+            <input id={c.submitPet} type="button" 
             value="Submit" onClick={this.submitPet}/>
         </form>
     </nav>
-
       )
   }
 });

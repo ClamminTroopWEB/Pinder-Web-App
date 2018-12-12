@@ -16,7 +16,7 @@ import List from './List.js';
 import Adopt from './Adopt.js';
 import DogBox from './DogBox.js';
 import Profile from './Profile.js';
-// import '../styles/selection.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   listaPet: function() {
@@ -33,14 +33,14 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-      <nav id="mainScreen">
-        <img id="pinderLogoMain" src="../images/mainLogoBlue.png"/>
-        <div id="bttnContainer">
-          <button id="listPetBttn" className="blueBttn" onClick={this.listaPet}>List Pet</button>
-          <button id="adoptPetBttn" className="blueBttn" onClick={this.adoptaPet}>Adopt a Pet</button>
-          <button id="yourMatchesBttn" className="blueBttn" onClick={this.yourMatches}>Your Matches</button>
+      <nav id={c.mainScreen}>
+        <img id={c.pinderLogoMain} src="https://i.imgur.com/pbgkjCN.png"/>
+        <div id={c.bttnContainer}>
+          <button id={c.listPetBttn} className={c.blueBttn} onClick={this.listaPet}>List Pet</button>
+          <button id={c.adoptPetBttn} className={c.blueBttn} onClick={this.adoptaPet}>Adopt a Pet</button>
+          <button id={c.yourMatchesBttn} className={c.blueBttn} onClick={this.yourMatches}>Your Matches</button>
         </div>
-        <button id="myProfileBttn" className="smallBlueBttn" onClick={this.yourProfile}>My Profile</button>
+        <button id={c.myProfileBttn} className={c.smallBlueBttn} onClick={this.yourProfile}>My Profile</button>
       </nav>
     );
   }

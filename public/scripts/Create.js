@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Login from './Login.js'
-import '../styles/login.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass ({
   getInitialState: function() {
@@ -106,40 +106,40 @@ module.exports = React.createClass ({
   }, 
   render: function() {
     return (
-      <nav id="loginScreen">
-        <img id="pinderLogoMain" src="../images/mainLogoBlue.png"/>
-        <form id="loginForm" action="/create" method="post">
-          <div id="loginInputs" className="blueRoundSquare">
-            <label id="loginFormTitle">Create Account</label>
+      <nav id={c.loginScreen}>
+        <img id={c.pinderLogoMain} src="https://i.imgur.com/pbgkjCN.png"/>
+        <form id={c.loginForm} action="/create" method="post">
+          <div id={c.loginInputs} className={c.blueRoundSquare}>
+            <label id={c.loginFormTitle}>Create Account</label>
             <br/>
-            <span className="formSpan">
-              <label className="loginFormLabel">Email: </label>
-              <input className="loginFormInput" type="email" placeholder="please enter an email" name="email" value=""
-              id="createAccountEmail" value={this.state.email} onChange={this.handleEmailChange}/>
+            <span className={c.formSpan}>
+              <label className={c.loginFormLabel}>Email: </label>
+              <input className={c.loginFormInput} type="email" placeholder="please enter an email" name="email" value=""
+              id={c.createAccountEmail} value={this.state.email} onChange={this.handleEmailChange}/>
             </span>
-            <span className="formSpan">
-              <label className="loginFormLabel">Password: </label>
-              <input className="loginFormInput" type="password" placeholder="please enter a password" name="password"
-              value="" id="createAccountPassword" value={this.state.password} onChange={this.handlePasswordChange}/>
+            <span className={c.formSpan}>
+              <label className={c.loginFormLabel}>Password: </label>
+              <input className={c.loginFormInput} type="password" placeholder="please enter a password" name="password"
+              value="" id={c.createAccountPassword} value={this.state.password} onChange={this.handlePasswordChange}/>
             </span>
-            <span className="formSpan">
-              <label className="loginFormLabel">Location: </label>
-              <input className="loginFormInput" type="text" placeholder="please enter a location" name="location"
-              value="" id="createAccountLocation" value={this.state.location} onChange={this.handleLocationChange} />
+            <span className={c.formSpan}>
+              <label className={c.loginFormLabel}>Location: </label>
+              <input className={c.loginFormInput} type="text" placeholder="please enter a location" name="location"
+              value="" id={c.createAccountLocation} value={this.state.location} onChange={this.handleLocationChange} />
             </span>
-            <span className="formSpan">
-              <label className="loginFormLabel">Name: </label>
-              <input className="loginFormInput" type="text" placeholder="please enter your name" name="location"
-              value="" id="createAccountName" value={this.state.name} onChange={this.handleNameChange} />
+            <span className={c.formSpan}>
+              <label className={c.loginFormLabel}>Name: </label>
+              <input className={c.loginFormInput} type="text" placeholder="please enter your name" name="location"
+              value="" id={c.createAccountName} value={this.state.name} onChange={this.handleNameChange} />
             </span>
             <span>
-              <label className="formLabel">Image: </label>
-              <input id="inp" type='file' onChange= {this.readFile}/>
-              <img id="PetPicture" height="150"/> 
+              <label className={c.formLabel}>Image: </label>
+              <input id={c.inp} type='file' onChange= {this.readFile}/>
+              <img id={c.PetPicture} height="150"/> 
             </span>
-            <span id="loginBttns" className="formSpan">
-              <input className="smallGreyBttn" id="backBttn" value="Back" onClick={this.loadLoginPage}/>
-              <input className="smallGreyBttn" id="loginToAccountBttn" type="button" value="Create Account" 
+            <span id={c.loginBttns} className={c.formSpan}>
+              <input className={c.smallGreyBttn} id={c.backBttn} value="Back" onClick={this.loadLoginPage}/>
+              <input className={c.smallGreyBttn} id={c.loginToAccountBttn} type="button" value="Create Account" 
               onClick={this.handleSubmitButton.bind(this, this.state.email,this.state.password, this.state.location, this.state.name)}/>
             </span>
           </div>

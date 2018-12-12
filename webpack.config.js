@@ -10,26 +10,23 @@ module.exports = {
         filename: '/bundle.js'
     },
     module: {
-        rules: [
-          {
-            test: /\.(png|jpg|gif)$/,
-            use: [
-              {
-                loader: 'file-loader',
-                options: {}
-              }
-            ]
-          }
-        ],
-        
+        rules:[
+            {
+                test:/\.css$/,
+                use:[
+                {loader: "style-loader"},
+                {loader: "css-loader"}
+                ]
+            }
+       ],
         loaders: [
             { test: /\.jsx?$/, exclude: /node_modules/, loader: "babel-loader" },
             { test: /\.css$/,  loader: 'style!css?modules!postcss' }
         ]
     },
     plugins: [
-	new HtmlWebpackPlugin({template: __dirname + "/public/index.tmpl.html"}),
-	new webpack.HotModuleReplacementPlugin()
+    new HtmlWebpackPlugin({template: __dirname + "/public/index.tmpl.html"}),
+    new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
         port: 3001,

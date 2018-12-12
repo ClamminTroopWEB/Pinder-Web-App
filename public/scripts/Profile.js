@@ -15,7 +15,7 @@ import $ from 'jquery';
 import Selection from './Selection.js';
 import Login from './Login.js';
 import DogBox from './DogBox';
-import '../styles/profile.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -47,14 +47,14 @@ module.exports = React.createClass({
         this.setState({name: data[0].name});
         this.setState({email: data[0].email});
         this.setState({location: data[0].Address});
-        // $("#profileNameText").val(data[0].name);
-        // $("#profileEmailText").val(data[0].email);
-        // $("#profileLocationText").val(data[0].Address);
+        // $(".profileNameText").val(data[0].name);
+        // $(".profileEmailText").val(data[0].email);
+        // $(".profileLocationText").val(data[0].Address);
 
         //console.log("result: " + result);
         var image = new Image();
         image.src = data[0].ProfilePicture;
-        $(".profileImage").attr("src", image.src);
+        $("#profileImage").attr("src", image.src);
 
         }.bind(this),
           error: function(xhr, status, err) {
@@ -69,9 +69,9 @@ module.exports = React.createClass({
       type: "POST",
       data: {
         loginID: loginID,
-        Name: $('#profileNameText').val(),
-        Email: $('#profileEmailText').val(),
-        Location: $('#profileLocationText').val()
+        Name: $('.profileNameText').val(),
+        Email: $('.profileEmailText').val(),
+        Location: $('.profileLocationText').val()
       }
     })
     .done(function( result ) {
@@ -102,48 +102,48 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-       <nav id="profileScreen">
-        <div className="menuBar">
-            <button id="backBttnMenu" className="smallBlueBttn" 
+       <nav id={c.profileScreen}>
+        <div className={c.menuBar}>
+            <button id={c.backBttnMenu} className={c.smallBlueBttn} 
             onClick={this.backBttn} > Back</button>
-            <label id="titleLabel">My Profile</label>
-            <button id="myProfileBttnMenu" className="smallBlueBttn"
+            <label id={c.titleLabel}>My Profile</label>
+            <button id={c.myProfileBttnMenu} className={c.smallBlueBttn}
             onClick={this.changeAccnt} > Change
                 Account</button>
         </div>
-        <div id="profileImageHolder">
-            <img className="profileImage"
+        <div id={c.profileImageHolder}>
+            <img className={c.profileImage} id="profileImage"
             value={this.state.image} onChange={this.imageChange}  />
         </div>
-        <div id="profileInputsContainer">
-            <div className="profileInputRow">
+        <div id={c.profileInputsContainer}>
+            <div className={c.profileInputRow}>
                 <label  htmlFor="profileName">Name: </label>
-                <input className="profileInput" type="text" 
+                <input className={c.profileInput} type="text" 
                 placeholder="enter your name" name="profileName"  
-                id="profileNameText"
+                id={c.profileNameText} className="profileNameText"
                 value={this.state.name} onChange={this.nameChange}/>
             </div>
-            <div className="profileInputRow">
+            <div className={c.profileInputRow}>
                 <label htmlFor="profileContactEmail">Contact Email:</label>
-                <input className="profileInput" type="text" 
+                <input className={c.profileInput} type="text" 
                 placeholder="enter your email" name="profileContactEmail" 
-                value="" id="profileEmailText"
+                value="" id={c.profileEmailText} className="profileEmailText"
                 value={this.state.email} onChange={this.emailChange} />
             </div>
-            <div className="profileInputRow">
+            <div className={c.profileInputRow}>
                 <label htmlFor="profileLocation">Location:</label>
-                <input className="profileInput" type="text" 
+                <input className={c.profileInput} type="text" 
                 placeholder="enter your city" name="profileLocation" value="" 
-                id="profileLocationText"
+                id={c.profileLocationText} className="profileLocationText"
                 value={this.state.location} onChange={this.locationChange} />
             </div>
         </div>
-        <div id="profileButtons">
-            <button id="myMatchesProfileBttn" 
-            className="profileBttn smallBlueBttn"
+        <div id={c.profileButtons}>
+            <button id={c.myMatchesProfileBttn} 
+            className={c.profileBttn, c.smallBlueBttn}
             onClick={this.seeMatches}  > My Matches</button>
-            <button id="saveChangesProfileBttn" 
-            className="profileBttn smallGreenBttn" onClick={this.updateInformation}>
+            <button id={c.saveChangesProfileBttn} 
+            className={c.profileBttn, c.smallGreenBttn} onClick={this.updateInformation}>
              Save Changes</button>
         </div>
     </nav>

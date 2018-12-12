@@ -15,7 +15,7 @@ import $ from 'jquery';
 import DogTable from './DogTable.js'
 import Selection from './Selection.js';
 import Profile from './Profile.js';
-import '../styles/matches.css';
+import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   loadDogsFromServer: function() {
@@ -58,15 +58,15 @@ module.exports = React.createClass({
   },
   render: function() {
     return (
-    <nav id="matchesScreen">
-      <div className="menuBar">
-        <button id="backBttnMenu" className="smallBlueBttn" onClick={this.backBttn}>Back</button>
-        <button id="myProfileBttnMenu" className="smallBlueBttn" onClick={this.profileAcct}>My Profile</button>
+    <nav id={c.matchesScreen}>
+      <div className={c.menuBar}>
+        <button id={c.backBttnMenu} className={c.smallBlueBttn} onClick={this.backBttn}>Back</button>
+        <button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.profileAcct}>My Profile</button>
       </div>
-      <div id="tableHeading">
+      <div id={c.tableHeading}>
         <label>Your Matches</label>
       </div>
-      <div id="matchesTableBackground">
+      <div id={c.matchesTableBackground}>
         <table>  
           <DogTable data={this.state.data} />
         </table>

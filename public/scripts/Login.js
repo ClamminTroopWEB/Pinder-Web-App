@@ -14,7 +14,8 @@ import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
 import Create from './Create.js';
-import '../styles/login.css';
+import c from '../styles/combined.css';
+
 
 module.exports = React.createClass({
     getInitialState: function() {
@@ -95,36 +96,37 @@ module.exports = React.createClass({
     render: function() {
       console.log(this.state);
       console.log("render");
+
         return (
-           <nav id="loginScreen">
-        <img id="pinderLogoMain" src="../images/mainLogoBlue.png" />
-        <form id="loginForm" action="/login" method="POST" >
-            <div id="loginInputs" className="blueRoundSquare">
-                <label id="loginFormTitle">Log In</label>
+           <nav id={c.loginScreen}>
+        <img id={c.pinderLogoMain} src="https://i.imgur.com/pbgkjCN.png" />
+        <form id={c.loginForm} action="/login" method="POST">
+            <div id={c.loginInputs} className={c.blueRoundSquare}>
+                <label id={c.loginFormTitle}>Log In</label>
                 <br/>
 
-                <span className="formSpan">
-                    <label className="loginFormLabel">Email: </label>
-                    <input className="loginFormInput" type="email" placeholder="please enter an email"
-                     name="Name" id="loginEmail" 
+                <span className={c.formSpan}>
+                    <label className={c.loginFormLabel}>Email: </label>
+                    <input className={c.loginFormInput} type="email" placeholder="please enter an email"
+                     name="Name" id={c.loginEmail} 
                      value={this.state.author} onChange={this.handleAuthorChange} />
                 </span>
 
-                <span className="formSpan">
-                    <label className="loginFormLabel">Password: </label>
-                    <input className="loginFormInput"  type="password" 
-                    placeholder="please enter a password"  name="Password" value="" id="loginPassword"
+                <span className={c.formSpan}>
+                    <label className={c.loginFormLabel}>Password: </label>
+                    <input className={c.loginFormInput} type="password" 
+                    placeholder="please enter a password"  name="Password" value="" id={c.loginPassword}
                      value={this.state.text} onChange={this.handleTextChange} />
                 </span>
 
-                <span id="loginBttns" className="formSpan">
-                    <input className="smallGreyBttn" id="loginToAccountBttn"
+                <span id={c.loginBttns} className={c.formSpan}>
+                    <input className={c.smallGreyBttn} id={c.loginToAccountBttn}
 
 
                     type="button" value="Log In"
                     onClick = {this.handleLoginClick.bind(this, this.state.author,this.state.text)}
                     />
-                    <input className="smallGreyBttn" id=""  
+                    <input className={c.smallGreyBttn}  
                     type="button" value="Create Account"
                     onClick={this.createAccount} />
                 </span>

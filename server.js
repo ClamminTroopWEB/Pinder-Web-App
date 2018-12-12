@@ -15,7 +15,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var MongoClient = require('mongodb').MongoClient;
 var multer = require('multer');
-var APP_PATH = path.join(__dirname, 'public');
+var APP_PATH = path.join(__dirname, 'dist');
 var dbo;
 var peopleList;
 var matches=[];
