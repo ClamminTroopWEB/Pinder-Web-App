@@ -54,7 +54,6 @@ module.exports = React.createClass({
       url: "/newPet",
       type: "POST",
       data: {
-        loginID: this.getCookie("PinderloginID"),
         Name: $('#listAPetName').val(),
         Gender: $('#listAPetGender').val(),
         Breed: $('#listAPetBreed').val(),
@@ -144,7 +143,9 @@ module.exports = React.createClass({
                         <option value="Labrador">Labrador</option>
                         <option value="Great_Dane">Great Dane</option>
                         <option value="Poodle">Poodle</option>
-                        <option value="Demon">Demon</option>
+                        <option value="Husky">Husky</option>
+                        <option value="German_Shepherd">German Shepherd</option>
+                        <option value="Pug">Pug</option>
                     </select>
                 </span>
 
@@ -177,7 +178,7 @@ module.exports = React.createClass({
                 <span>
                     <label className={c.formLabel}>Image: </label>
                     <input id='inp' type='file' onChange={this.readFile}/>
-                    <img id="PetPicture" height="150"/> 
+                    <img className="PetPicture" height="150"/> 
                 </span>
                
             </div>

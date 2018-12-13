@@ -149,24 +149,20 @@ app.post('/saveProfile', function (req, res) {
 });
 
 app.post('/newPet', function (req, res) {
-  var dogList;
-
-  dbo.collection('dogs').find().toArray(function(err, result) {
+  dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err;
-    var dogList = result.length;
+      var dogID = result.length + 1;
+    dbo.collection('dogs').insertOne({
+      id: dogID,
+      Name: req.body.Name,
+      Gender: req.body.Gender,
+      Breed: req.body.Breed,
+      EnergyLevel: req.body.EnergyLevel,
+      HouseTrained: req.body.HouseTrained,
+      Size: req.body.Size,
+      Image: req.body.Image
+    });
   });
-  dbo.collection('dogs').insertOne({
-    id: dogList + 1,
-    Name: req.body.Name,
-    Gender: req.body.Gender,
-    Breed: req.body.Breed,
-    EnergyLevel: req.body.EnergyLevel,
-    HouseTrained: req.body.HouseTrained,
-    Size: req.body.Size,
-    Image: req.body.Image
-  });
-  console.log("List a Pet Response" + res);
-  //res.sendStatus(200);
 });
 
 app.put('/itsamatch', function (req, res) {
