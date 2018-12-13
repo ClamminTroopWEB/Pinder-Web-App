@@ -32,9 +32,6 @@ module.exports = React.createClass ({
     }
     reader.readAsDataURL(file);
   },
-  loadLoginPage: function() {
-    ReactDOM.render(React.createElement(Login), document.getElementById('login'));
-  },
   handleNameChange: function(e) {
     this.setState({name: e.target.value});
   },
@@ -67,34 +64,29 @@ module.exports = React.createClass ({
       }
       return null;
     }
-    console.log($('.PetPicture').prop('src'));
     $.ajax({
-      url: '/create',
-      type: 'post',
+      url: "/create",
+      type: "post",
       data: {
       name: name,
       email: email,
       password: password,
       location: location,
       Image: $('.PetPicture').prop('src')
-      }
-    })
-    .done(function(result) {
-        console.log('got what we needed: ' + result);
-      if (result.Result == 'Failure') {
-        console.log(result);
+    },
+    success: function(data) {
+      console.log("Result: " + data.loginID);
+      if (data.loginID == "Failure") {
         alert("That Email has been taken, please choose another");
-      } else {
-        console.log("JSON: " + result);
-        setCookie('PinderloginID', result.loginID, 3);
-        setCookie('PinderloginEmail', $('#createAccountEmail').val(), 3);
-        setCookie('PinderloginPassword', $('#createAccountPassword').val(), 3);
-        console.log("Cookies: " + getCookie('PinderloginID'));
-        ReactDOM.render(React.createElement(Selection), document.getElementById('login'));
+      } else  {
+        this.setCookie('PinderloginID', data.loginID, 3);
+        this.setCookie('PinderloginEmail', loginID, 3);
+        this.setCookie('PinderloginPassword', Password, 3);
+        console.log("Cookies: " + this.getCookie('PinderloginID'))
       }
-    })
-    .fail(function (xhr, status, errorThrown) {
-      console.log('failed: ' + errorThrown + '\nAJAX POST failed...');
+      }.bind(this), error: function(xhr, status, err) {
+        console.log("Error Produced!: " + err);
+      }.bind(this)
     });
   }, 
   render: function() {
@@ -127,7 +119,7 @@ module.exports = React.createClass ({
             </span>
             <span>
               <label className={c.formLabel}>Image: </label>
-              <input id='inp' type='file' onChange= {this.readFile}/>
+              <input id='inp' type='file' onChange={this.readFile}/>
               <img id="PetPicture" className="PetPicture" height="150"/> 
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
