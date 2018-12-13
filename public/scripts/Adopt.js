@@ -1,4 +1,4 @@
-/* Adopt.js
+/* Adopt.js implements the react component for the Adopt route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -17,19 +17,15 @@ import Selection from './Selection.js';
 import Profile from './Profile.js';
 import c from '../styles/combined.css';
 
-// import {Dog_Array, Dogs_Liked, index} from './global';
-
 var Dog_Array = [];
 var Dogs_Liked = [];
 var index = 0;
 
 module.exports = React.createClass({
   getInitialState: function() {
-    console.log("getInitialState");
     return {data: []};
   },
   componentDidMount: function() {
-    console.log("componentDidMount");
     this.getAdoptInformation();
   },
   getCookie: function(name) {
@@ -43,7 +39,6 @@ module.exports = React.createClass({
     return null;
   },
   getAdoptInformation: function() {
-    console.log("getAdoptInformation");
     Dog_Array=[];
     Dogs_Liked = [];
     index = 0;
@@ -63,8 +58,6 @@ module.exports = React.createClass({
         Dog_Array.push(Dog);
       }
 
-      console.log(Dog_Array);
-
       $("#adopInfoNameDesc").text(Dog_Array[index].Name);
       $("#adopInfoBreedDesc").text(Dog_Array[index].Breed);
       $("#adopInfoGenderDesc").text(Dog_Array[index].Gender);
@@ -73,14 +66,12 @@ module.exports = React.createClass({
       image.src = Dog_Array[index].Image;
       $("#adoptImage").attr("src", image.src);
 
-      console.log("Dog_Array");
       }.bind(this), error: function(xhr, status, err) {
         console.log("Error: " + err);
       }.bind(this)
     });
   },
   handleAdoptClick: function() {
-    console.log("handleAdoptClick");
     $.ajax({
       url: "/itsamatch",
       type: "put",
@@ -155,7 +146,6 @@ module.exports = React.createClass({
     $("#adoptImage").attr("src", image.src);
   },
   handleLeftClick: function() {
-    console.log("handleLeftClick");
     if ((index - 1) < 0) {
       index = Dog_Array.length - 1;
     } else {
@@ -169,24 +159,6 @@ module.exports = React.createClass({
     var image = new Image();
     image.src = Dog_Array[index].Image;
     $("#adoptImage").attr("src", image.src);
-  },
-  handleBackClick: function() {
-    console.log("back button clicked");
-    alert("back button clicked");
-    // TODO: Redirect to the "Selection" page
-    // window.location.href = "../selection";
-  },
-  handleMyProfileClick: function() {
-    console.log("my profile button clicked");
-    alert("my profile button clicked");
-    // TODO: Redirect to the "My Profile" page
-    // window.location.href = "../profile";
-  },
-  backBttn: function() {
-    ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
-  },
-  profileAcct: function() {
-    ReactDOM.render(React.createElement(Profile), document.getElementById('login'))
   },
   render: function() {
     console.log("Render: " + this.state);

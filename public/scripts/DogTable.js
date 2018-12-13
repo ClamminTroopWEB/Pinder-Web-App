@@ -1,4 +1,5 @@
-/* DogTable.js implements the react that displays the dogs within a table inside the DogBox
+/* DogTable.js implements the react component that 
+ * displays inside the DogBox on the Matches route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -31,7 +32,7 @@ module.exports = React.createClass({
     $.ajax({
       url: "/deleteMatch",
       dataType: 'json',
-      type: 'put',
+      type: "put",
       data: { 
       "loginID": personID, 
       "dogID": dogID
@@ -40,11 +41,9 @@ module.exports = React.createClass({
     .done(function( result ) {
       console.log(result);
       alert('Removed Dog from your Matches!');
-      //window.location.href = "../selection.html";
     })
     .fail(function(xhr, status, errorThrown) {
       console.log('AJAX POST failed...');
-      // window.location.href = "../selection.html";
     })
   }.bind(this),
   render: function() {
@@ -57,11 +56,11 @@ module.exports = React.createClass({
           <td className={c.matchImage}><button onClick={this.getDogProfile.bind(this, dog)}>Unmatch</button></td>
         </tr>
       );
-      }.bind(this));
-      return (
-        <tbody className={c.dogTable}>
-          {dogNodes}
-        </tbody>
+    }.bind(this));
+    return (
+      <tbody className={c.dogTable}>
+        {dogNodes}
+      </tbody>
     );
   }
 });

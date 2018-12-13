@@ -1,4 +1,4 @@
-/* Create.js
+/* Create.js implements the react component for the Create route
 *
 * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
 * Professor: Keith Vander Linden
@@ -80,7 +80,6 @@ module.exports = React.createClass ({
       }
     })
     .done(function(result) {
-        // console.log("JSON: " + result[0].loginID);
         console.log('got what we needed: ' + result);
       if (result.Result == 'Failure') {
         console.log(result);
@@ -95,9 +94,7 @@ module.exports = React.createClass ({
       }
     })
     .fail(function (xhr, status, errorThrown) {
-      console.log('failed: ' + errorThrown);
-      console.log('AJAX POST failed...');
-      //alert(xhr + " " +  status);
+      console.log('failed: ' + errorThrown + '\nAJAX POST failed...');
     });
   }, 
   render: function() {

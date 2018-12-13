@@ -1,4 +1,11 @@
-/* adoptStyling.css stylizes adopt.html
+/* combined.css contains all of the stylization for the Pinder
+ * application.
+ *
+ * TODO: access each independent style page.
+ * When we switched to react router components it made it 
+ * significantly more difficult to use each style page and 
+ * the time required to make the connections seemed not 
+ * worth the time
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden

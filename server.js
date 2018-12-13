@@ -1,4 +1,5 @@
-/* server.js implements the server for Pinder
+/* server.js implements the server and the server-side routing
+ * that allows the application to communicate with the database
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -21,7 +22,6 @@ var peopleList;
 var matches=[];
 var matches_list = [];
 
-
 MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds033056.mlab.com:33056/pinder-web-app`, function (err, client) {
   if (err) throw err
   dbo = client.db('pinder-web-app')
@@ -31,6 +31,8 @@ MongoClient.connect(`mongodb://clammintroopweb:${process.env.MONGO_PASSWORD}@ds0
     peopleList = result;
   });
 
+  app.listen(app.get('port'), function() { console.log('Server started: http://' + app.get('host') + ':' + app.get('port') + '/'); });
+});
 
 app.set('port', (process.env.PORT || 3000));
 app.set('host', (process.env.HOST || "localhost"));
@@ -39,9 +41,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/login', function (req, res) {
-  console.log('post request recieved on server');
-  console.log("Email: " + req.body.email);
-  console.log("Password: " + req.body.password);
   dbo.collection('users').find({
     "email": req.body.email,
     "password": req.body.password
@@ -52,10 +51,8 @@ app.post('/login', function (req, res) {
         email: result[0].email,
         password: result[0].password
       };
-      console.log('sent result for match found' + JSON.stringify(response));
       res.send(JSON.stringify(response));
     } else {
-      console.log('sent failure for match found');
       res.send({
         loginID: "Failure"
       });
@@ -69,35 +66,35 @@ app.post('/create', function (req, res) {
     if (err) throw err
     total = result.length
   
-  dbo.collection('users').find({
-    "email": req.body.email
-  }).toArray(function (err, result) {
-    if (err) {
-      res.send(err);
-    }
-    if (result.length != 0) {
-      res.send({
-        "Result": req.body.email
-      });
-    } else if (result.length == 0) {
-        dbo.collection('users').insertOne({
-          name: req.body.name,
-          loginID: total + 1,
-          password: req.body.password,
-          email: req.body.email,
-          Address: req.body.location,
-          ProfilePicture: req.body.Image,
-          matches: [],
-        }, function (err, data) {
-          if (err) {
-            res.sendStatus(400);
-          }
-          res.send({
-            "loginID": total + 1
-          });
-      });
-    }
-  });
+    dbo.collection('users').find({
+      "email": req.body.email
+    }).toArray(function (err, result) {
+      if (err) {
+        res.send(err);
+      }
+      if (result.length != 0) {
+        res.send({
+          "Result": req.body.email
+        });
+      } else if (result.length == 0) {
+          dbo.collection('users').insertOne({
+            name: req.body.name,
+            loginID: total + 1,
+            password: req.body.password,
+            email: req.body.email,
+            Address: req.body.location,
+            ProfilePicture: req.body.Image,
+            matches: [],
+          }, function (err, data) {
+            if (err) {
+              res.sendStatus(400);
+            }
+            res.send({
+              "loginID": total + 1
+            });
+        });
+      }
+    });
   });
 });
 
@@ -111,12 +108,10 @@ app.get('/adoptApet', function (req, res) {
 
 app.post('/profile', function (req, res) {
   var ownerID = req.body.ownerID;
-  console.log("Profile: " + ownerID);
 
   dbo.collection('users').find({
     "loginID": parseInt(ownerID)
   }).toArray(function (err, result) {
-    console.log(result);
     if (result.length > 0) {
       res.send(result);
     } else {
@@ -129,7 +124,6 @@ app.post('/profile', function (req, res) {
 
 app.post('/saveProfile', function (req, res) {
   var ownerID = req.body.loginID;
-  console.log("Profile Saveprofile: " + ownerID);
   var Name = req.body.Name;
   var Email = req.body.Email;
   var Location = req.body.Location;
@@ -179,7 +173,6 @@ app.post('/matches', function (req, res) {
   }).toArray(function (err, result) {
     if (err) throw err;
     matches = result[0].matches;
-    console.log("Matches Array: " +matches);
     matches.forEach(function(element) {
       dbo.collection('dogs').find({
         "id": parseInt(element)
@@ -196,40 +189,29 @@ app.post('/matches', function (req, res) {
           "Size": dog.Size,
           "Image": dog.Image
         };
-        //console.log(match.Name);
-       // console.log("I value: " + i);
         matches_list.unshift(match);
-        console.log("Array Length INSIDE: " + matches_list.length);
       });
     });
-
     setTimeout(function(){
-    console.log("Array Length OUTSIDE: " + matches_list.length);
-    res.json(matches_list);
-    matches_list = [];
+      res.json(matches_list);
+      matches_list = [];
     }, 500);
-
-    
   });
 });
 
 app.put('/deleteMatch', function (req, res) {
-  console.log("Server DogID: " + req.body.dogID);
-  console.log("Server loginID: " + req.body.loginID);
   dbo.collection('users').find({
     "loginID": parseInt(req.body.loginID)
   }).toArray(function (err, result) {
     if (err) throw err;
     var newmatches = [];
     var matches = result[0].matches;
-    console.log("Matches for User: " + matches);
 
     for (i = 0; i < matches.length; i++) {
       if (req.body.dogID != matches[i]) {
         newmatches.push(matches[i]);
       }
     }
-    console.log("New Matches for User" + newmatches);
 
     dbo.collection('users').updateOne({
       "loginID": parseInt(req.body.loginID)
@@ -242,7 +224,3 @@ app.put('/deleteMatch', function (req, res) {
 });
 
 app.use('*', express.static(APP_PATH));
-
-
-app.listen(app.get('port'), function() { console.log('Server started: http://' + app.get('host') + ':' + app.get('port') + '/'); });
-});

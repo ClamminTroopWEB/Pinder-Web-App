@@ -1,4 +1,4 @@
-/* Selection.js
+/* Selection.js implements the react component for the Selection route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -20,18 +20,6 @@ import Profile from './Profile.js';
 import c from '../styles/combined.css';
 
 module.exports = React.createClass({
-  listaPet: function() {
-    ReactDOM.render(React.createElement(List), document.getElementById('login'));
-  },
-  adoptaPet: function() {
-    ReactDOM.render(React.createElement(Adopt), document.getElementById('login'));
-  },
-  yourMatches: function() {
-    ReactDOM.render(React.createElement(DogBox), document.getElementById('login'));
-  },
-  yourProfile: function() {
-    ReactDOM.render(React.createElement(Profile), document.getElementById('login'));
-  },
   render: function() {
     return (
       <nav id={c.mainScreen}>

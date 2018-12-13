@@ -1,4 +1,4 @@
-/* List.js
+/* List.js implements the react component for the List route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -25,34 +25,26 @@ module.exports = React.createClass({
 
    var file = document.getElementById('inp').files[0];
     var reader  = new FileReader();
-    // it's onload event and you forgot (parameters)
     reader.onload = function(e)  {
-        // var image = document.createElement("img");
-        // the result image data
         $('.PetPicture').attr("src",e.target.result ) ;
-        console.log("Source Data: " + e.target.result);
-        console.log("Img Data: " + $('.PetPicture').prop('src'));
-       // document.body.appendChild(image);
-        
+        console.log("Source Data: " + e.target.result + "\nImg Data: " + $('.PetPicture').prop('src'));
      }
-     // you have to declare the file loading
      reader.readAsDataURL(file);
-
   },
   getCookie: function(name) {
-    var nameEQ = name + "=";
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    var nameEquals = name + "=";
+    var cookieArray = document.cookie.split(';');
+    for (var i = 0; i < cookieArray.length; i++) {
+      var cookie = cookieArray[i];
+      while (cookie.charAt(0) == ' ') cookie = cookie.substring(1, cookie.length);
+      if (cookie.indexOf(nameEquals) == 0) return cookie.substring(nameEquals.length, cookie.length);
     }
     return null;
   },
   submitPet: function() {
     $.ajax({
       url: "/newPet",
-      type: "POST",
+      type: "post",
       data: {
         Name: $('#listAPetName').val(),
         Gender: $('#listAPetGender').val(),
@@ -66,13 +58,10 @@ module.exports = React.createClass({
     .done(function( result ) {
       console.log(result);
       alert('A dog has been added');
-      //window.location.href = "../selection.html";
     })
     .fail(function(xhr, status, errorThrown) {
-      console.log(xhr.status);
-      console.log('AJAX POST failed...');
+      console.log(xhr.status + 'AJAX POST failed...');
       alert('A dog has been added');
-      //window.location.href = "../selection.html";
     })
   },
   componentDidMount: function() {
@@ -99,13 +88,6 @@ module.exports = React.createClass({
   onFileChange: function() {
     this.readFile;
   },
-  backBttn: function() {
-    ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
-  },
-  profileAcct: function() {
-    ReactDOM.render(React.createElement(Profile), document.getElementById('login'))
-  },
-
   render: function() {
     console.log("render");
       return (
@@ -114,9 +96,8 @@ module.exports = React.createClass({
            <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn}>Back</button></Link>
             <Link to="/Profile"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn}>My Profile</button></Link>
         </div>
-        <form id={c.listAPetForm} action="/newPet" method="POST">
+        <form id={c.listAPetForm} action="/newPet" method="post">
             <div id={c.listAPetInputs} className={c.blueRoundSquare}>
-
                 <span>
                     <label className={c.formLabel}>Name: </label>
                     <input className={c.formInput} 
@@ -125,7 +106,6 @@ module.exports = React.createClass({
                     className={c.listAPetName} id="listAPetName" value={this.state.name} 
                     onChange={this.handleNameChange}/>
                 </span>
-
                 <span>
                     <label className={c.formLabel}>Gender: </label>
                     <select className={c.formInput} id="listAPetGender" className={c.listAPetGender}
@@ -135,7 +115,6 @@ module.exports = React.createClass({
                         <option value="other">Other ;)</option>
                     </select>
                 </span>
-
                 <span>
                     <label className={c.formLabel}>Breed: </label>
                     <select className={c.formInput} id="listAPetBreed" className={c.listAPetBreed}
@@ -148,7 +127,6 @@ module.exports = React.createClass({
                         <option value="Pug">Pug</option>
                     </select>
                 </span>
-
                 <span>
                     <label className={c.formLabel}>Energy Level: </label>
                     <select id="listAPetEnergy" className={c.listAPetEnergy, c.formInput}
@@ -158,14 +136,13 @@ module.exports = React.createClass({
                         <option value="really_energetic">Really Energetic</option>
                     </select>
                 </span>
-
                 <span>
                     <label className={c.formLabel}>House Trained: </label>
                     <select className={c.formInput} id="listAPetHouseTrained" className={c.listAPetHouseTrained} value={this.state.houseTrained} onChange={this.houseTrained}>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
-                    </select> </span>
-
+                    </select>
+                </span>
                 <span>
                     <label className={c.formLabel}>Size: </label>
                     <select className={c.formInput} id="listAPetSize" className={c.listAPetSize} value={this.state.size} onChange={this.handleSizeChange}>
@@ -174,17 +151,15 @@ module.exports = React.createClass({
                         <option value="large">Large</option>
                     </select>
                 </span>
-
                 <span>
                     <label className={c.formLabel}>Image: </label>
                     <input id='inp' type='file' onChange={this.readFile}/>
                     <img className="PetPicture" height="150"/> 
                 </span>
-               
             </div>
             <input id={c.submitPet} type="button" value="Submit" onClick={this.submitPet}/>
         </form>
-    </nav>
-      )
+      </nav>
+    )
   }
 });

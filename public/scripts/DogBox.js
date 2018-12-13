@@ -1,4 +1,5 @@
-/* DogBox.js implements the react container for the DogTable displayed on the matches page
+/* DogBox.js implements the react component container for 
+ * DogTable and displays it on the Matches route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -27,7 +28,7 @@ module.exports = React.createClass({
       type: 'post',
       data: { "loginID": personID },
       success: function(data) {
-      this.setState({ data: data });
+        this.setState({ data: data });
       }.bind(this), error: function(xhr, status, err) {
         console.log("Matches: " + xhr.status);
         console.error(this.props.url, status, err.toString());
@@ -49,13 +50,6 @@ module.exports = React.createClass({
   },
   componentDidMount: function() {
     this.loadDogsFromServer();
-    // setInterval(this.loadDogsFromServer, this.props.pollInterval);
-  },
-  backBttn: function() {
-    ReactDOM.render(React.createElement(Selection), document.getElementById('login'));
-  },
-  profileAcct: function() {
-    ReactDOM.render(React.createElement(Profile), document.getElementById('login'));
   },
   render: function() {
     return (

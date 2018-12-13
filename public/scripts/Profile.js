@@ -1,4 +1,4 @@
-/* Profile.js
+/* Profile.js implements the react component for the Profile route
  *
  * Authors: Justin Baskaran, Gavin Martin, Ian Christensen
  * Professor: Keith Vander Linden
@@ -20,57 +20,47 @@ import c from '../styles/combined.css';
 
 module.exports = React.createClass({
   getInitialState: function() {
-      console.log("myProfile-getInitialState");
-      return { name: '',email: '', location: ''};
-    },
+    return { name: '',email: '', location: ''};
+  },
   componentDidMount: function() {
-      console.log("myProfile-componentDidMount");
-        this.getProfileInformation();
-      //  setInterval( this.props.pollInterval);
-    },
-    getCookie: function(name) {
-        var nameEQ = name + "=";
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-          var c = ca[i];
-          while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
-        }
-        return null;
-    },
-    deleteCookie: function(name) {
-      document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    },
+    this.getProfileInformation();
+  },
+  getCookie: function(name) {
+    var nameEquals = name + "=";
+    var cookieArray = document.cookie.split(';');
+    for (var i = 0; i < cookieArray.length; i++) {
+      var cookie = cookieArray[i];
+      while (cookie.charAt(0) == ' ') cookie = cookie.substring(1, cookie.length);
+      if (cookie.indexOf(nameEquals) == 0) return cookie.substring(nameEquals.length, cookie.length);
+    }
+    return null;
+  },
+  deleteCookie: function(name) {
+    document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+  },
   getProfileInformation: function() {
-      var loginID = this.getCookie("PinderloginID");
-        $.ajax({
-            url: "/profile",
-            type: "POST",
-            data: {"ownerID": loginID},
+    var loginID = this.getCookie("PinderloginID");
+    $.ajax({
+      url: "/profile",
+      type: "post",
+      data: {"ownerID": loginID},
       success: function(data) {
         this.setState({name: data[0].name});
         this.setState({email: data[0].email});
         this.setState({location: data[0].Address});
-        // $(".profileNameText").val(data[0].name);
-        // $(".profileEmailText").val(data[0].email);
-        // $(".profileLocationText").val(data[0].Address);
-
-        //console.log("result: " + result);
         var image = new Image();
         image.src = data[0].ProfilePicture;
         $("#profileImage").attr("src", image.src);
-
-        }.bind(this),
-          error: function(xhr, status, err) {
-            console.log("Error Produced!: " + err);
+      }.bind(this), error: function(xhr, status, err) {
+        console.log("Error Produced!: " + err);
       }.bind(this)
-      });  
+    });  
   },
   updateInformation: function() {
-      var loginID = this.getCookie("PinderloginID");
-       $.ajax({
+    var loginID = this.getCookie("PinderloginID");
+    $.ajax({
       url: "/saveProfile",
-      type: "POST",
+      type: "post",
       data: {
         loginID: loginID,
         Name: $('.profileNameText').val(),
@@ -79,7 +69,7 @@ module.exports = React.createClass({
       }
     })
     .done(function( result ) {
-       console.log('AJAX POST succeded...');
+      console.log('AJAX POST succeded...');
       alert('Your changes have been saved');
     })
     .fail(function(xhr, status, errorThrown) {
@@ -87,22 +77,13 @@ module.exports = React.createClass({
     })  
   },
   nameChange: function(e) {
-      this.setState({name: e.target.value}); 
-    },
+    this.setState({name: e.target.value}); 
+  },
   emailChange: function(e) {
-      this.setState({email: e.target.value}); 
-    },
+    this.setState({email: e.target.value}); 
+  },
   locationChange: function(e) {
-      this.setState({location: e.target.value}); 
-    },
-  backBttn: function() {
-      ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
-    },
-  changeAccnt: function() {
-      ReactDOM.render(React.createElement(Login), document.getElementById('login'))
-    },
-  seeMatches: function() {
-      ReactDOM.render(React.createElement(DogBox), document.getElementById('login'))
+    this.setState({location: e.target.value}); 
   },
   render: function() {
     return (
@@ -114,7 +95,7 @@ module.exports = React.createClass({
         </div>
         <div id={c.profileImageHolder}>
             <img className={c.profileImage} id="profileImage"
-            value={this.state.image} onChange={this.imageChange}  />
+            value={this.state.image} onChange={this.imageChange} />
         </div>
         <div id={c.profileInputsContainer}>
             <div className={c.profileInputRow}>
@@ -129,14 +110,14 @@ module.exports = React.createClass({
                 <input className={c.profileInput} type="text" 
                 placeholder="enter your email" name="profileContactEmail" 
                 value="" id={c.profileEmailText} className="profileEmailText"
-                value={this.state.email} onChange={this.emailChange} />
+                value={this.state.email} onChange={this.emailChange}/>
             </div>
             <div className={c.profileInputRow}>
                 <label htmlFor="profileLocation">Location:</label>
                 <input className={c.profileInput} type="text" 
                 placeholder="enter your city" name="profileLocation" value="" 
                 id={c.profileLocationText} className="profileLocationText"
-                value={this.state.location} onChange={this.locationChange} />
+                value={this.state.location} onChange={this.locationChange}/>
             </div>
         </div>
         <div id={c.profileButtons}>
@@ -144,6 +125,6 @@ module.exports = React.createClass({
             <button id={c.saveChangesProfileBttn} className={c.profileBttn, c.smallGreenBttn} onClick={this.updateInformation}>Save Changes</button>
         </div>
     </nav>
-      );
+    );
   }
 });
