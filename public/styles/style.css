@@ -71,6 +71,7 @@ html body {
     border: 1.5px;
     border-style: solid;
     border-color: rgb(151, 195, 231);
+  
 }
 
 .smallBlueBttn {
@@ -87,12 +88,19 @@ html body {
     border-style: solid;
     border-color: rgb(151, 195, 231);
 }
+#bttnContainer {
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .roundBlueSquare {
     padding: 3%;
     margin-left: auto;
     margin-right: auto;
 }
+
 
 @media screen and (max-width: 550px) {
     #mainScreen {
