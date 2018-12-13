@@ -44,6 +44,7 @@ module.exports = React.createClass ({
   handleLocationChange: function(e) {
     this.setState({location: e.target.value});
   },
+
   handleSubmitButton: function(email, password, location, name) {
     function setCookie(name, value, days) {
       var expires = "";
@@ -88,6 +89,15 @@ module.exports = React.createClass ({
         console.log("Error Produced!: " + err);
       }.bind(this)
     });
+  }, 
+  setCookie: function(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie = name + "=" + (value || "") + expires + "; path=/";
   }, 
   render: function() {
     return (
