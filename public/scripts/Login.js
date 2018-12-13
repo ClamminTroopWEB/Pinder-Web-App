@@ -23,7 +23,7 @@ module.exports = React.createClass({
       console.log("getInitialState");
          return {data: []};
     },
-    handleLoginClick: function(loginID,Password) {
+    handleLoginClick: function(loginID, Password) {
 
 
       var response;
@@ -121,7 +121,8 @@ module.exports = React.createClass({
                 </span>
 
                 <span id={c.loginBttns} className={c.formSpan}>
-                    <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn}>Log In</button></Link>
+                    <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn} 
+                    onClick={this.handleLoginClick.bind(this, this.state.author,this.state.text)}>Log In</button></Link>
                     <Link to="/Create"><button className={c.smallGreyBttn}>Create Account</button></Link>
                 </span>
                  </div>

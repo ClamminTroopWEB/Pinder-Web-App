@@ -68,9 +68,7 @@ app.post('/create', function (req, res) {
   dbo.collection('users').find().toArray(function (err, result) {
     if (err) throw err
     total = result.length
-  console.log("Size of Users: ", total);
-  });
-
+  
   dbo.collection('users').find({
     "email": req.body.email
   }).toArray(function (err, result) {
@@ -97,9 +95,9 @@ app.post('/create', function (req, res) {
           res.send({
             "loginID": total + 1
           });
-  
       });
     }
+  });
   });
 });
 

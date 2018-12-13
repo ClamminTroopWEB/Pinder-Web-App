@@ -38,8 +38,8 @@ module.exports = React.createClass({
         <img id={c.pinderLogoMain} src="https://i.imgur.com/pbgkjCN.png"/>
         <div id={c.bttnContainer}>
           <Link to="/List"><button id={c.listPetBttn} className={c.blueBttn}>List Pet</button></Link>
-          <Link to="/Adopt"><button id={c.adoptPetBttn} className={c.blueBttn} onClick={this.adoptaPet}>Adopt a Pet</button></Link>
-          <Link to="/Matches"><button id={c.yourMatchesBttn} className={c.blueBttn} onClick={this.yourMatches}>Your Matches</button></Link>
+          <Link to="/Adopt"><button id={c.adoptPetBttn} className={c.blueBttn}>Adopt a Pet</button></Link>
+          <Link to="/Matches"><button id={c.yourMatchesBttn} className={c.blueBttn}>Your Matches</button></Link>
         </div>
         <Link to="/Profile"><button id={c.myProfileBttn} className={c.smallBlueBttn} onClick={this.yourProfile}>My Profile</button></Link>
       </nav>

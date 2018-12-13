@@ -28,11 +28,7 @@ module.exports = React.createClass ({
     var file = document.getElementById('inp').files[0];
     var reader  = new FileReader();
     reader.onload = function(e) {
-      // var image = document.createElement("img");
       $('#PetPicture').attr("src",e.target.result ) ;
-      console.log("Source Data: " + e.target.result);
-      console.log("Img Data: " + $('#PetPicture').prop('src'));
-      // document.body.appendChild(image);
     }
     reader.readAsDataURL(file);
   },
@@ -52,7 +48,6 @@ module.exports = React.createClass ({
     this.setState({location: e.target.value});
   },
   handleSubmitButton: function(email, password, location, name) {
-    console.log(email, password, location, name)
     function setCookie(name, value, days) {
       var expires = "";
       if (days) {
@@ -72,7 +67,7 @@ module.exports = React.createClass ({
       }
       return null;
     }
-    console.log($('#PetPicture').prop('src'));
+    console.log($('.PetPicture').prop('src'));
     $.ajax({
       url: '/create',
       type: 'post',
@@ -81,7 +76,7 @@ module.exports = React.createClass ({
       email: email,
       password: password,
       location: location,
-      Image: $('#PetPicture').prop('src')
+      Image: $('.PetPicture').prop('src')
       }
     })
     .done(function(result) {
@@ -135,13 +130,13 @@ module.exports = React.createClass ({
             </span>
             <span>
               <label className={c.formLabel}>Image: </label>
-              <input id={c.inp} type='file' onChange= {this.readFile}/>
-              <img id={c.PetPicture} height="150"/> 
+              <input id='inp' type='file' onChange= {this.readFile}/>
+              <img id="PetPicture" className="PetPicture" height="150"/> 
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
               <Link to="/"><button className={c.smallGreyBttn} id={c.backBttn}>Back</button></Link>
               <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn} 
-              onClick={this.handleSubmitButton.bind(this, this.state.email,this.state.password, this.state.location, this.state.name)}>
+              onClick={this.handleSubmitButton.bind(this, this.state.email, this.state.password, this.state.location, this.state.name)}>
               Create Account</button></Link>
             </span>
           </div>

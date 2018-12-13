@@ -141,7 +141,7 @@ module.exports = React.createClass({
         </div>
         <div id={c.profileButtons}>
             <Link to="/Matches"><button id={c.myMatchesProfileBttn} className={c.profileBttn, c.smallBlueBttn}>My Matches</button></Link>
-            <Link to="/Profile"><button id={c.saveChangesProfileBttn} className={c.profileBttn, c.smallGreenBttn}>Save Changes</button></Link>
+            <button id={c.saveChangesProfileBttn} className={c.profileBttn, c.smallGreenBttn} onClick={this.updateInformation}>Save Changes</button>
         </div>
     </nav>
       );
