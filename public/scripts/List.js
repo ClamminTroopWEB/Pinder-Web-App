@@ -176,7 +176,7 @@ module.exports = React.createClass({
 
                 <span>
                     <label className={c.formLabel}>Image: </label>
-                    <input id={c.inp} type='file' onChange= {this.readFile}/>
+                    <input id='inp' type='file' onChange={this.readFile}/>
                     <img id="PetPicture" height="150"/> 
                 </span>
                
