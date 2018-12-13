@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import List from './List.js';
@@ -36,11 +37,11 @@ module.exports = React.createClass({
       <nav id={c.mainScreen}>
         <img id={c.pinderLogoMain} src="https://i.imgur.com/pbgkjCN.png"/>
         <div id={c.bttnContainer}>
-          <button id={c.listPetBttn} className={c.blueBttn} onClick={this.listaPet}>List Pet</button>
-          <button id={c.adoptPetBttn} className={c.blueBttn} onClick={this.adoptaPet}>Adopt a Pet</button>
-          <button id={c.yourMatchesBttn} className={c.blueBttn} onClick={this.yourMatches}>Your Matches</button>
+          <Link to="/List"><button id={c.listPetBttn} className={c.blueBttn}>List Pet</button></Link>
+          <Link to="/Adopt"><button id={c.adoptPetBttn} className={c.blueBttn} onClick={this.adoptaPet}>Adopt a Pet</button></Link>
+          <Link to="/Matches"><button id={c.yourMatchesBttn} className={c.blueBttn} onClick={this.yourMatches}>Your Matches</button></Link>
         </div>
-        <button id={c.myProfileBttn} className={c.smallBlueBttn} onClick={this.yourProfile}>My Profile</button>
+        <Link to="/Profile"><button id={c.myProfileBttn} className={c.smallBlueBttn} onClick={this.yourProfile}>My Profile</button></Link>
       </nav>
     );
   }

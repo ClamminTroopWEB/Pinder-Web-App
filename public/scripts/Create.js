@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Login from './Login.js'
@@ -138,9 +139,10 @@ module.exports = React.createClass ({
               <img id={c.PetPicture} height="150"/> 
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
-              <input className={c.smallGreyBttn} id={c.backBttn} value="Back" onClick={this.loadLoginPage}/>
-              <input className={c.smallGreyBttn} id={c.loginToAccountBttn} type="button" value="Create Account" 
-              onClick={this.handleSubmitButton.bind(this, this.state.email,this.state.password, this.state.location, this.state.name)}/>
+              <Link to="/"><button className={c.smallGreyBttn} id={c.backBttn}>Back</button></Link>
+              <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn} 
+              onClick={this.handleSubmitButton.bind(this, this.state.email,this.state.password, this.state.location, this.state.name)}>
+              Create Account</button></Link>
             </span>
           </div>
         </form>

@@ -103,7 +103,7 @@ app.post('/create', function (req, res) {
   });
 });
 
-app.get('/adopt', function (req, res) {
+app.get('/adoptApet', function (req, res) {
   dbo.collection('dogs').find().toArray(function (err, result) {
     if (err) throw err
     peopleList = result;
@@ -151,14 +151,12 @@ app.post('/saveProfile', function (req, res) {
 app.post('/newPet', function (req, res) {
   var dogList;
 
-  dbo.collection('dogs').find().toArray(function (err, result) {
+  dbo.collection('dogs').find().toArray(function(err, result) {
     if (err) throw err;
-    dogList = result.length;
-    console.log(result);
+    var dogList = result.length;
   });
   dbo.collection('dogs').insertOne({
     id: dogList + 1,
-    ownerID: req.body.loginID,
     Name: req.body.Name,
     Gender: req.body.Gender,
     Breed: req.body.Breed,

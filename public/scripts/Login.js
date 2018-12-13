@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
@@ -120,15 +121,8 @@ module.exports = React.createClass({
                 </span>
 
                 <span id={c.loginBttns} className={c.formSpan}>
-                    <input className={c.smallGreyBttn} id={c.loginToAccountBttn}
-
-
-                    type="button" value="Log In"
-                    onClick = {this.handleLoginClick.bind(this, this.state.author,this.state.text)}
-                    />
-                    <input className={c.smallGreyBttn}  
-                    type="button" value="Create Account"
-                    onClick={this.createAccount} />
+                    <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn}>Log In</button></Link>
+                    <Link to="/Create"><button className={c.smallGreyBttn}>Create Account</button></Link>
                 </span>
                  </div>
              </form>

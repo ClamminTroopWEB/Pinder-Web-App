@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
@@ -48,7 +49,7 @@ module.exports = React.createClass({
     index = 0;
 
     $.ajax({
-      url: "/adopt",
+      url: "/adoptApet",
       type: "get",
       success: function(data) {
       for (var i = 0; i < data.length; i++) {
@@ -192,8 +193,8 @@ module.exports = React.createClass({
     return (
       <nav id={c.adoptScreen}>
         <div className={c.menuBar}>
-          <button id={c.backBttnMenu} className={c.smallBlueBttn} onClick={this.backBttn}>Back</button>
-          <button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.profileAcct}>My Profile</button>
+          <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn}>Back</button></Link>
+          <Link to="/Profile"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn}>My Profile</button></Link>
         </div>
         <div id={c.adopContainer}>
           <div id={c.adoptImageHolder}>

@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import Selection from './Selection.js';
@@ -36,6 +37,9 @@ module.exports = React.createClass({
           if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
         }
         return null;
+    },
+    deleteCookie: function(name) {
+      document.cookie = "name=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     },
   getProfileInformation: function() {
       var loginID = this.getCookie("PinderloginID");
@@ -104,12 +108,9 @@ module.exports = React.createClass({
     return (
        <nav id={c.profileScreen}>
         <div className={c.menuBar}>
-            <button id={c.backBttnMenu} className={c.smallBlueBttn} 
-            onClick={this.backBttn} > Back</button>
+            <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn}>Back</button></Link>
             <label id={c.titleLabel}>My Profile</label>
-            <button id={c.myProfileBttnMenu} className={c.smallBlueBttn}
-            onClick={this.changeAccnt} > Change
-                Account</button>
+            <Link to="/"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.deleteCookie.bind(this)}>Log Out</button></Link>
         </div>
         <div id={c.profileImageHolder}>
             <img className={c.profileImage} id="profileImage"
@@ -139,12 +140,8 @@ module.exports = React.createClass({
             </div>
         </div>
         <div id={c.profileButtons}>
-            <button id={c.myMatchesProfileBttn} 
-            className={c.profileBttn, c.smallBlueBttn}
-            onClick={this.seeMatches}  > My Matches</button>
-            <button id={c.saveChangesProfileBttn} 
-            className={c.profileBttn, c.smallGreenBttn} onClick={this.updateInformation}>
-             Save Changes</button>
+            <Link to="/Matches"><button id={c.myMatchesProfileBttn} className={c.profileBttn, c.smallBlueBttn}>My Matches</button></Link>
+            <Link to="/Profile"><button id={c.saveChangesProfileBttn} className={c.profileBttn, c.smallGreenBttn}>Save Changes</button></Link>
         </div>
     </nav>
       );

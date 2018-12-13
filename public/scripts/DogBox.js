@@ -10,6 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import DogTable from './DogTable.js'
@@ -60,8 +61,8 @@ module.exports = React.createClass({
     return (
     <nav id={c.matchesScreen}>
       <div className={c.menuBar}>
-        <button id={c.backBttnMenu} className={c.smallBlueBttn} onClick={this.backBttn}>Back</button>
-        <button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.profileAcct}>My Profile</button>
+        <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn} onClick={this.backBttn}>Back</button></Link>
+        <Link to="/Profile"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.profileAcct}>My Profile</button></Link>
       </div>
       <div id={c.tableHeading}>
         <label>Your Matches</label>
