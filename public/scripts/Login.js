@@ -6,6 +6,8 @@
  * Semester: Fall, 2018
  */
 
+// TODO: refactor author into a more accurate name
+
 "use_strict";
 
 import React from 'react';
@@ -23,12 +25,12 @@ module.exports = React.createClass({
   },
   handleLoginClick: function(loginID, Password) {
     $.ajax({
-      url: "/login",
-      type: "post",
-      dataType: 'json',
-      data: {
-      email: loginID,
-      password: Password
+        url: "/login",
+        type: "post",
+        dataType: 'json',
+        data: {
+        email: loginID,
+        password: Password
       },
       success: function(data) {
         console.log("Result: " + data.loginID);
@@ -39,7 +41,6 @@ module.exports = React.createClass({
         this.setCookie('PinderloginEmail', loginID, 3);
         this.setCookie('PinderloginPassword', Password, 3);
         console.log("Cookies: " + this.getCookie('PinderloginID'))
-        ReactDOM.render(React.createElement(Selection), document.getElementById('login'))
       }
       }.bind(this), error: function(xhr, status, err) {
         console.log("Error Produced!: " + err);
@@ -74,9 +75,6 @@ module.exports = React.createClass({
     }
     return null;
   },
-  createAccount() {
-    ReactDOM.render(React.createElement(Create), document.getElementById('login'))
-  },
   render: function() {
     return (
       <nav id={c.loginScreen}>
@@ -98,8 +96,8 @@ module.exports = React.createClass({
               value={this.state.text} onChange={this.handleTextChange}/>
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
-              <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn} 
-              onClick={this.handleLoginClick.bind(this, this.state.author,this.state.text)}>Log In</button></Link>
+              <Link to="/Selection" onClick={this.handleLoginClick.bind(this, this.state.author,this.state.text)}>
+              <button className={c.smallGreyBttn} id={c.loginToAccountBttn}>Log In</button></Link>
               <Link to="/Create"><button className={c.smallGreyBttn}>Create Account</button></Link>
             </span>
           </div>

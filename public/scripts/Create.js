@@ -132,8 +132,8 @@ module.exports = React.createClass ({
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
               <Link to="/"><button className={c.smallGreyBttn} id={c.backBttn}>Back</button></Link>
-              <Link to="/Selection"><button className={c.smallGreyBttn} id={c.loginToAccountBttn} 
-              onClick={this.handleSubmitButton.bind(this, this.state.email, this.state.password, this.state.location, this.state.name)}>
+              <Link to="/Selection" onClick={this.handleSubmitButton.bind(this, this.state.email, this.state.password, this.state.location, this.state.name)}>
+              <button className={c.smallGreyBttn} id={c.loginToAccountBttn}>
               Create Account</button></Link>
             </span>
           </div>
