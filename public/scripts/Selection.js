@@ -6,6 +6,10 @@
  * Semester: Fall, 2018
  */
 
+
+ /*    This Component shows all the options of the app in a main menu format     */
+
+
 "use_strict";
 
 import React from 'react';

@@ -6,6 +6,9 @@
  * Semester: Fall, 2018
  */
 
+ /*    This Component allows users to view their profile and change their info                */
+
+
 "use_strict";
 
 import React from 'react';

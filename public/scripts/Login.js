@@ -6,7 +6,7 @@
  * Semester: Fall, 2018
  */
 
-// TODO: refactor author into a more accurate name
+ /*    This Component allows users to Login                */
 
 "use_strict";
 

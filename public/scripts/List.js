@@ -6,6 +6,8 @@
  * Semester: Fall, 2018
  */
 
+ /*    This Component allows users to create an account                */
+
 "use_strict";
 
 import React from 'react';
@@ -94,6 +96,7 @@ module.exports = React.createClass({
         <nav id={c.listAPetScreen}>
         <div className={c.menuBar}>
            <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn}>Back</button></Link>
+           <div id={c.pinderLogoMain}></div>
             <Link to="/Profile"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn}>My Profile</button></Link>
         </div>
         <form id={c.listAPetForm} action="/newPet" method="post">
@@ -103,12 +106,12 @@ module.exports = React.createClass({
                     <input className={c.formInput} 
                     type="text" name="Name" 
                     placeholder="enter a pet name" 
-                    className={c.listAPetName} id="listAPetName" value={this.state.name} 
+                    id="listAPetName" value={this.state.name} 
                     onChange={this.handleNameChange}/>
                 </span>
                 <span>
                     <label className={c.formLabel}>Gender: </label>
-                    <select className={c.formInput} id="listAPetGender" className={c.listAPetGender}
+                    <select className={c.formInput} id="listAPetGender" 
                     defaultValue={this.state.gender} onChange={this.handleGenderChange}>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
@@ -117,7 +120,7 @@ module.exports = React.createClass({
                 </span>
                 <span>
                     <label className={c.formLabel}>Breed: </label>
-                    <select className={c.formInput} id="listAPetBreed" className={c.listAPetBreed}
+                    <select className={c.formInput} id="listAPetBreed"
                     value={this.state.breed} onChange={this.handleBreedChange}>
                         <option value="Labrador">Labrador</option>
                         <option value="Great_Dane">Great Dane</option>
@@ -129,7 +132,7 @@ module.exports = React.createClass({
                 </span>
                 <span>
                     <label className={c.formLabel}>Energy Level: </label>
-                    <select id="listAPetEnergy" className={c.listAPetEnergy, c.formInput}
+                    <select id="listAPetEnergy" className={c.formInput}
                     value={this.state.energyLevel} onChange={this.handleEnergyLevelChange}>
                         <option value="calm">Calm</option>
                         <option value="somewhat_energetic">Somewhat Energetic</option>

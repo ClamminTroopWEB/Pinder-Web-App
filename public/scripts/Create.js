@@ -6,6 +6,9 @@
 * Semester: Fall, 2018
 */
 
+ /*    This Component allows users to create an account                */
+
+
 "use_strict";
 
 import React from 'react';

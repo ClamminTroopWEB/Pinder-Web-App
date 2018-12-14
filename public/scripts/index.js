@@ -6,6 +6,9 @@
  * Semester: Fall, 2018
  */
 
+  /*    This Component renders everything together     */
+
+
 "use_strict";
 
 import React from 'react';

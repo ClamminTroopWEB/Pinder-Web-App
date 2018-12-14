@@ -204,14 +204,14 @@
     margin-left: auto;
     margin-right: auto;
     width: 65%;
-    height: 60%;
+    height: 30%;
     display:flex;
     flex-direction: column;
     justify-content: left;
 }
 
 #listAPetForm {
-    margin-top:3%;
+    margin-top:8%;
     display: flex;
     overflow:visible;
     flex-direction: column;
@@ -825,6 +825,22 @@ tr {
     background-size: contain;
     background-repeat: no-repeat;
     margin: auto;
+    border-radius: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1.5px;
+    border-style: solid;
+    border-color: rgb(129, 182, 224);
+}
+
+.smallBlueBttnRight {
+    min-height: 50px;
+    min-width: 100px;
+    background-image: linear-gradient(white, rgb(169, 226, 252), white);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin: auto;
+    margin-left: 50%;
     border-radius: 15px;
     font-size: 18px;
     font-weight: bold;

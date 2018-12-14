@@ -27,7 +27,7 @@ module.exports = React.createClass({
   return null;
   }.bind(this),
   getDogProfile: function(e) {
-    var personID = getCookie("PinderloginID");
+    var personID = this.getCookie("PinderloginID");
     var dogID = e.id;
     $.ajax({
       url: "/deleteMatch",
@@ -50,10 +50,9 @@ module.exports = React.createClass({
     const dogNodes = this.props.data.map(function(dog) {
     return (
         <tr key={dog.id}>
-          <td className={c.matchBreed}>{dog.Breed}</td>
-          <td className={c.matchName}>{dog.Name}</td>
           <td className={c.matchImage}> <img src={dog.Image}/> </td>
-          <td className={c.matchImage}><button onClick={this.getDogProfile.bind(this, dog)}>Unmatch</button></td>
+          <td className={c.matchName}>{dog.Name}</td>
+          <td className={c.matchBreed}>{dog.Breed}</td>
         </tr>
       );
     }.bind(this));

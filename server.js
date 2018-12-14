@@ -7,6 +7,9 @@
  * Semester: Fall, 2018
  */
 
+   /*    This server controls the server-side endpoints of the app    */
+
+
 "use_strict";
 
 var express = require('express');
