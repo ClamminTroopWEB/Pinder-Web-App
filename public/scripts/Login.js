@@ -14,6 +14,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Remarkable from 'remarkable';
+import { browserHistory } from 'react-router';
 import $ from 'jquery';
 import Selection from './Selection.js';
 import Create from './Create.js';
@@ -35,12 +36,17 @@ module.exports = React.createClass({
       success: function(data) {
         console.log("Result: " + data.loginID);
       if (data.loginID == "Failure") {
+        this.setCookie('loginError', 'true', 3);
+        console.log(this.getCookie('loginError'));
         alert("Incorrect Password or Username");
       } else  {
         this.setCookie('PinderloginID', data.loginID, 3);
         this.setCookie('PinderloginEmail', loginID, 3);
         this.setCookie('PinderloginPassword', Password, 3);
-        console.log("Cookies: " + this.getCookie('PinderloginID'))
+        this.setCookie('loginError', 'false', 3);
+        this.setCookie('accountError', 'false', 3);
+        console.log("Cookies: " + this.getCookie('PinderloginID'));
+        browserHistory.push('/Selection');
       }
       }.bind(this), error: function(xhr, status, err) {
         console.log("Error Produced!: " + err);
@@ -96,8 +102,8 @@ module.exports = React.createClass({
               value={this.state.text} onChange={this.handleTextChange}/>
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
-              <Link to="/Selection" onClick={this.handleLoginClick.bind(this, this.state.author,this.state.text)}>
-              <button className={c.smallGreyBttn} id={c.loginToAccountBttn}>Log In</button></Link>
+             
+              <Link to='/Login' onClick={this.handleLoginClick.bind(this, this.state.author,this.state.text)} > <button className={c.smallGreyBttn} id={c.loginToAccountBttn}>Log In</button></Link>
               <Link to="/Create"><button className={c.smallGreyBttn}>Create Account</button></Link>
             </span>
           </div>

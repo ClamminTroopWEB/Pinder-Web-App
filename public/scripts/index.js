@@ -23,7 +23,7 @@ import Selection from './Selection.js';
 
 ReactDOM.render((
         <Router history={browserHistory}>
-            <Route path="/" component={Login}/>
+            <Route path="/Login" component={Login}/>
             <Route path="/Adopt" component={Adopt}/>
             <Route path="/Create" component={Create}/>
             <Route path="/Matches" component={DogBox}/>

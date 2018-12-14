@@ -61,7 +61,7 @@ module.exports = React.createClass({
     })
     .fail(function(xhr, status, errorThrown) {
       console.log(xhr.status + 'AJAX POST failed...');
-      alert('A dog has been added');
+      alert("Image file was too large, please limit it to less than 2 KB");
     })
   },
   componentDidMount: function() {

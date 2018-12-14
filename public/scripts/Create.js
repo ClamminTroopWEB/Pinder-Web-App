@@ -13,6 +13,7 @@ import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
+import { browserHistory } from 'react-router';
 import Login from './Login.js'
 import c from '../styles/combined.css';
 
@@ -76,17 +77,22 @@ module.exports = React.createClass ({
       Image: $('.PetPicture').prop('src')
     },
     success: function(data) {
-      console.log("Result: " + data.loginID);
-      if (data.loginID == "Failure") {
-        alert("That Email has been taken, please choose another");
-      } else  {
-        this.setCookie('PinderloginID', data.loginID, 3);
-        this.setCookie('PinderloginEmail', loginID, 3);
-        this.setCookie('PinderloginPassword', Password, 3);
-        console.log("Cookies: " + this.getCookie('PinderloginID'))
-      }
-      }.bind(this), error: function(xhr, status, err) {
+        console.log("Result: " + data.loginID);
+        if (data.loginID == "Failure") {
+          alert("That Email has been taken, please choose another");
+        } else  {
+          this.setCookie('PinderloginID', data.loginID, 3);
+          this.setCookie('PinderloginEmail', data.email, 3);
+          this.setCookie('PinderloginPassword', data.password, 3);
+          console.log("Cookies: " + getCookie('PinderloginID'));
+          browserHistory.push('/Selection');
+
+
+        }
+    }.bind(this), 
+    error: function(xhr, status, err) {
         console.log("Error Produced!: " + err);
+        alert("Image file was too large, please limit it to less than 2 KB");
       }.bind(this)
     });
   }, 
@@ -133,8 +139,8 @@ module.exports = React.createClass ({
               <img id="PetPicture" className="PetPicture" height="150"/> 
             </span>
             <span id={c.loginBttns} className={c.formSpan}>
-              <Link to="/"><button className={c.smallGreyBttn} id={c.backBttn}>Back</button></Link>
-              <Link to="/Selection" onClick={this.handleSubmitButton.bind(this, this.state.email, this.state.password, this.state.location, this.state.name)}>
+              <Link to="/Login"><button className={c.smallGreyBttn} id={c.backBttn}>Back</button></Link>
+              <Link to="/Create" onClick={this.handleSubmitButton.bind(this, this.state.email, this.state.password, this.state.location, this.state.name)}>
               <button className={c.smallGreyBttn} id={c.loginToAccountBttn}>
               Create Account</button></Link>
             </span>

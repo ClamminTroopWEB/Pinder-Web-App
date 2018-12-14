@@ -74,7 +74,7 @@ app.post('/create', function (req, res) {
       }
       if (result.length != 0) {
         res.send({
-          "Result": req.body.email
+          "loginID": 'Failure'
         });
       } else if (result.length == 0) {
           dbo.collection('users').insertOne({

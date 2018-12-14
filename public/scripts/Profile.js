@@ -91,7 +91,7 @@ module.exports = React.createClass({
         <div className={c.menuBar}>
             <Link to="/Selection"><button id={c.backBttnMenu} className={c.smallBlueBttn}>Back</button></Link>
             <label id={c.titleLabel}>My Profile</label>
-            <Link to="/"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.deleteCookie.bind(this)}>Log Out</button></Link>
+            <Link to="/Login"><button id={c.myProfileBttnMenu} className={c.smallBlueBttn} onClick={this.deleteCookie.bind(this)}>Log Out</button></Link>
         </div>
         <div id={c.profileImageHolder}>
             <img className={c.profileImage} id="profileImage"

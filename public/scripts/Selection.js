@@ -11,6 +11,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
+import { browserHistory } from 'react-router';
 import Remarkable from 'remarkable';
 import $ from 'jquery';
 import List from './List.js';
@@ -21,6 +22,31 @@ import c from '../styles/style.css';
 
 
 module.exports = React.createClass({
+
+  componentDidMount: function() {
+    console.log("componentDidMount");
+    this.checkForBadLogin();
+  },
+  checkForBadLogin: function() {
+    function getCookie(name) {
+      var nameEquals = name + "=";
+      var cookieArray = document.cookie.split(';');
+      for (var i = 0; i < cookieArray.length; i++) {
+        var cookie = cookieArray[i];
+        while (cookie.charAt(0) == ' ') cookie = cookie.substring(1, cookie.length);
+        if (cookie.indexOf(nameEquals) == 0) return cookie.substring(nameEquals.length, cookie.length);
+      }
+      return null;
+    }
+    /*
+    if(getCookie('accountError') == 'true'){
+        console.log(getCookie(getCookie('accountError')));
+      browserHistory.push('/create');
+    } /*else if (getCookie('loginError') == 'true'){
+       console.log(getCookie(getCookie('loginError')));
+      browserHistory.push('/login');
+    }*/
+  },
   render: function() {
     return (
       <nav id={c.mainScreen}>
