@@ -27,7 +27,7 @@ module.exports = React.createClass({
   return null;
   }.bind(this),
   getDogProfile: function(e) {
-    var personID = getCookie("PinderloginID");
+    var personID = this.getCookie("PinderloginID");
     var dogID = e.id;
     $.ajax({
       url: "/deleteMatch",
